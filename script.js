@@ -41,3 +41,35 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
   document.body.style.backgroundImage = `url(${randomSrc})`;
 });
+
+// ✨ Animate sections on scroll
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll('.fade-in');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(section => observer.observe(section));
+});
+
+// 🔌 Wallet Connect Button
+const connectBtn = document.querySelector(".connect-btn");
+
+connectBtn?.addEventListener("click", async () => {
+  if (window.ethereum) {
+    try {
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      connectBtn.textContent = "✅ Connected";
+      connectBtn.disabled = true;
+    } catch (err) {
+      alert("Connection rejected.");
+    }
+  } else {
+    alert("MetaMask not found. Please install it to connect.");
+  }
+});
