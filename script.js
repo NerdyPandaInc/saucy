@@ -26,46 +26,25 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   // Allow scrolling again
   document.body.style.overflow = "auto";
 
-  // ✅ Initialize Turn.js if available
-  const flipbook = document.getElementById("flipbook");
-  if (!flipbook) {
-    console.error("❌ #flipbook element not found.");
-    return;
-  }
-
-  if (typeof $('#flipbook').turn === 'function') {
-    $('#flipbook').turn({
-      width: 800,
-      height: 600,
-      autoCenter: true,
-      elevation: 50,
-      gradients: true,
-      duration: 1000,
-      when: {
-        turned: function (event, page) {
-          // 🔄 Remove 'active' from all pages
-          document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-
-          // ✅ Add 'active' to the current page
-          const currentPage = document.querySelector(`#flipbook .page:nth-child(${page})`);
-          if (currentPage) currentPage.classList.add('active');
-
-          // 🌄 Randomize background image
-          const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-          document.body.style.backgroundImage = `url(${randomSrc})`;
-          document.body.style.backgroundSize = 'cover';
-          document.body.style.backgroundPosition = 'center';
-        }
-      }
-    });
-
-    // Trigger animation on first page
-    const firstPage = document.querySelector('#flipbook .page:nth-child(1)');
-    if (firstPage) firstPage.classList.add('active');
-  } else {
-    console.error("❌ Turn.js failed to load.");
-  }
+  // 🌄 Set a random background image
+  const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+  document.body.style.backgroundImage = `url(${randomSrc})`;
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
 });
+
+// ✨ Fade-in animation on scroll
+const sections = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+sections.forEach(section => observer.observe(section));
 
 // 🔌 Connect Wallet Button Logic
 const connectBtn = document.querySelector(".connect-btn");
