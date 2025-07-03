@@ -14,7 +14,7 @@ html {
 body {
   font-family: 'Bangers', cursive;
   background-color: #111;
-  background-image: url('images/clearer-background.png');
+  background-image: url('images/clearer-background.png'); /* Replace with your preferred image */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -22,22 +22,28 @@ body {
   color: #fff;
   overflow: hidden;
   transition: background-image 0.5s ease-in-out;
+  padding-top: 100px; /* Prevent content from hiding behind the logo */
 }
 
 /* 🐾 Sticky Fade-In Logo */
 .site-header {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.8); /* Optional: semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
   opacity: 0;
   animation: fadeInLogo 2s ease-out forwards;
 }
 
 .logo {
-  width: 180px;
-  height: auto;
+  height: 70px;
+  width: auto;
   filter: drop-shadow(0 0 10px #000);
 }
 
@@ -195,4 +201,65 @@ body {
 /* 🔘 Connect Wallet Button */
 .connect-btn {
   font-size: 1.5rem;
-  padding: 0.75
+  padding: 0.75rem 2rem;
+  background: #ffcc00;
+  color: #000;
+  border: 3px solid #000;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.connect-btn:hover {
+  background: #000;
+  color: #ffcc00;
+  border-color: #ffcc00;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 850px) {
+  body {
+    padding-top: 80px;
+  }
+
+  #flipbook {
+    width: 100%;
+    height: auto;
+  }
+
+  .page {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .modal-content h1 {
+    font-size: 2rem;
+  }
+
+  .modal-content p {
+    font-size: 1rem;
+  }
+
+  .modal-content button {
+    font-size: 1.2rem;
+  }
+
+  .page h1, .page h2 {
+    font-size: 1.8rem;
+  }
+
+  .page p {
+    font-size: 1rem;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .site-header {
+    height: 80px;
+  }
+}
