@@ -20,14 +20,19 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   // Hide modal
   document.getElementById("popup").style.display = "none";
 
+  // Inject logo container into DOM
+  const logoContainer = document.createElement("div");
+  logoContainer.className = "logo-container";
+  logoContainer.innerHTML = `<img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="logo" />`;
+  document.body.prepend(logoContainer);
+
+  // Animate logo
+  setTimeout(() => {
+    document.querySelector(".logo").classList.add("visible");
+  }, 100);
+
   // Show comic content
   document.getElementById("comic-container").classList.remove("hidden");
-
-  // Show and animate logo
-  const header = document.getElementById("siteHeader");
-  const logo = header.querySelector(".logo");
-  header.classList.remove("hidden");
-  setTimeout(() => logo.classList.add("visible"), 100);
 
   // Enable scrolling
   document.body.style.overflow = "auto";
@@ -36,11 +41,3 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
   document.body.style.backgroundImage = `url(${randomSrc})`;
 });
-
-// ✨ Animate sections on scroll
-const sections = document.querySelectorAll('.fade-in');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList
