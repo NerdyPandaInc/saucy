@@ -28,10 +28,10 @@ document.getElementById("okayBoom").addEventListener("click", () => {
 
         // 🌄 Randomize background image
         const backgrounds = [
-          'url(images/bg1.jpg)',
-          'url(images/bg2.jpg)',
-          'url(images/bg3.jpg)',
-          'url(images/bg4.jpg)'
+          'url(images/202572165113979.png)',
+          'url(images/202572165617309.png)',
+          'url(images/20257216561317.png)',
+          'url(images/20257216516370.png)'
         ];
         const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
         document.body.style.backgroundImage = randomBg;
