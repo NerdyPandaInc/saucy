@@ -40,7 +40,7 @@ body {
 
 /* 🖼️ Massive Logo with Fade-In */
 .logo-inline {
-  height: 320px; /* 💥 Super-sized */
+  height: 180px; /* 💥 Super-sized */
   width: auto;
   display: inline-block;
   opacity: 0;
