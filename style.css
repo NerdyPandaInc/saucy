@@ -9,11 +9,15 @@
 body {
   font-family: 'Bangers', cursive;
   background-color: #111;
+  background-image: url('images/bg1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   color: #fff;
   overflow: hidden;
+  transition: background-image 0.5s ease-in-out;
 }
 
-/* 🔥 Modal Pop-Up */
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -64,7 +68,6 @@ body {
   border-color: #000;
 }
 
-/* 🔄 Animation */
 @keyframes popIn {
   from {
     transform: scale(0.8);
@@ -76,12 +79,10 @@ body {
   }
 }
 
-/* 🔒 Hidden Comic Until Unlocked */
 .hidden {
   display: none;
 }
 
-/* 📖 Flipbook Container */
 #flipbook {
   width: 800px;
   height: 600px;
@@ -89,7 +90,6 @@ body {
   box-shadow: 0 0 30px #000;
 }
 
-/* 📄 Comic Pages */
 .page {
   background: #222;
   border: 5px solid #ffcc00;
@@ -101,6 +101,14 @@ body {
   flex-direction: column;
   justify-content: center;
   position: relative;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.6s ease-out;
+}
+
+.page.active {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .page h1, .page h2 {
@@ -116,7 +124,6 @@ body {
   margin: 0 auto;
 }
 
-/* 🖼️ Image Styling */
 .comic-img {
   max-width: 90%;
   height: auto;
@@ -125,7 +132,6 @@ body {
   box-shadow: 0 0 15px #000;
 }
 
-/* 🎥 Video Styling */
 .comic-video {
   width: 90%;
   max-width: 700px;
@@ -134,7 +140,6 @@ body {
   margin: 1rem auto;
 }
 
-/* 🔘 Connect Wallet Button */
 .connect-btn {
   font-size: 1.5rem;
   padding: 0.75rem 2rem;
@@ -152,7 +157,6 @@ body {
   border-color: #ffcc00;
 }
 
-/* 📱 Responsive Design */
 @media (max-width: 850px) {
   #flipbook {
     width: 100%;
