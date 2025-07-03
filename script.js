@@ -8,8 +8,12 @@ const backgrounds = [
 
 backgrounds.forEach(src => {
   const img = new Image();
+  img.onload = () => console.log(`✅ Preloaded: ${src}`);
   img.src = src;
 });
+
+// 🔒 Lock scroll until comic is unlocked
+document.body.style.overflow = "hidden";
 
 // 🔓 Unlock the comic when user clicks "OKAY, BOOM"
 document.getElementById("okayBoom").addEventListener("click", () => {
@@ -22,7 +26,13 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   // Allow scrolling again
   document.body.style.overflow = "auto";
 
-  // ✅ Check if Turn.js is loaded
+  // ✅ Initialize Turn.js if available
+  const flipbook = document.getElementById("flipbook");
+  if (!flipbook) {
+    console.error("❌ #flipbook element not found.");
+    return;
+  }
+
   if (typeof $('#flipbook').turn === 'function') {
     $('#flipbook').turn({
       width: 800,
