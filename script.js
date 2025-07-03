@@ -16,8 +16,34 @@ document.getElementById("okayBoom").addEventListener("click", () => {
     autoCenter: true,
     elevation: 50,
     gradients: true,
-    duration: 1000
+    duration: 1000,
+    when: {
+      turned: function (event, page) {
+        // 🔄 Remove 'active' from all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+        // ✅ Add 'active' to the current page
+        const currentPage = document.querySelector(`#flipbook .page:nth-child(${page})`);
+        if (currentPage) currentPage.classList.add('active');
+
+        // 🌄 Randomize background image
+        const backgrounds = [
+          'url(images/bg1.jpg)',
+          'url(images/bg2.jpg)',
+          'url(images/bg3.jpg)',
+          'url(images/bg4.jpg)'
+        ];
+        const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        document.body.style.backgroundImage = randomBg;
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+      }
+    }
   });
+
+  // Trigger animation on first page
+  const firstPage = document.querySelector('#flipbook .page:nth-child(1)');
+  if (firstPage) firstPage.classList.add('active');
 });
 
 // 🔌 Optional: Connect Wallet Button
