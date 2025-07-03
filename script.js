@@ -12,28 +12,32 @@ backgrounds.forEach(src => {
   img.src = src;
 });
 
-// 🔒 Lock scroll until comic is unlocked
+// 🔒 Lock scroll until accepted
 document.body.style.overflow = "hidden";
 
-// 🔓 Unlock the comic when user clicks "OKAY, BOOM"
+// 🔓 Unlock site on "OKAY, BOOM"
 document.getElementById("okayBoom").addEventListener("click", () => {
-  // Hide the modal
+  // Hide modal
   document.getElementById("popup").style.display = "none";
 
-  // Show the comic container
+  // Show comic content
   document.getElementById("comic-container").classList.remove("hidden");
 
-  // Allow scrolling again
+  // Show and animate logo
+  const header = document.getElementById("siteHeader");
+  const logo = header.querySelector(".logo");
+  header.classList.remove("hidden");
+  setTimeout(() => logo.classList.add("visible"), 100); // trigger zoom-in
+
+  // Enable scrolling
   document.body.style.overflow = "auto";
 
-  // 🌄 Set a random background image
+  // Optional: randomize background
   const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
   document.body.style.backgroundImage = `url(${randomSrc})`;
-  document.body.style.backgroundSize = 'cover';
-  document.body.style.backgroundPosition = 'center';
 });
 
-// ✨ Fade-in animation on scroll
+// ✨ Animate sections on scroll
 const sections = document.querySelectorAll('.fade-in');
 
 const observer = new IntersectionObserver(entries => {
@@ -46,7 +50,7 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(section => observer.observe(section));
 
-// 🔌 Connect Wallet Button Logic
+// 🔌 Wallet Connect Button
 const connectBtn = document.querySelector(".connect-btn");
 
 connectBtn?.addEventListener("click", async () => {
