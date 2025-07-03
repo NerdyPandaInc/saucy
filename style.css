@@ -15,12 +15,11 @@ body {
   background-position: center top;
   background-attachment: fixed;
   color: #fff;
-  padding-top: 160px; /* Push content below fixed logo */
+  padding-top: 160px; /* Push content below logo */
   overflow-x: hidden;
   transition: background-image 0.5s ease-in-out;
 }
 
-/* 🔒 Hidden Utility */
 .hidden {
   display: none;
 }
@@ -66,7 +65,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .modal-content {
@@ -160,7 +159,6 @@ body {
   margin-right: 0.5rem;
 }
 
-.stake-btn,
 .connect-btn {
   background: #ffcc00;
   color: #000;
@@ -174,7 +172,6 @@ body {
   transition: background 0.2s ease-in-out;
 }
 
-.stake-btn:hover,
 .connect-btn:hover {
   background: #fff000;
 }
