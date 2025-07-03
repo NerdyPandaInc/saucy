@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const comicContainer = document.getElementById("comic-container");
 
   if (okayBoomBtn && popup && comicContainer) {
+    console.log("✅ OKAY, BOOM button ready");
+
     okayBoomBtn.addEventListener("click", () => {
       // Hide modal
       popup.style.display = "none";
@@ -32,12 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
       // Enable scrolling
       document.body.style.overflow = "auto";
 
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       // 🌄 Randomize background
       const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-      document.body.style.backgroundImage = `url(${randomSrc})`;
+      if (randomSrc) {
+        document.body.style.backgroundImage = `url(${randomSrc})`;
+      }
     });
   } else {
-    console.warn("⚠️ Modal or content container not found in DOM.");
+    if (!okayBoomBtn) console.warn("❌ Button with ID 'okayBoom' not found.");
+    if (!popup) console.warn("❌ Modal with ID 'popup' not found.");
+    if (!comicContainer) console.warn("❌ Container with ID 'comic-container' not found.");
   }
 
   // ✨ Animate sections on scroll
