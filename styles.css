@@ -15,7 +15,7 @@ body {
   background-position: center top;
   background-attachment: fixed;
   color: #fff;
-  padding-top: 160px;
+  padding-top: 0;
   overflow-x: hidden;
   transition: background-image 0.5s ease-in-out;
 }
@@ -23,9 +23,42 @@ body {
 .hidden {
   display: none;
 }
+
 .logo.visible {
   opacity: 1;
   transform: scale(1);
+}
+
+/* 🐾 Scrollable Header */
+.site-header {
+  width: 100%;
+  background: transparent;
+  text-align: center;
+  padding: 1rem 0 0.25rem; /* Tight vertical spacing */
+  margin-bottom: -1rem;    /* Pull content closer */
+}
+
+/* 🖼️ Massive Logo with Fade-In */
+.logo-inline {
+  height: 320px; /* 💥 Super-sized */
+  width: auto;
+  display: inline-block;
+  opacity: 0;
+  animation: fadeInLogo 3.5s ease forwards;
+  filter: drop-shadow(0 0 15px #000);
+  margin-bottom: -1rem;
+}
+
+/* 🎞️ Fade-in Animation */
+@keyframes fadeInLogo {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal {
@@ -155,41 +188,4 @@ body {
 .stake-btn:hover,
 .connect-btn:hover {
   background: #fff000;
-}
-.logo-inline {
-  display: block;
-  margin: 0 auto 1rem auto;
-  height: 120px;
-  width: auto;
-  filter: drop-shadow(0 0 10px #000);
-}
-/* 🐾 Scrollable Header */
-.site-header {
-  width: 100%;
-  background: transparent;
-  text-align: center;
-  padding: 1rem 0 0.5rem; /* 🔧 Smaller vertical spacing */
-  margin-bottom: 0;       /* 🔧 Remove gap below logo */
-}
-
-/* 🖼️ Massive Logo with Fade-In */
-.logo-inline {
-  height: 300px; /* 💥 Super-sized */
-  width: auto;
-  display: inline-block;
-  opacity: 0;
-  animation: fadeInLogo 3.5s ease forwards;
-  filter: drop-shadow(0 0 15px #000);
-  margin-bottom: -1rem; /* 🔧 Pull content closer */
-}
-/* 🎞️ Fade-in Animation */
-@keyframes fadeInLogo {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
