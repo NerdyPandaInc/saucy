@@ -38,7 +38,7 @@ body {
   align-items: center;
   z-index: 1000;
   opacity: 0;
-  animation: fadeInLogo 5s ease-out forwards;
+  animation: fadeInLogo 2.5s ease-out forwards;
 }
 
 .logo {
