@@ -32,7 +32,7 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   // Enable scrolling
   document.body.style.overflow = "auto";
 
-  // Optional: randomize background
+  // 🌄 Optional: randomize background
   const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
   document.body.style.backgroundImage = `url(${randomSrc})`;
 });
