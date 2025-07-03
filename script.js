@@ -1,3 +1,16 @@
+// 🌄 Preload background images
+const backgrounds = [
+  'images/202572165113979.png',
+  'images/202572165617309.png',
+  'images/20257216561317.png',
+  'images/20257216516370.png'
+];
+
+backgrounds.forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
+
 // 🔓 Unlock the comic when user clicks "OKAY, BOOM"
 document.getElementById("okayBoom").addEventListener("click", () => {
   // Hide the modal
@@ -9,49 +22,50 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   // Allow scrolling again
   document.body.style.overflow = "auto";
 
-  // Initialize Turn.js flipbook
-  $('#flipbook').turn({
-    width: 800,
-    height: 600,
-    autoCenter: true,
-    elevation: 50,
-    gradients: true,
-    duration: 1000,
-    when: {
-      turned: function (event, page) {
-        // 🔄 Remove 'active' from all pages
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // ✅ Check if Turn.js is loaded
+  if (typeof $('#flipbook').turn === 'function') {
+    $('#flipbook').turn({
+      width: 800,
+      height: 600,
+      autoCenter: true,
+      elevation: 50,
+      gradients: true,
+      duration: 1000,
+      when: {
+        turned: function (event, page) {
+          // 🔄 Remove 'active' from all pages
+          document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
-        // ✅ Add 'active' to the current page
-        const currentPage = document.querySelector(`#flipbook .page:nth-child(${page})`);
-        if (currentPage) currentPage.classList.add('active');
+          // ✅ Add 'active' to the current page
+          const currentPage = document.querySelector(`#flipbook .page:nth-child(${page})`);
+          if (currentPage) currentPage.classList.add('active');
 
-        // 🌄 Randomize background image
-        const backgrounds = [
-          'url(images/202572165113979.png)',
-          'url(images/202572165617309.png)',
-          'url(images/20257216561317.png)',
-          'url(images/20257216516370.png)'
-        ];
-        const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        document.body.style.backgroundImage = randomBg;
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundPosition = 'center';
+          // 🌄 Randomize background image
+          const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+          document.body.style.backgroundImage = `url(${randomSrc})`;
+          document.body.style.backgroundSize = 'cover';
+          document.body.style.backgroundPosition = 'center';
+        }
       }
-    }
-  });
+    });
 
-  // Trigger animation on first page
-  const firstPage = document.querySelector('#flipbook .page:nth-child(1)');
-  if (firstPage) firstPage.classList.add('active');
+    // Trigger animation on first page
+    const firstPage = document.querySelector('#flipbook .page:nth-child(1)');
+    if (firstPage) firstPage.classList.add('active');
+  } else {
+    console.error("❌ Turn.js failed to load.");
+  }
 });
 
-// 🔌 Optional: Connect Wallet Button
-document.querySelector(".connect-btn")?.addEventListener("click", async () => {
+// 🔌 Connect Wallet Button Logic
+const connectBtn = document.querySelector(".connect-btn");
+
+connectBtn?.addEventListener("click", async () => {
   if (window.ethereum) {
     try {
       await window.ethereum.request({ method: "eth_requestAccounts" });
-      alert("Wallet connected!");
+      connectBtn.textContent = "✅ Connected";
+      connectBtn.disabled = true;
     } catch (err) {
       alert("Connection rejected.");
     }
