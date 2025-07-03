@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
-/* 🔧 Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -22,41 +21,47 @@ body {
   color: #fff;
   overflow: hidden;
   transition: background-image 0.5s ease-in-out;
-  padding-top: 100px;
+  padding-top: 180px;
   image-rendering: crisp-edges;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 🐾 Sticky Logo */
+.hidden {
+  display: none;
+}
+
+/* 🐾 Logo */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
-  background: rgba(0, 0, 0, 0.8);
+  height: 160px;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  opacity: 0;
-  animation: fadeInLogo 2.5s ease-out forwards;
+  pointer-events: none;
 }
 
 .logo {
-  height: 70px;
+  height: 140px;
   width: auto;
-  filter: drop-shadow(0 0 10px #000);
+  filter: drop-shadow(0 0 15px #000);
+  pointer-events: auto;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.8s ease-out;
 }
 
-@keyframes fadeInLogo {
-  to {
-    opacity: 1;
-  }
+.logo.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
-/* 🔥 Modal Pop-Up */
+/* 🔥 Modal */
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -82,14 +87,8 @@ body {
 }
 
 @keyframes popIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .modal-content h1 {
@@ -118,18 +117,13 @@ body {
   border-color: #000;
 }
 
-.hidden {
-  display: none;
-}
-
-/* 📦 Comic Content Container */
+/* 📦 Comic Sections */
 .content {
   padding: 2rem;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* 📄 Comic Sections */
 .comic-section {
   background: #222;
   border: 5px solid #ffcc00;
@@ -171,7 +165,6 @@ body {
   margin-right: 0.5rem;
 }
 
-/* 🎬 Video Styling */
 .comic-video {
   width: 100%;
   max-width: 700px;
@@ -180,7 +173,6 @@ body {
   margin-top: 1rem;
 }
 
-/* 🔘 Buttons */
 .stake-btn,
 .connect-btn {
   background: #ffcc00;
@@ -198,98 +190,4 @@ body {
 .stake-btn:hover,
 .connect-btn:hover {
   background: #fff000;
-}
-
-/* 📱 Responsive Design */
-@media (max-width: 850px) {
-  body {
-    padding-top: 80px;
-  }
-
-  .modal-content {
-    padding: 1.5rem;
-  }
-
-  .modal-content h1 {
-    font-size: 2rem;
-  }
-
-  .modal-content p {
-    font-size: 1rem;
-  }
-
-  .modal-content button {
-    font-size: 1.2rem;
-  }
-
-  .comic-section {
-    padding: 1.5rem;
-  }
-
-  .comic-section h2 {
-    font-size: 1.6rem;
-  }
-
-  .comic-section p,
-  .comic-section ul {
-    font-size: 1rem;
-  }
-
-  .logo {
-    height: 50px;
-  }
-
-  .site-header {
-    height: 80px;
-  }
-}body {
-  font-family: 'Bangers', cursive;
-  background-color: #111;
-  background-image: url('images/202572165617309_v2.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  color: #fff;
-  overflow: hidden;
-  transition: background-image 0.5s ease-in-out;
-  padding-top: 180px;
-  image-rendering: crisp-edges;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 🐾 Sticky Logo with Zoom-In Animation */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 140px;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  animation: zoomFadeIn 1.5s ease-out forwards;
-  pointer-events: none;
-}
-
-.logo {
-  height: 120px;
-  width: auto;
-  filter: drop-shadow(0 0 15px #000);
-  pointer-events: auto;
-}
-
-@keyframes zoomFadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
