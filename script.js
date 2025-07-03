@@ -72,4 +72,19 @@ connectBtn?.addEventListener("click", async () => {
   } else {
     alert("MetaMask not found. Please install it to connect.");
   }
+  // 👀 Hide logo on scroll down, show on scroll up
+let lastScrollTop = 0;
+window.addEventListener("scroll", () => {
+  const logoContainer = document.querySelector(".logo-container");
+  if (!logoContainer) return;
+
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollTop > 50) {
+    logoContainer.classList.add("hidden-scroll");
+  } else {
+    logoContainer.classList.remove("hidden-scroll");
+  }
+
+  lastScrollTop = scrollTop;
 });
