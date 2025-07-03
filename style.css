@@ -1,14 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
-/* 🔧 Reset & Base Styles */
+/* 🔧 Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -20,58 +16,35 @@ body {
   background-position: center top;
   background-attachment: fixed;
   color: #fff;
-  overflow: hidden;
+  padding-top: 140px; /* ✅ Matches header height */
+  overflow-x: hidden;
   transition: background-image 0.5s ease-in-out;
-  padding-top: 240px; /* ✅ Prevent content from hiding under logo */
-  image-rendering: crisp-edges;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-.hidden {
-  display: none;
-}
-
-/* 🐾 Logo Header */
+/* ✅ Fixed Transparent Header */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px; /* ✅ Keep header small */
-  background: transparent;
+  height: 140px;
+  background: transparent; /* ✅ Transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  pointer-events: none;
+  pointer-events: none; /* Allows clicks through header */
 }
 
-/* 💥 Optional: Comic-style burst */
-.site-header::before {
-  content: "";
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  background: url('images/comic-boom.png') no-repeat center center;
-  background-size: contain;
-  z-index: -1;
-  opacity: 0.8;
-  transform: scale(1.2);
-}
-
-/* 🖼️ Logo */
+/* 🖼️ Logo Styling */
 .logo {
-  height: 180px; /* ✅ Visually large */
+  height: 120px;
   width: auto;
-  margin-top: 40px; /* ✅ Pull it down visually */
-  filter: drop-shadow(0 0 20px #000);
-  pointer-events: auto;
   opacity: 0;
   transform: scale(0.7);
   transition: all 0.8s ease-out;
-  position: relative;
-  z-index: 1;
+  filter: drop-shadow(0 0 15px #000);
+  pointer-events: auto; /* Allows interaction with logo if needed */
 }
 
 .logo.visible {
