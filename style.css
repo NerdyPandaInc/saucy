@@ -14,7 +14,7 @@ html {
 body {
   font-family: 'Bangers', cursive;
   background-color: #111;
-  background-image: url('images/clearer-background.png'); /* Replace with your preferred image */
+  background-image: url('images/202572165631575.png'); /* Replace with your preferred image */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -38,7 +38,7 @@ body {
   align-items: center;
   z-index: 1000;
   opacity: 0;
-  animation: fadeInLogo 2s ease-out forwards;
+  animation: fadeInLogo 5s ease-out forwards;
 }
 
 .logo {
