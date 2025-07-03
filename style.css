@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  font-family: 'Bangers', cursive;
+  background: #111;
+  color: #fff;
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
