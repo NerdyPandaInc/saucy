@@ -266,3 +266,63 @@ body {
     height: 80px;
   }
 }
+.content {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.comic-section {
+  background: #222;
+  border: 5px solid #ffcc00;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 5px 5px 0 #000;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.comic-section h2 {
+  color: #ffcc00;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px #000;
+}
+
+.comic-section p, .comic-section ul {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.stake-btn {
+  background: #ffcc00;
+  color: #000;
+  font-size: 1.2rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.stake-btn:hover {
+  background: #fff000;
+}
+
+.comic-video {
+  width: 100%;
+  max-width: 700px;
+  border: 4px solid #fff;
+  box-shadow: 0 0 15px #000;
+  margin-top: 1rem;
+}
+
+/* ✨ Fade-in animation */
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
