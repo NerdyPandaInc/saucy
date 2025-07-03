@@ -21,14 +21,14 @@ body {
   transition: background-image 0.5s ease-in-out;
 }
 
-/* ✅ Fixed Transparent Header */
+/* 🐾 Fixed Transparent Header */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 140px;
-  background: transparent; /* ✅ Transparent background */
+  height: 160px; /* Adjust based on logo size */
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,18 +38,23 @@ body {
 
 /* 🖼️ Logo Styling */
 .logo {
-  height: 120px;
+  height: 140px;
   width: auto;
   opacity: 0;
   transform: scale(0.7);
   transition: all 0.8s ease-out;
   filter: drop-shadow(0 0 15px #000);
-  pointer-events: auto; /* Allows interaction with logo if needed */
+  pointer-events: auto;
 }
 
 .logo.visible {
   opacity: 1;
   transform: scale(1);
+}
+
+/* ✅ Body padding to prevent content from hiding behind logo */
+body {
+  padding-top: 180px; /* Must be ≥ .site-header height */
 }
 
 /* ✅ Adjust body padding to match header height */
