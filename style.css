@@ -168,19 +168,20 @@ body {
   width: 100%;
   background: transparent;
   text-align: center;
-  padding: 2rem 0 1rem;
+  padding: 1rem 0 0.5rem; /* 🔧 Smaller vertical spacing */
+  margin-bottom: 0;       /* 🔧 Remove gap below logo */
 }
 
-/* 🖼️ Bigger Logo with Fade-In */
+/* 🖼️ Massive Logo with Fade-In */
 .logo-inline {
-  height: 320px; /* 🔥 Bigger */
+  height: 300px; /* 💥 Super-sized */
   width: auto;
   display: inline-block;
   opacity: 0;
   animation: fadeInLogo 3.5s ease forwards;
-  filter: drop-shadow(0 0 10px #000);
+  filter: drop-shadow(0 0 15px #000);
+  margin-bottom: -1rem; /* 🔧 Pull content closer */
 }
-
 /* 🎞️ Fade-in Animation */
 @keyframes fadeInLogo {
   from {
