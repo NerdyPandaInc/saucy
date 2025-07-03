@@ -171,13 +171,6 @@ body {
   padding: 2rem 0 1rem;
 }
 
-/* 🖼️ Inline Logo */
-.logo-inline {
-  height: 120px;
-  width: auto;
-  display: inline-block;
-  filter: drop-shadow(0 0 10px #000);
-}
 /* 🖼️ Bigger Logo with Fade-In */
 .logo-inline {
   height: 180px; /* 🔥 Bigger */
@@ -199,6 +192,3 @@ body {
     transform: scale(1);
   }
 }
-
-
-
