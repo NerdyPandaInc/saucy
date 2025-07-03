@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- 🔥 Pop-Up Modal -->
   <div id="popup" class="modal">
     <div class="modal-content">
       <h1>💥 WARNING 💥</h1>
@@ -16,32 +17,72 @@
     </div>
   </div>
 
+  <!-- 📖 Comic Flipbook -->
   <div id="comic-container" class="hidden">
     <div id="flipbook">
+      <!-- Cover Page -->
       <div class="page cover">
         <h1>🐶💣 BOOMINU</h1>
         <p>The Shiba with a Detonator</p>
       </div>
+
+      <!-- Origin Story -->
       <div class="page">
         <h2>🔥 Origin Story</h2>
         <p>Born from the ashes of rugs... forged in the fires of meme warfare.</p>
       </div>
+
+      <!-- Tokenomics Text -->
       <div class="page">
         <h2>📊 Tokenomics</h2>
         <p>1.2T supply. 1T circulating. 200B locked. Burn rate: 1–5% per transfer.</p>
       </div>
+
+      <!-- Trust Page -->
       <div class="page">
         <h2>🔒 Trust & Transparency</h2>
         <p>Ownership renounced. Wallets locked. No minting. Just memes and math.</p>
       </div>
+
+      <!-- Meme War Call -->
       <div class="page">
         <h2>🚀 Join the Meme War</h2>
         <p>Buy. Burn. Meme. Repeat.</p>
       </div>
+
+      <!-- Image Page -->
+      <div class="page">
+        <h2>💣 The Detonator Awakens</h2>
+        <img src="images/boominu-cover.jpg" alt="BOOMINU Cover" class="comic-img" />
+        <p>BOOMINU emerges from the shadows... ready to burn.</p>
+      </div>
+
+      <!-- Tokenomics Chart -->
+      <div class="page">
+        <h2>📊 Tokenomics Visual</h2>
+        <img src="images/tokenomics-chart.png" alt="Tokenomics Chart" class="comic-img" />
+        <p>Fixed supply. Dynamic burn. Locked wallets. No mercy.</p>
+      </div>
+
+      <!-- Video Page -->
+      <div class="page">
+        <h2>🎬 BOOMINU: Origin Story</h2>
+        <video class="comic-video" autoplay muted loop playsinline>
+          <source src="videos/boominu-intro.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Connect Wallet -->
+      <div class="page">
+        <h2>🧠 Ready to Join?</h2>
+        <p>Connect your wallet and enter the meme war.</p>
+        <button class="connect-btn">Connect Wallet</button>
+      </div>
     </div>
   </div>
 
-  <!-- jQuery + Turn.js -->
+  <!-- 📦 Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
   <script src="script.js"></script>
