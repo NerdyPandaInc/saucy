@@ -10,9 +10,11 @@
     body {
       margin: 0;
       font-family: 'Bangers', cursive;
-      background: #111;
+      background: #111 url('images/202572165113979.png') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
       overflow-x: hidden;
+      transition: background-image 0.5s ease-in-out;
     }
 
     .site-header {
@@ -93,6 +95,10 @@
         font-size: 1.2rem;
         padding: 0.5rem 1.5rem;
       }
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
