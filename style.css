@@ -1,3 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Bangers', cursive;
+  background-color: #111;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* 🔥 Modal Pop-Up */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #ffcc00;
+  color: #000;
+  padding: 2rem;
+  border: 5px solid #000;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 0 20px #ff0000;
+  border-radius: 10px;
+  animation: popIn 0.5s ease-out;
+}
+
+.modal-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.modal-content button {
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  background: #000;
+  color: #fff;
+  border: 3px solid #fff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-content button:hover {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+}
+
+/* 🔄 Animation */
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 🔒 Hidden Comic Until Unlocked */
+.hidden {
+  display: none;
+}
+
+/* 📖 Flipbook Container */
+#flipbook {
+  width: 800px;
+  height: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 0 30px #000;
+}
+
+/* 📄 Comic Pages */
+.page {
+  background: #222;
+  border: 5px solid #ffcc00;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.page h1, .page h2 {
+  color: #ffcc00;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px #000;
+}
+
+.page p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 🖼️ Image Styling */
 .comic-img {
   max-width: 90%;
   height: auto;
@@ -6,6 +125,7 @@
   box-shadow: 0 0 15px #000;
 }
 
+/* 🎥 Video Styling */
 .comic-video {
   width: 90%;
   max-width: 700px;
@@ -14,6 +134,7 @@
   margin: 1rem auto;
 }
 
+/* 🔘 Connect Wallet Button */
 .connect-btn {
   font-size: 1.5rem;
   padding: 0.75rem 2rem;
@@ -29,4 +150,40 @@
   background: #000;
   color: #ffcc00;
   border-color: #ffcc00;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 850px) {
+  #flipbook {
+    width: 100%;
+    height: auto;
+  }
+
+  .page {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .modal-content h1 {
+    font-size: 2rem;
+  }
+
+  .modal-content p {
+    font-size: 1rem;
+  }
+
+  .modal-content button {
+    font-size: 1.2rem;
+  }
+
+  .page h1, .page h2 {
+    font-size: 1.8rem;
+  }
+
+  .page p {
+    font-size: 1rem;
+  }
 }
