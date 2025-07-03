@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BOOMINU Staking</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Bangers', cursive;
+      background: #111 url('images/clearer-background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ffcc00;
+      text-shadow: 2px 2px #000;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    input, select, button {
+      margin-top: 0.5rem;
+      padding: 0.6rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    input, select {
+      width: 200px;
+    }
+
+    button {
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      margin: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #fff000;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: #ffcc00;
+      color: #000;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #status {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #0f0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ⚠️ Disclaimer Modal -->
+<div id="disclaimer-modal" class="modal">
+  <div class="modal-content">
+    <h2>⚠️ Acknowledgement Required</h2>
+    <p>
+      By using this staking interface, you acknowledge that smart contracts carry inherent risks.
+      Always verify contract addresses, use trusted wallets, and never share your private keys.
+    </p>
+    <button onclick="acknowledgeDisclaimer()">I Understand</button>
+  </div>
+</div>
+
+<!-- 🔐 Staking Interface -->
+<div id="staking-ui" class="hidden">
+  <h1>💧 BOOMINU Staking</h1>
+
+  <button onclick="connectWallet()">🔌 Connect Wallet</button>
+
+  <div>
+    <label>Amount to Stake (LP):</label>
+    <input type="number" id="stakeAmount" placeholder="e.g. 100" />
+  </div>
+
+  <div>
+    <label>Lock Duration (days):</label>
+    <input type="number" id="lockDays" placeholder="0–90" />
+  </div>
+
+  <button onclick="stake()">✅ Stake</button>
+  <button onclick="claimRewards()">🎁 Claim Rewards</button>
+  <button onclick="emergencyWithdraw()">🆘 Emergency Withdraw</button>
+
+  <div>
+    <label>Preferred Reward Token (after 12 months):</label>
+    <select id="rewardTokenSelect">
+      <option value="BOOM">BOOMINU</option>
+      <option value="BERA">BERA</option>
+    </select>
+    <button onclick="setRewardPreference()">Set Preference</button>
+  </div>
+
+  <p id="status"></p>
+</div>
+
+<script>
+  const contractAddress = "0xYourBoomInuContract";
+  const boomToken = "0xBoomTokenAddress";
+  const beraToken = "0xBeraTokenAddress";
+  const abi = [ /* 🔧 Paste your BoomInu ABI here */ ];
+
+  let provider, signer, contract;
+
+  function acknowledgeDisclaimer() {
+    document.getElementById("disclaimer-modal").style.display = "none";
+    document.getElementById("staking-ui").classList.remove("hidden");
+  }
+
+  async function connectWallet() {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    signer = provider.getSigner();
+    contract = new ethers.Contract(contractAddress, abi, signer);
+    document.getElementById("status").innerText = "✅ Wallet connected";
+  }
+
+  async function stake() {
+    const amount = document.getElementById("stakeAmount").value;
+    const lockDays = document.getElementById("lockDays").value;
+    if (!amount) return alert("Enter amount to stake");
+
+    const parsed = ethers.utils.parseUnits(amount, 18);
+    try {
+      const tx = await contract.stakeLP(parsed, lockDays);
+      await tx.wait();
+      alert("Staked successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Stake failed.");
+    }
+  }
+
+  async function claimRewards() {
+    try {
+      const tx = await contract.claimRewards();
+      await tx.wait();
+      alert("Rewards claimed!");
+    } catch (err) {
+      console.error(err);
+      alert("Claim failed.");
+    }
+  }
+
+  async function emergencyWithdraw() {
+    try {
+      const tx = await contract.emergencyWithdraw();
+      await tx.wait();
+      alert("Emergency withdrawal complete.");
+    } catch (err) {
+      console.error(err);
+      alert("Withdraw failed.");
+    }
+  }
+
+  async function setRewardPreference() {
+    const token = document.getElementById("rewardTokenSelect").value;
+    const tokenAddress = token === "BOOM" ? boomToken : beraToken;
+    try {
+      const tx = await contract.setRewardTokenPreference(tokenAddress);
+      await tx.wait();
+      alert(`Reward preference set to ${token}`);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to set preference.");
+    }
+  }
+</script>
+
+</body>
+</html>
