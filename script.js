@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const comicContainer = document.getElementById("comic-container");
 
   if (okayBoomBtn && popup && comicContainer) {
-    console.log("✅ OKAY, BOOM button ready");
-
     okayBoomBtn.addEventListener("click", () => {
       // Hide modal
       popup.style.display = "none";
