@@ -6,73 +6,165 @@
   <title>BOOMINU Comic</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Bangers', cursive;
+      background: #111;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: #000;
+      padding: 0.5rem;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .logo {
+      max-width: 200px;
+      height: auto;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: #ffcc00;
+      color: #000;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .comic-panel {
+      border: 5px solid #ffcc00;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1rem;
+      background: #222;
+      box-shadow: 5px 5px 0 #000;
+    }
+
+    .comic-img, .comic-video {
+      max-width: 100%;
+      height: auto;
+      border: 3px solid #fff;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+
+    .connect-btn, .stake-btn {
+      background: #ffcc00;
+      color: #000;
+      font-size: 1.5rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .connect-btn:hover, .stake-btn:hover {
+      background: #fff000;
+    }
+
+    @media (max-width: 768px) {
+      .comic-panel {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .connect-btn, .stake-btn {
+        font-size: 1.2rem;
+        padding: 0.5rem 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- 🐾 Sticky Fade-In Logo -->
-  <header class="site-header">
-    <img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="logo" />
-  </header>
 
-  <!-- 🔥 Pop-Up Modal -->
-  <div id="popup" class="modal">
-    <div class="modal-content">
-      <h1>💥 WARNING 💥</h1>
-      <p>This comic contains explosive memes and deflationary destruction. Proceed?</p>
-      <button id="okayBoom">OKAY, BOOM</button>
+<!-- 🐾 Sticky Logo -->
+<header class="site-header">
+  <img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="logo" />
+</header>
+
+<!-- 🔥 Pop-Up Modal -->
+<div id="popup" class="modal">
+  <div class="modal-content">
+    <h1>💥 WARNING 💥</h1>
+    <p>This comic contains explosive memes and deflationary destruction. Proceed?</p>
+    <button id="okayBoom">OKAY, BOOM</button>
+  </div>
+</div>
+
+<!-- 📖 Comic Flipbook -->
+<div id="comic-container" class="hidden">
+  <div id="flipbook">
+    <div class="page comic-panel cover">
+      <h1>🐶💣 BOOMINU</h1>
+      <p>The Shiba Hybrid with a Detonator</p>
+    </div>
+    <div class="page comic-panel">
+      <h2>🔥 Origin Story</h2>
+      <p>Born from the ashes of rugs... forged in the fires of meme warfare.</p>
+    </div>
+    <div class="page comic-panel">
+      <h2>📊 Tokenomics</h2>
+      <p>1.2T supply. 1T circulating. 200B locked. Burn rate: 1–5% per transfer.</p>
+    </div>
+    <div class="page comic-panel">
+      <h2>🔒 Trust & Transparency</h2>
+      <p>Ownership renounced. Wallets locked. No minting. Just memes and math.</p>
+    </div>
+    <div class="page comic-panel">
+      <h2>🚀 Join the Meme War</h2>
+      <p>Buy. Burn. Meme. Repeat.</p>
+    </div>
+    <div class="page comic-panel">
+      <h2>💣 The Detonator Awakens</h2>
+      <img src="images/202572165113979.png" alt="BOOMINU Cover" class="comic-img" />
+      <p>BOOMINU emerges from the shadows... ready to burn.</p>
+    </div>
+    <div class="page comic-panel">
+      <h2>📊 Tokenomics Visual</h2>
+      <img src="images/tokenomics-chart.png" alt="Tokenomics Chart" class="comic-img" />
+      <p>Fixed supply. Dynamic burn. Locked wallets. No mercy.</p>
+    </div>
+    <div class="page comic-panel video-page">
+      <h2>🎬 BOOMINU: Origin Story</h2>
+      <video class="comic-video" autoplay muted loop playsinline>
+        <source src="videos/boominu-intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="page comic-panel">
+      <h2>🧠 Ready to Join?</h2>
+      <p>Connect your wallet and enter the meme war.</p>
+      <button class="connect-btn">Connect Wallet</button>
+      <br />
+      <a href="stake.html"><button class="stake-btn">💧 Stake BOOMINU</button></a>
     </div>
   </div>
+</div>
 
-  <!-- 📖 Comic Flipbook -->
-  <div id="comic-container" class="hidden">
-    <div id="flipbook">
-      <div class="page cover">
-        <h1>🐶💣 BOOMINU</h1>
-        <p>The Shiba Hybrid with a Detonator</p>
-      </div>
-      <div class="page">
-        <h2>🔥 Origin Story</h2>
-        <p>Born from the ashes of rugs... forged in the fires of meme warfare.</p>
-      </div>
-      <div class="page">
-        <h2>📊 Tokenomics</h2>
-        <p>1.2T supply. 1T circulating. 200B locked. Burn rate: 1–5% per transfer.</p>
-      </div>
-      <div class="page">
-        <h2>🔒 Trust & Transparency</h2>
-        <p>Ownership renounced. Wallets locked. No minting. Just memes and math.</p>
-      </div>
-      <div class="page">
-        <h2>🚀 Join the Meme War</h2>
-        <p>Buy. Burn. Meme. Repeat.</p>
-      </div>
-      <div class="page">
-        <h2>💣 The Detonator Awakens</h2>
-        <img src="images/202572165113979.png" alt="BOOMINU Cover" class="comic-img" />
-        <p>BOOMINU emerges from the shadows... ready to burn.</p>
-      </div>
-      <div class="page">
-        <h2>📊 Tokenomics Visual</h2>
-        <img src="images/tokenomics-chart.png" alt="Tokenomics Chart" class="comic-img" />
-        <p>Fixed supply. Dynamic burn. Locked wallets. No mercy.</p>
-      </div>
-      <div class="page video-page">
-        <h2>🎬 BOOMINU: Origin Story</h2>
-        <video class="comic-video" autoplay muted loop playsinline>
-          <source src="videos/boominu-intro.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <div class="page">
-        <h2>🧠 Ready to Join?</h2>
-        <p>Connect your wallet and enter the meme war.</p>
-        <button class="connect-btn">Connect Wallet</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 📦 Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
-  <script src="script.js"></script>
+<!-- 📦 Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
