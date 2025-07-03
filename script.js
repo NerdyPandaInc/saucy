@@ -18,13 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🔓 Unlock site on "OKAY, BOOM"
   const okayBoomBtn = document.getElementById("okayBoom");
-  if (okayBoomBtn) {
+  const popup = document.getElementById("popup");
+  const comicContainer = document.getElementById("comic-container");
+
+  if (okayBoomBtn && popup && comicContainer) {
     okayBoomBtn.addEventListener("click", () => {
       // Hide modal
-      document.getElementById("popup").style.display = "none";
+      popup.style.display = "none";
 
       // Show comic content
-      document.getElementById("comic-container").classList.remove("hidden");
+      comicContainer.classList.remove("hidden");
 
       // Enable scrolling
       document.body.style.overflow = "auto";
@@ -33,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const randomSrc = backgrounds[Math.floor(Math.random() * backgrounds.length)];
       document.body.style.backgroundImage = `url(${randomSrc})`;
     });
+  } else {
+    console.warn("⚠️ Modal or content container not found in DOM.");
   }
 
   // ✨ Animate sections on scroll
@@ -49,17 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🔌 Wallet Connect Button
   const connectBtn = document.querySelector(".connect-btn");
-  connectBtn?.addEventListener("click", async () => {
-    if (window.ethereum) {
-      try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        connectBtn.textContent = "✅ Connected";
-        connectBtn.disabled = true;
-      } catch (err) {
-        alert("Connection rejected.");
+
+  if (connectBtn) {
+    connectBtn.addEventListener("click", async () => {
+      if (window.ethereum) {
+        try {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          connectBtn.textContent = "✅ Connected";
+          connectBtn.disabled = true;
+        } catch (err) {
+          alert("Connection rejected.");
+        }
+      } else {
+        alert("MetaMask not found. Please install it to connect.");
       }
-    } else {
-      alert("MetaMask not found. Please install it to connect.");
-    }
-  });
+    });
+  }
 });
