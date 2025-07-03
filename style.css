@@ -181,4 +181,10 @@ body {
 .connect-btn:hover {
   background: #fff000;
 }
-
+.logo-inline {
+  display: block;
+  margin: 0 auto 1rem auto;
+  height: 120px;
+  width: auto;
+  filter: drop-shadow(0 0 10px #000);
+}
