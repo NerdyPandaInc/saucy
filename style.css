@@ -14,14 +14,37 @@ html {
 body {
   font-family: 'Bangers', cursive;
   background-color: #111;
-  background-image: url('images/202572165617309.png'); /* ✅ Use a high-contrast, clean image */
+  background-image: url('images/clearer-background.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* ✅ Keeps background in place */
+  background-attachment: fixed;
   color: #fff;
   overflow: hidden;
   transition: background-image 0.5s ease-in-out;
+}
+
+/* 🐾 Sticky Fade-In Logo */
+.site-header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInLogo 2s ease-out forwards;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #000);
+}
+
+@keyframes fadeInLogo {
+  to {
+    opacity: 1;
+  }
 }
 
 /* 🔥 Modal Pop-Up */
@@ -150,10 +173,11 @@ body {
   transform: scale(1.02);
 }
 
-/* 🎥 Video Styling — moved to bottom */
+/* 🎥 Video Styling */
 .page.video-page {
-  justify-content: flex-end;
-  padding-bottom: 3rem;
+  justify-content: space-between;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .comic-video {
@@ -171,53 +195,4 @@ body {
 /* 🔘 Connect Wallet Button */
 .connect-btn {
   font-size: 1.5rem;
-  padding: 0.75rem 2rem;
-  background: #ffcc00;
-  color: #000;
-  border: 3px solid #000;
-  cursor: pointer;
-  margin-top: 1.5rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.connect-btn:hover {
-  background: #000;
-  color: #ffcc00;
-  border-color: #ffcc00;
-}
-
-/* 📱 Responsive Design */
-@media (max-width: 850px) {
-  #flipbook {
-    width: 100%;
-    height: auto;
-  }
-
-  .page {
-    padding: 1rem;
-  }
-
-  .modal-content {
-    padding: 1.5rem;
-  }
-
-  .modal-content h1 {
-    font-size: 2rem;
-  }
-
-  .modal-content p {
-    font-size: 1rem;
-  }
-
-  .modal-content button {
-    font-size: 1.2rem;
-  }
-
-  .page h1, .page h2 {
-    font-size: 1.8rem;
-  }
-
-  .page p {
-    font-size: 1rem;
-  }
-}
+  padding: 0.75
