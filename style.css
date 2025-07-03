@@ -152,3 +152,12 @@ body {
     font-size: 1.2rem;
   }
 }
+.page::before {
+  content: "💥";
+  font-size: 5rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  opacity: 0.05;
+  transform: rotate(-20deg);
+}
