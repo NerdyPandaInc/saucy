@@ -20,18 +20,7 @@ document.getElementById("okayBoom").addEventListener("click", () => {
   // Hide modal
   document.getElementById("popup").style.display = "none";
 
-  // Inject logo container into DOM
-  const logoContainer = document.createElement("div");
-  logoContainer.className = "logo-container";
-  logoContainer.innerHTML = `<img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="logo" />`;
-  document.body.prepend(logoContainer);
-
-  // Animate logo
-  setTimeout(() => {
-    document.querySelector(".logo").classList.add("visible");
-  }, 100);
-
-  // Show comic content
+   // Show comic content
   document.getElementById("comic-container").classList.remove("hidden");
 
   // Enable scrolling
