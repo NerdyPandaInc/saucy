@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
-/* 🔧 Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -19,8 +18,8 @@ body {
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
+  background-blend-mode: multiply;
   color: #fff;
-  padding-top: 0;
   overflow-x: hidden;
   transition: background-image 0.5s ease-in-out;
 }
@@ -29,16 +28,13 @@ body {
   display: none;
 }
 
-/* 🐾 Scrollable Header */
 .site-header {
   width: 100%;
-  background: transparent;
   text-align: center;
   padding: 1rem 0 0.25rem;
   margin-bottom: -1rem;
 }
 
-/* 🖼️ Massive Logo with Fade-In */
 .logo-inline {
   height: 180px;
   width: auto;
@@ -49,7 +45,6 @@ body {
   margin-bottom: -1rem;
 }
 
-/* 🎞️ Fade-in Animation */
 @keyframes fadeInLogo {
   from {
     opacity: 0;
@@ -61,14 +56,12 @@ body {
   }
 }
 
-/* 📱 Responsive Logo */
 @media (max-width: 600px) {
   .logo-inline {
     height: 120px;
   }
 }
 
-/* 🔥 Modal */
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -124,15 +117,14 @@ body {
   border-color: #000;
 }
 
-/* 📖 Main Content */
-.content {
-  padding: 2rem;
-  max-width: 900px;
+.content-wrapper {
+  max-width: 960px;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 .comic-section {
-  background: #222;
+  background: rgba(34, 34, 34, 0.95);
   border: 5px solid #ffcc00;
   border-radius: 10px;
   padding: 2rem;
@@ -172,7 +164,6 @@ body {
   margin-right: 0.5rem;
 }
 
-/* 🎬 Video */
 .comic-video {
   width: 100%;
   max-width: 700px;
@@ -181,7 +172,6 @@ body {
   margin-top: 1rem;
 }
 
-/* 💰 Buttons */
 .stake-btn,
 .connect-btn {
   background: #ffcc00;
@@ -198,5 +188,4 @@ body {
 
 .stake-btn:hover,
 .connect-btn:hover {
-  background: #fff000;
-}
+[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/lzh-yi/Web-Fork-/tree/024b3e55587afdf9f05a677613a75f24e3d1803e/03-CSS%E8%BF%9B%E9%98%B6%2F04-%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%EF%BC%9F.md?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")
