@@ -265,3 +265,13 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+.intro-modal {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+  pointer-events: all;
+}
+
+.intro-modal.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
