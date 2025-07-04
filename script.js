@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const backgrounds = [
     'images/202572165617309.png',
-    'images/202572165631575.png',
+    'images/202572165455552.png',
     'images/202572165113979.png'
   ];
 
