@@ -175,4 +175,13 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: -1;
+}.comic-panel {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.comic-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
