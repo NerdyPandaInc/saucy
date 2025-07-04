@@ -156,10 +156,18 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: -2;
-  transition: background-image 1s ease-in-out;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
 }
 
-/* 🕶️ Overlay for readability */
+.bg1 {
+  z-index: -3;
+}
+
+.bg2 {
+  z-index: -4;
+}
+
 .background-overlay {
   position: fixed;
   top: 0; left: 0;
