@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ⏱️ Timed Intro Pop-Up
   const introPopup = document.getElementById("intro-popup");
   const countdownEl = document.getElementById("countdown");
-  const bgMusic = document.getElementById("bgMusic"); // 🎵 Background music element
+  const bgMusic = document.getElementById("bgMusic");
 
   let timeLeft = 5;
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000); // match CSS transition duration
   }
 
-  // 🔁 Fallback: play music on first user interaction if autoplay is blocked
+  // 🔊 Fallback: play music on first user interaction
   document.addEventListener("click", () => {
     if (bgMusic && bgMusic.paused) {
       bgMusic.play().catch(err => {
