@@ -1,26 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ⏱️ Timed Intro Pop-Up
   const introPopup = document.getElementById("intro-popup");
-  const countdownEl = document.getElementById("countdown");
-  const bgMusic = document.getElementById("bgMusic");
   const enterBtn = document.getElementById("enterBtn");
+  const bgMusic = document.getElementById("bgMusic");
 
-  let timeLeft = 5;
-
-  const countdownInterval = setInterval(() => {
-    timeLeft--;
-    countdownEl.textContent = timeLeft;
-    console.log("Countdown:", timeLeft);
-
-    if (timeLeft <= 0) {
-      clearInterval(countdownInterval);
-      enterBtn.disabled = false;
-      enterBtn.textContent = "Enter Site";
-    }
-  }, 1000);
+  // Lock scroll while intro is active
+  document.body.style.overflow = "hidden";
 
   enterBtn.addEventListener("click", () => {
     introPopup.classList.add("fade-out");
+
     setTimeout(() => {
       introPopup.style.display = "none";
       document.body.style.overflow = "auto";
@@ -33,12 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
           console.warn("Music play failed:", err);
         });
       }
-    }, 1000);
+    }, 1000); // match CSS transition duration
   });
-
-  // Disable button until countdown ends
-  enterBtn.disabled = true;
-  document.body.style.overflow = "hidden";
 
   // 🔁 Background Crossfade Setup
   const bg1 = document.querySelector(".bg1");
