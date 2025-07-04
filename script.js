@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (bgMusic) {
         bgMusic.volume = 0.5;
-        bgMusic.play().then(() => {
+        console.log("Attempting to play:", bgMusic.src); bgMusic.play().then(() => {
           console.log("Music started.");
         }).catch(err => {
           console.warn("Music play failed:", err);
