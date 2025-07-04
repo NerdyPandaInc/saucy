@@ -2,12 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // ⏱️ Timed Intro Pop-Up
   const introPopup = document.getElementById("intro-popup");
   const countdownEl = document.getElementById("countdown");
+  // const boomSound = document.getElementById("boomSound"); // optional sound
 
   let timeLeft = 5;
 
   const countdownInterval = setInterval(() => {
     timeLeft--;
     countdownEl.textContent = timeLeft;
+    console.log("Countdown:", timeLeft); // ✅ Debug line
 
     if (timeLeft <= 0) {
       clearInterval(countdownInterval);
@@ -16,12 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 1000);
 
   function closeIntro() {
-    introPopup.style.display = "none";
-    document.body.style.overflow = "auto"; // unlock scroll
+    // boomSound.play(); // 🔊 Uncomment if using sound
+    introPopup.classList.add("fade-out");
+    setTimeout(() => {
+      introPopup.style.display = "none";
+      document.body.style.overflow = "auto"; // unlock scroll
+    }, 1000); // match CSS transition duration
   }
 
   // Lock scroll while intro is active
   document.body.style.overflow = "hidden";
+
+
 
 function closeIntro() {
   introPopup.style.display = "none";
