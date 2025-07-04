@@ -22,21 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       introPopup.style.display = "none";
       document.body.style.overflow = "auto";
-
-      // 🎵 Attempt to play music
-      if (bgMusic) {
-        bgMusic.volume = 0.5;
-        bgMusic.play().catch(err => {
-          console.warn("Autoplay blocked:", err);
-        });
-      }
+      // 🎵 Do not autoplay here — handled by user interaction below
     }, 1000); // match CSS transition duration
   }
 
   // 🔊 Fallback: play music on first user interaction
   document.addEventListener("click", () => {
     if (bgMusic && bgMusic.paused) {
-      bgMusic.play().catch(err => {
+      bgMusic.volume = 0.5;
+      bgMusic.play().then(() => {
+        console.log("Music started after user interaction.");
+      }).catch(err => {
         console.warn("User interaction fallback failed:", err);
       });
     }
