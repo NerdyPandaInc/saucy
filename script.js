@@ -1,4 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // ⏱️ Timed Intro Pop-Up
+const introPopup = document.getElementById("intro-popup");
+const countdownEl = document.getElementById("countdown");
+const skipBtn = document.getElementById("skipIntro");
+
+let timeLeft = 5;
+
+const countdownInterval = setInterval(() => {
+  timeLeft--;
+  countdownEl.textContent = timeLeft;
+
+  if (timeLeft <= 0) {
+    clearInterval(countdownInterval);
+    closeIntro();
+  }
+}, 1000);
+
+function closeIntro() {
+  introPopup.style.display = "none";
+  document.body.style.overflow = "auto"; // unlock scroll
+}
+
+// Allow user to skip
+skipBtn.addEventListener("click", () => {
+  clearInterval(countdownInterval);
+  closeIntro();
+});
+
+// Lock scroll while intro is active
+document.body.style.overflow = "hidden";
   // 🔁 Background Crossfade Setup
   const bg1 = document.querySelector(".bg1");
   const bg2 = document.querySelector(".bg2");
