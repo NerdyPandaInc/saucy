@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const rotator = document.querySelector(".background-rotator");
 
