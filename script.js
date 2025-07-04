@@ -29,21 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Lock scroll while intro is active
   document.body.style.overflow = "hidden";
 
-
-
-function closeIntro() {
-  introPopup.style.display = "none";
-  document.body.style.overflow = "auto"; // unlock scroll
-}
-
-// Allow user to skip
-skipBtn.addEventListener("click", () => {
-  clearInterval(countdownInterval);
-  closeIntro();
-});
-
-// Lock scroll while intro is active
-document.body.style.overflow = "hidden";
   // 🔁 Background Crossfade Setup
   const bg1 = document.querySelector(".bg1");
   const bg2 = document.querySelector(".bg2");
@@ -74,7 +59,6 @@ document.body.style.overflow = "hidden";
     showingBg1 = !showingBg1;
   }
 
-  // Initial background
   bg1.style.backgroundImage = `url(${backgrounds[0]})`;
   bg1.style.opacity = 1;
 
