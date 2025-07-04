@@ -35,7 +35,7 @@ body {
   width: auto;
   max-width: 90%;
   opacity: 0;
-  animation: fadeInLogo 3s ease-out forwards;
+  animation: fadeInLogo 5.5s ease-out forwards;
   filter: drop-shadow(0 0 15px #000);
 }
 
