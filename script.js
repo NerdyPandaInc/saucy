@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // 🔁 Background Crossfade Setup
   const bg1 = document.querySelector(".bg1");
   const bg2 = document.querySelector(".bg2");
 
@@ -28,9 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
     showingBg1 = !showingBg1;
   }
 
-  // Initial load
+  // Initial background
   bg1.style.backgroundImage = `url(${backgrounds[0]})`;
   bg1.style.opacity = 1;
 
   setInterval(crossfadeBackground, 8000); // every 8 seconds
+
+  // ✨ Scroll-triggered Panel Animation
+  const panels = document.querySelectorAll('.comic-panel');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible'); // optional: remove on scroll up
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  panels.forEach(panel => observer.observe(panel));
 });
