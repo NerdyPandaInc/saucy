@@ -145,3 +145,26 @@ body {
     padding: 0.5rem 1.5rem;
   }
 }
+/* 🔁 Background Rotator */
+.background-rotator {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -2;
+  transition: background-image 1s ease-in-out;
+}
+
+/* 🕶️ Overlay for readability */
+.background-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
