@@ -2,14 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // ⏱️ Timed Intro Pop-Up
   const introPopup = document.getElementById("intro-popup");
   const countdownEl = document.getElementById("countdown");
-  // const boomSound = document.getElementById("boomSound"); // optional sound
+  const bgMusic = document.getElementById("bgMusic"); // 🎵 Background music element
 
   let timeLeft = 5;
 
   const countdownInterval = setInterval(() => {
     timeLeft--;
     countdownEl.textContent = timeLeft;
-    console.log("Countdown:", timeLeft); // ✅ Debug line
+    console.log("Countdown:", timeLeft);
 
     if (timeLeft <= 0) {
       clearInterval(countdownInterval);
@@ -18,13 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 1000);
 
   function closeIntro() {
-    // boomSound.play(); // 🔊 Uncomment if using sound
     introPopup.classList.add("fade-out");
     setTimeout(() => {
       introPopup.style.display = "none";
-      document.body.style.overflow = "auto"; // unlock scroll
+      document.body.style.overflow = "auto";
+
+      // 🎵 Attempt to play music
+      if (bgMusic) {
+        bgMusic.volume = 0.5;
+        bgMusic.play().catch(err => {
+          console.warn("Autoplay blocked:", err);
+        });
+      }
     }, 1000); // match CSS transition duration
   }
+
+  // 🔁 Fallback: play music on first user interaction if autoplay is blocked
+  document.addEventListener("click", () => {
+    if (bgMusic && bgMusic.paused) {
+      bgMusic.play().catch(err => {
+        console.warn("User interaction fallback failed:", err);
+      });
+    }
+  }, { once: true });
 
   // Lock scroll while intro is active
   document.body.style.overflow = "hidden";
@@ -62,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bg1.style.backgroundImage = `url(${backgrounds[0]})`;
   bg1.style.opacity = 1;
 
-  setInterval(crossfadeBackground, 8000); // every 8 seconds
+  setInterval(crossfadeBackground, 8000);
 
   // ✨ Scroll-triggered Panel Animation
   const panels = document.querySelectorAll('.comic-panel');
@@ -72,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
       } else {
-        entry.target.classList.remove('visible'); // optional
+        entry.target.classList.remove('visible');
       }
     });
   }, {
