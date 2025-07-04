@@ -15,10 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (bgMusic) {
         bgMusic.volume = 0.5;
-        console.log("Attempting to play:", bgMusic.src); bgMusic.play().then(() => {
-          console.log("Music started.");
+        console.log("Attempting to play:", bgMusic.src);
+
+        bgMusic.play().then(() => {
+          console.log("🎵 Music started.");
         }).catch(err => {
-          console.warn("Music play failed:", err);
+          console.warn("❌ Music play failed:", err);
         });
       }
     }, 1000); // match CSS transition duration
