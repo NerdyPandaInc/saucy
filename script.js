@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const rotator = document.querySelector(".background-rotator");
+  const bg1 = document.querySelector(".bg1");
+  const bg2 = document.querySelector(".bg2");
 
   const backgrounds = [
     'images/202572165617309.png',
@@ -8,12 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let index = 0;
+  let showingBg1 = true;
 
-  function rotateBackground() {
-    rotator.style.backgroundImage = `url(${backgrounds[index]})`;
+  function crossfadeBackground() {
+    const nextImage = backgrounds[index];
     index = (index + 1) % backgrounds.length;
+
+    if (showingBg1) {
+      bg2.style.backgroundImage = `url(${nextImage})`;
+      bg2.style.opacity = 1;
+      bg1.style.opacity = 0;
+    } else {
+      bg1.style.backgroundImage = `url(${nextImage})`;
+      bg1.style.opacity = 1;
+      bg2.style.opacity = 0;
+    }
+
+    showingBg1 = !showingBg1;
   }
 
-  rotateBackground(); // initial load
-  setInterval(rotateBackground, 8000); // change every 8 seconds
+  // Initial load
+  bg1.style.backgroundImage = `url(${backgrounds[0]})`;
+  bg1.style.opacity = 1;
+
+  setInterval(crossfadeBackground, 8000); // every 8 seconds
 });
