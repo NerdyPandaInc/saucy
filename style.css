@@ -210,6 +210,56 @@ body {
   transform: translateY(30px);
   transition: all 0.8s ease-out;
 }
+.intro-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #fff;
+  font-family: 'Bangers', cursive;
+  text-align: center;
+}
+
+.intro-content {
+  background: #ffcc00;
+  color: #000;
+  padding: 2rem;
+  border: 5px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #ff0000;
+  animation: popIn 0.5s ease-out;
+}
+
+.intro-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.intro-content p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.intro-content button {
+  font-size: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  background: #000;
+  color: #fff;
+  border: 3px solid #fff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.intro-content button:hover {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+}
 
 .fade-panel.visible {
   opacity: 1;
