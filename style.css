@@ -6,30 +6,68 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Bangers', cursive;
   background: radial-gradient(circle at center, #222 0%, #000 100%);
   color: #fff;
-  padding: 2rem;
+  padding: 1rem;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* 🧠 Centered Header */
 .comic-header {
   text-align: center;
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+/* 🖼️ Responsive Logo */
+.comic-logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  height: 200px;
+  width: auto;
+  max-width: 90%;
+  opacity: 0;
+  animation: fadeInLogo 3s ease-out forwards;
+  filter: drop-shadow(0 0 15px #000);
+}
+
+@keyframes fadeInLogo {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 💬 Header Title */
+.comic-header h1 {
   font-size: 2.5rem;
   color: #ffcc00;
   text-shadow: 3px 3px #000;
-  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
+/* 📖 Main Container */
 .comic-container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding: 0 1rem;
 }
 
+/* 📦 Comic Panels */
 .comic-panel {
   background: #222;
   border: 5px solid #ffcc00;
@@ -45,6 +83,12 @@ body {
   text-shadow: 2px 2px #000;
 }
 
+.comic-panel p,
+.comic-panel ul {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
 .comic-panel ul {
   list-style: none;
   padding-left: 0;
@@ -55,6 +99,7 @@ body {
   margin-right: 0.5rem;
 }
 
+/* 🎯 Buttons */
 .comic-button {
   background: #ffcc00;
   color: #000;
@@ -65,28 +110,38 @@ body {
   cursor: pointer;
   box-shadow: 3px 3px 0 #000;
   transition: background 0.2s ease-in-out;
+  margin-top: 1rem;
 }
 
 .comic-button:hover {
   background: #fff000;
 }
-.comic-logo {
-  display: block;
-  margin: 0 auto 1rem auto;
-  height: 200px;
-  width: auto;
-  opacity: 0;
-  animation: fadeInLogo 3s ease-out forwards;
-  filter: drop-shadow(0 0 15px #000);
-}
 
-@keyframes fadeInLogo {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
+/* 📱 Responsive Tweaks */
+@media (max-width: 600px) {
+  .comic-logo {
+    height: 120px;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+
+  .comic-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .comic-panel {
+    padding: 1.5rem;
+  }
+
+  .comic-panel h2 {
+    font-size: 1.5rem;
+  }
+
+  .comic-panel p,
+  .comic-panel ul {
+    font-size: 1rem;
+  }
+
+  .comic-button {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
   }
 }
