@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
       } else {
-        entry.target.classList.remove('visible'); // optional: remove on scroll up
+        entry.target.classList.remove('visible'); // optional
       }
     });
   }, {
@@ -51,4 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   panels.forEach(panel => observer.observe(panel));
+
+  // ✨ Animate origin story paragraphs on scroll
+  const fadePanels = document.querySelectorAll('.fade-panel');
+
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  fadePanels.forEach(p => fadeObserver.observe(p));
 });
