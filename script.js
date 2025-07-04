@@ -1,20 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ⏱️ Timed Intro Pop-Up
-const introPopup = document.getElementById("intro-popup");
-const countdownEl = document.getElementById("countdown");
-const skipBtn = document.getElementById("skipIntro");
+  const introPopup = document.getElementById("intro-popup");
+  const countdownEl = document.getElementById("countdown");
 
-let timeLeft = 5;
+  let timeLeft = 5;
 
-const countdownInterval = setInterval(() => {
-  timeLeft--;
-  countdownEl.textContent = timeLeft;
+  const countdownInterval = setInterval(() => {
+    timeLeft--;
+    countdownEl.textContent = timeLeft;
 
-  if (timeLeft <= 0) {
-    clearInterval(countdownInterval);
-    closeIntro();
+    if (timeLeft <= 0) {
+      clearInterval(countdownInterval);
+      closeIntro();
+    }
+  }, 1000);
+
+  function closeIntro() {
+    introPopup.style.display = "none";
+    document.body.style.overflow = "auto"; // unlock scroll
   }
-}, 1000);
+
+  // Lock scroll while intro is active
+  document.body.style.overflow = "hidden";
 
 function closeIntro() {
   introPopup.style.display = "none";
