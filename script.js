@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const introPopup = document.getElementById("intro-popup");
   const countdownEl = document.getElementById("countdown");
   const bgMusic = document.getElementById("bgMusic");
+  const enterBtn = document.getElementById("enterBtn");
 
   let timeLeft = 5;
 
@@ -13,32 +14,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (timeLeft <= 0) {
       clearInterval(countdownInterval);
-      closeIntro();
+      enterBtn.disabled = false;
+      enterBtn.textContent = "Enter Site";
     }
   }, 1000);
 
-  function closeIntro() {
+  enterBtn.addEventListener("click", () => {
     introPopup.classList.add("fade-out");
     setTimeout(() => {
       introPopup.style.display = "none";
       document.body.style.overflow = "auto";
-      // 🎵 Do not autoplay here — handled by user interaction below
-    }, 1000); // match CSS transition duration
-  }
 
-  // 🔊 Fallback: play music on first user interaction
-  document.addEventListener("click", () => {
-    if (bgMusic && bgMusic.paused) {
-      bgMusic.volume = 0.5;
-      bgMusic.play().then(() => {
-        console.log("Music started after user interaction.");
-      }).catch(err => {
-        console.warn("User interaction fallback failed:", err);
-      });
-    }
-  }, { once: true });
+      if (bgMusic) {
+        bgMusic.volume = 0.5;
+        bgMusic.play().then(() => {
+          console.log("Music started.");
+        }).catch(err => {
+          console.warn("Music play failed:", err);
+        });
+      }
+    }, 1000);
+  });
 
-  // Lock scroll while intro is active
+  // Disable button until countdown ends
+  enterBtn.disabled = true;
   document.body.style.overflow = "hidden";
 
   // 🔁 Background Crossfade Setup
