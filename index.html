@@ -8,241 +8,208 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div id="intro-popup" class="intro-modal">
-  <div class="intro-content">
-    <h1>💥 Welcome to BOOMINU</h1>
-    <h1>Disclaimer: BoomInu is a community-driven meme token with no financial value. Always DYOR.</h1>
-    <button id="enterBtn" class="comic-button">Enter Site</button>
+  <div id="intro-popup" class="intro-modal">
+    <div class="intro-content">
+      <h1>💥 Welcome to BOOMINU</h1>
+      <h1>Disclaimer: BoomInu is a community-driven meme token with no financial value. Always DYOR.</h1>
+      <button id="enterBtn" class="comic-button">Enter Site</button>
+    </div>
   </div>
-</div>
 
-<div class="background-overlay"></div>
-<div class="background-rotator bg1"></div>
-<div class="background-rotator bg2"></div>
+  <div class="background-overlay"></div>
+  <div class="background-rotator bg1"></div>
+  <div class="background-rotator bg2"></div>
 
-<header class="comic-header">
-  <img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="comic-logo" />
-  <h1>💥 BOOMINU: The Detonator of DeFi 💥</h1>
-</header>
-
+  <header class="comic-header">
+    <img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="comic-logo" />
+    <h1>💥 BOOMINU: The Detonator of DeFi 💥</h1>
+  </header>
 
   <main class="comic-container">
- <section class="comic-panel origin-story">
-  <div class="burst-title">
-    <h2>Origin Story</h2>
-  </div>
-
-<section class="comic-panel">
-  <h2>📝 Story & Lore</h2>
-
-  <p class="fade-panel">
-    <strong>A New Chapter Begins:</strong><br>
-    Boom Inu launched with 10 trillion BOOM. Every trade burns 3%—shrinking supply—and sets aside 2% to reward holders. Once 1.2 T BOOM is gone, only 8.8 T remain, locking in permanent scarcity and fueling reflections.
-  </p>
-
-  <p class="fade-panel">
-    <strong>Core Mechanics, Simplified:</strong>
-    <ul>
-      <li>3% burn on non-LP transfers until 1.2 T cap</li>
-      <li>2% reflection fee distributed automatically</li>
-      <li>0% buy tax on whitelisted liquidity pools</li>
-      <li>No minting ever—supply is fixed</li>
-    </ul>
-  </p>
-
-  <p class="fade-panel">
-    <strong>Why Hold Boom Inu?</strong><br>
-    Polygon’s low fees mean instant, cheap trades. Reflections claim themselves on every transaction—no extra steps. Immutable tokenomics ensure the rules never change.
-  </p>
-
-  <p class="fade-panel">
-    <strong>Rally the Pack:</strong><br>
-    Join our community on Telegram, Twitter, and Discord. Early adopters lead the charge—stake your claim and watch Boom Inu conquer Polygon.
-  </p>
-
-  <p class="fade-panel">
-    “I’m not here to fetch. I’m here to detonate.”<br>
-    — Boomer, the Shiba with a Detonator
-  </p>
-
-  <p class="fade-panel">
-    <strong>Advisor Take:</strong><br>
-    Deflationary burns + a mint-free reflection system—fully on-chain and first of its kind on Polygon. Permanent scarcity and automatic rewards, guaranteed.
-  </p>
-</section>
+    <section class="comic-panel origin-story">
+      <div class="burst-title">
+        <h2>Origin Story</h2>
+      </div>
+    </section>
 
     <section class="comic-panel">
-  <h2>🎥 The Creator of The "Boom"</h2>
-  <p>Watch the explosive origins of BOOMINU unfold in motion.</p>
+      <h2>📝 Story & Lore</h2>
 
-  <div class="video-wrapper">
-    <video id="boomVideo" controls poster="images/boominu-poster.jpg">
-      <source src="videos/2025-07-04-070009612.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-</section>
+      <p class="fade-panel">
+        <strong>A New Chapter Begins:</strong><br>
+        Boom Inu launched with 10 trillion BOOM. Every trade burns 3%—shrinking supply—and sets aside 2% to reward holders. Once 1.2 T BOOM is gone, only 8.8 T remain, locking in permanent scarcity and fueling reflections.
+      </p>
 
-   <section class="comic-panel fade-panel" id="meme-generator">
-  <h2>Create Your Boom Inu Meme</h2>
-
-<label for="template">Choose a template:</label>
-<select id="template" class="comic-button">
-  <option value="drake">Drake Hotline Bling</option>
-  <option value="two-buttons">Two Buttons</option>
-  <option value="distracted-boyfriend">Distracted Boyfriend</option>
-  <option value="change-my-mind">Change My Mind</option>
-  <option value="gru">Gru’s Plan</option>
-  <option value="doge">Doge</option>
-  <option value="buzz">Buzz Lightyear</option>
-  <option value="philosoraptor">Philosoraptor</option>
- </select>
-
-  <label for="topText">Top Text:</label>
-  <input type="text" id="topText" placeholder="Enter top text" class="comic-button">
-
-  <label for="bottomText">Bottom Text:</label>
-  <input type="text" id="bottomText" placeholder="Enter bottom text" class="comic-button">
-
-  <button class="comic-button" onclick="generateMeme()">Generate Meme</button>
-  <button class="comic-button" onclick="downloadMeme()">Download Meme</button>
-
- <div id="preview" class="meme-preview-container">
-  <h3 style="margin-top: 1rem;">Preview:</h3>
-  <div class="meme-image-wrapper">
-    <img id="memeImage" src="" alt="Your Meme Will Appear Here">
-  </div>
-</div>
-
-<section class="comic-panel">
-  <h2>📊 Tokenomics</h2>
-
-  <ul>
-    <li>🔥 Total Supply: 10 T BOOM</li>
-    <li><strong>Allocation:</strong>
-      <ul>
-        <li>1 T (10%) to Treasury (365 days lock)</li>
-        <li>0.5 T (5%) to Team</li>
-        <li>8.5 T (85%) for Public Circulation</li>
-      </ul>
-    </li>
-    <li>⛔ No further minting ever</li>
-  </ul>
-
-  <ul>
-    <li><strong>Phase 1 – Burn</strong>
-      <ul>
-        <li>3% fee on all non-LP & non-whitelisted transfers</li>
-        <li>Burn cap: stops after 1.2 T (12%) is removed</li>
-      </ul>
-    </li>
-
-    <li><strong>Phase 2 – Reflections</strong>
-      <ul>
-        <li>2% fee on transfers goes into the rewards pool</li>
-        <li>Auto-claim on your next transfer (no extra tx needed)</li>
-        <li>Per-tx reflection fee capped to prevent whale dumps</li>
-      </ul>
-    </li>
-
-    <li><strong>⚡ Double-Reflection Boost</strong>
-      <ul>
-        <li>4% reflection rate for 48 hours after qualifying buys</li>
-        <li>Qualification: flip a certaom amount of a tracked memecoin in last 3 days of month</li>
-        <li>One boost per 30 days, per address</li>
+      <p class="fade-panel">
+        <strong>Core Mechanics, Simplified:</strong>
         <ul>
-  <!-- …other items… -->
-  <li id="flip-req">
-    Loading flip requirement…
-  </li>
-</ul>
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-<script>
-  (async () => {
-    if (!window.ethereum) return;
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const contract = new ethers.Contract(
-      '0xYOUR_CONTRACT_ADDRESS',
-      [ 'function minFlipAmount() view returns (uint256)' ],
-      provider
-    );
+          <li>3% burn on non-LP transfers until 1.2 T cap</li>
+          <li>2% reflection fee distributed automatically</li>
+          <li>0% buy tax on whitelisted liquidity pools</li>
+          <li>No minting ever—supply is fixed</li>
+        </ul>
+      </p>
 
-    // fetch and format
-    const raw = await contract.minFlipAmount();
-    const human = ethers.utils.formatUnits(raw, 18);
+      <p class="fade-panel">
+        <strong>Why Hold Boom Inu?</strong><br>
+        Polygon’s low fees mean instant, cheap trades. Reflections claim themselves on every transaction—no extra steps. Immutable tokenomics ensure the rules never change.
+      </p>
 
-    // update the list item
-    document.getElementById('flip-req').innerHTML = `
-      Qualification: sell at least
-      <code>${human} BOOM</code>
-      of any top-3 tracked memecoin during the last 3 days of the month.
-    `;
-  })();
-</script>
+      <p class="fade-panel">
+        <strong>Rally the Pack:</strong><br>
+        Join our community on Telegram, Twitter, and Discord. Early adopters lead the charge—stake your claim and watch Boom Inu conquer Polygon.
+      </p>
 
+      <p class="fade-panel">
+        “I’m not here to fetch. I’m here to detonate.”<br>
+        — Boomer, the Shiba with a Detonator
+      </p>
 
-      </ul>
-    </li>
+      <p class="fade-panel">
+        <strong>Advisor Take:</strong><br>
+        Deflationary burns + a mint-free reflection system—fully on-chain and first of its kind on Polygon. Permanent scarcity and automatic rewards, guaranteed.
+      </p>
+    </section>
 
-    <li><strong>🚀 Tax-Free Buys</strong>
+    <section class="comic-panel">
+      <h2>🎥 The Creator of The "Boom"</h2>
+      <p>Watch the explosive origins of BOOMINU unfold in motion.</p>
+
+      <div class="video-wrapper">
+        <video id="boomVideo" controls poster="images/boominu-poster.jpg">
+          <source src="videos/2025-07-04-070009612.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <section class="comic-panel fade-panel" id="meme-generator">
+      <h2>Create Your Boom Inu Meme</h2>
+
+      <label for="template">Choose a template:</label>
+      <select id="template" class="comic-button">
+        <option value="drake">Drake Hotline Bling</option>
+        <option value="two-buttons">Two Buttons</option>
+        <option value="distracted-boyfriend">Distracted Boyfriend</option>
+        <option value="change-my-mind">Change My Mind</option>
+        <option value="gru">Gru’s Plan</option>
+        <option value="doge">Doge</option>
+        <option value="buzz">Buzz Lightyear</option>
+        <option value="philosoraptor">Philosoraptor</option>
+      </select>
+
+      <label for="topText">Top Text:</label>
+      <input type="text" id="topText" placeholder="Enter top text" class="comic-button">
+
+      <label for="bottomText">Bottom Text:</label>
+      <input type="text" id="bottomText" placeholder="Enter bottom text" class="comic-button">
+
+      <button class="comic-button" onclick="generateMeme()">Generate Meme</button>
+      <button class="comic-button" onclick="downloadMeme()">Download Meme</button>
+
+      <div id="preview" class="meme-preview-container">
+        <h3 style="margin-top: 1rem;">Preview:</h3>
+        <div class="meme-image-wrapper">
+          <img id="memeImage" src="" alt="Your Meme Will Appear Here">
+        </div>
+      </div>
+    </section>
+
+    <section class="comic-panel">
+      <h2>📊 Tokenomics</h2>
+
       <ul>
-        <li>0% buy tax on all whitelisted liquidity pools (presale, DEX, etc.)</li>
+        <li>🔥 Total Supply: 10 T BOOM</li>
+        <li><strong>Allocation:</strong>
+          <ul>
+            <li>1 T (10%) to Treasury (365 days lock)</li>
+            <li>0.5 T (5%) to Team</li>
+            <li>8.5 T (85%) for Public Circulation</li>
+          </ul>
+        </li>
+        <li>⛔ No further minting ever</li>
       </ul>
-    </li>
-  </ul>
-</section>
+
+      <ul>
+        <li><strong>Phase 1 – Burn</strong>
+          <ul>
+            <li>3% fee on all non-LP & non-whitelisted transfers</li>
+            <li>Burn cap: stops after 1.2 T (12%) is removed</li>
+          </ul>
+        </li>
+
+        <li><strong>Phase 2 – Reflections</strong>
+          <ul>
+            <li>2% fee on transfers goes into the rewards pool</li>
+            <li>Auto-claim on your next transfer (no extra tx needed)</li>
+            <li>Per-tx reflection fee capped to prevent whale dumps</li>
+          </ul>
+        </li>
+
+        <li><strong>⚡ Double-Reflection Boost</strong>
+          <ul>
+            <li>4% reflection rate for 48 hours after qualifying buys</li>
+            <li id="flip-req">Loading flip requirement…</li>
+            <li>One boost per 30 days, per address</li>
+          </ul>
+        </li>
+
+        <li><strong>🚀 Tax-Free Buys</strong>
+          <ul>
+            <li>0% buy tax on all whitelisted liquidity pools (presale, DEX, etc.)</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
     <section class="comic-panel">
       <h2>🧠 Join the Meme War</h2>
       <p>Connect your wallet and become part of the BOOMINU revolution.</p>
-      <button class="comic-button">Connect Wallet(SOON)</button>
+      <button class="comic-button">Connect Wallet (SOON)</button>
     </section>
   </main>
-  <!-- 🎵 Background Music -->
-<audio id="bgMusic" preload="auto">
-  <source src="sounds/BoomInu.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
 
+  <!-- 🎵 Background Music -->
+  <audio id="bgMusic" preload="auto">
+    <source src="sounds/BoomInu.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <!-- 📜 JavaScript -->
   <script src="script.js"></script>
- <script>
-  function sanitize(text) {
-    return encodeURIComponent(text.trim() || "_")
-      .replace(/-/g, "--")
-      .replace(/_/g, "__")
-      .replace(/\?/g, "~q")
-      .replace(/%/g, "~p")
-      .replace(/#/g, "~h")
-      .replace(/\//g, "~s");
-  }
 
-  function generateMeme() {
-    const template = document.getElementById("template").value;
-    const top = sanitize(document.getElementById("topText").value);
-    const bottom = sanitize(document.getElementById("bottomText").value);
-    const url = `https://api.memegen.link/images/${template}/${top}/${bottom}.png`;
-    document.getElementById("memeImage").src = url;
-  }
+  <!-- Ethers.js ESM + dynamic flip-requirement -->
+  <script type="module">
+    import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js';
 
-  function downloadMeme() {
-    const image = document.getElementById("memeImage").src;
-    const link = document.createElement("a");
-    link.href = image;
-    link.download = "boom-inu-meme.png";
-    link.click();
-  }
+    async function updateFlipRequirement() {
+      const el = document.getElementById('flip-req');
+      if (!el || !window.ethereum) return;
 
-  // Optional: Animate meme panel on scroll
-  window.addEventListener("scroll", () => {
-    const panel = document.getElementById("meme-generator");
-    const rect = panel.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      panel.classList.add("visible");
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const contract = new ethers.Contract(
+          '0xYOUR_CONTRACT_ADDRESS',
+          ['function minFlipAmount() view returns (uint256)'],
+          provider
+        );
+
+        const raw = await contract.minFlipAmount();
+        const human = ethers.formatUnits(raw, 18);
+
+        el.innerHTML = `
+          Qualification: sell at least
+          <code>${human} BOOM</code>
+          of any top-3 tracked memecoin during the last 3 days of the month.
+        `;
+      } catch (e) {
+        console.error('Failed to fetch flip requirement', e);
+        el.textContent = 'Unable to load flip requirement';
+      }
     }
-  });
-</script>
+
+    updateFlipRequirement();
+  </script>
 </body>
 </html>
