@@ -170,38 +170,88 @@
     </section>
   </main>
 
-  <!-- Background Music -->
-  <audio id="bgMusic" preload="auto">
-    <source src="sounds/BoomInu.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" preload="auto">
+  <source src="sounds/BoomInu.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
-  <!-- Core Script -->
-  <script src="script.js"></script>
+<!-- ✅ Meme Generator & Flip Requirement Scripts -->
+<script>
+  // Meme Generator Logic
+  function sanitize(text) {
+    return encodeURIComponent(text.trim() || "_")
+      .replace(/-/g, "--")
+      .replace(/_/g, "__")
+      .replace(/\?/g, "~q")
+      .replace(/%/g, "~p")
+      .replace(/#/g, "~h")
+      .replace(/\//g, "~s");
+  }
 
-  <!-- Ethers.js ESM + Dynamic Flip Requirement -->
-  <script type="module">
-    import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js';
+  function generateMeme() {
+    const template = document.getElementById("template").value;
+    const top = sanitize(document.getElementById("topText").value);
+    const bottom = sanitize(document.getElementById("bottomText").value);
+    const url = `https://api.memegen.link/images/${template}/${top}/${bottom}.png`;
+    document.getElementById("memeImage").src = url;
+  }
 
-    async function updateFlipRequirement() {
-      const el = document.getElementById('flip-req');
-      if (!el || !window.ethereum) return;
+  function downloadMeme() {
+    const image = document.getElementById("memeImage").src;
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "boom-inu-meme.png";
+    link.click();
+  }
 
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const contract = new ethers.Contract(
-          '0xYOUR_CONTRACT_ADDRESS',
-          ['function minFlipAmount() view returns (uint256)'],
-          provider
-        );
+  // Optional: Animate meme panel on scroll
+  window.addEventListener("scroll", () => {
+    const panel = document.getElementById("meme-generator");
+    const rect = panel.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      panel.classList.add("visible");
+    }
+  });
+</script>
 
-        const raw = await contract.minFlipAmount();
-        const human = ethers.formatUnits(raw, 18);
+<!-- ✅ Ethers.js UMD build (safe for CSP) -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script>
+  async function updateFlipRequirement() {
+    const el = document.getElementById('flip-req');
+    if (!el || !window.ethereum) return;
 
-        el.innerHTML = `
-          Qualification: sell at least
-          <code>${human} BOOM</code>
-          of any top-3 tracked memecoin during the last 3 days of the month.
-        `;
-      } catch
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(
+        '0xYOUR_CONTRACT_ADDRESS', // 🔁 Replace with your actual contract address
+        ['function minFlipAmount() view returns (uint256)'],
+        provider
+      );
+
+      const raw = await contract.minFlipAmount();
+      const human = ethers.utils.formatUnits(raw, 18);
+
+      el.innerHTML = `
+        Qualification: sell at least
+        <code>${human} BOOM</code>
+        of any top-3 tracked memecoin during the last 3 days of the month.
+      `;
+    } catch (e) {
+      console.error('❌ Failed to fetch flip requirement:', e);
+      el.textContent = 'Unable to load flip requirement';
+    }
+  }
+
+  updateFlipRequirement();
+</script>
+
+<!-- 📜 Your main site script (if needed) -->
+<script src="script.js"></script>
+</body>
+</html>
+
+
