@@ -89,32 +89,66 @@
     </section>
 
     <!-- Meme Generator Panel -->
-    <section class="comic-panel fade-panel" id="meme-generator">
-      <h2>Create Your Boom Inu Meme</h2>
-      <label for="template">Choose a template:</label>
-      <select id="template" class="comic-button">
-        <option value="drake">Drake Hotline Bling</option>
-        <option value="two-buttons">Two Buttons</option>
-        <option value="distracted-boyfriend">Distracted Boyfriend</option>
-        <option value="change-my-mind">Change My Mind</option>
-        <option value="gru">Gru’s Plan</option>
-        <option value="doge">Doge</option>
-        <option value="buzz">Buzz Lightyear</option>
-        <option value="philosoraptor">Philosoraptor</option>
-      </select>
-      <label for="topText">Top Text:</label>
-      <input type="text" id="topText" placeholder="Enter top text" class="comic-button">
-      <label for="bottomText">Bottom Text:</label>
-      <input type="text" id="bottomText" placeholder="Enter bottom text" class="comic-button">
-      <button class="comic-button" onclick="generateMeme()">Generate Meme</button>
-      <button class="comic-button" onclick="downloadMeme()">Download Meme</button>
-      <div id="preview" class="meme-preview-container">
-        <h3>Preview:</h3>
-        <div class="meme-image-wrapper">
-          <img id="memeImage" src="" alt="Your Meme Will Appear Here">
-        </div>
-      </div>
-    </section>
+<!-- Meme Generator Panel -->
+<section class="comic-panel fade-panel" id="meme-generator">
+  <h2>Create Your Boom Inu Meme</h2>
+
+  <div class="form-group">
+    <label for="template">Choose a template:</label>
+    <select id="template" class="comic-button">
+      <option value="drake">Drake Hotline Bling</option>
+      <option value="two-buttons">Two Buttons</option>
+      <option value="distracted-boyfriend">Distracted Boyfriend</option>
+      <option value="change-my-mind">Change My Mind</option>
+      <option value="gru">Gru’s Plan</option>
+      <option value="doge">Doge</option>
+      <option value="buzz">Buzz Lightyear</option>
+      <option value="philosoraptor">Philosoraptor</option>
+      <option value="exit-ramp">Left Exit 12 Off Ramp</option>
+      <option value="uno-draw-25">UNO Draw 25 Cards</option>
+      <option value="bernie-asking">Bernie I Am Once Again Asking</option>
+      <option value="disaster-girl">Disaster Girl</option>
+      <option value="batman-slap">Batman Slapping Robin</option>
+      <option value="epic-handshake">Epic Handshake</option>
+      <option value="sad-pablo">Sad Pablo Escobar</option>
+      <option value="anakin-padme">Anakin & Padmé</option>
+      <option value="always-has-been">Always Has Been</option>
+      <option value="mocking-spongebob">Mocking Spongebob</option>
+      <option value="buff-doge">Buff Doge vs. Cheems</option>
+      <option value="expanding-brain">Expanding Brain</option>
+      <option value="woman-cat">Woman Yelling at Cat</option>
+      <option value="x-everywhere">X, X Everywhere</option>
+      <option value="trade-offer">Trade Offer</option>
+      <option value="one-does-not-simply">One Does Not Simply</option>
+      <option value="success-kid">Success Kid</option>
+      <option value="tuxedo-pooh">Tuxedo Winnie the Pooh</option>
+      <option value="pain-harold">Hide the Pain Harold</option>
+      <option value="this-is-fine">This Is Fine</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="topText">Top Text:</label>
+    <input type="text" id="topText" placeholder="Enter top text" class="comic-button">
+  </div>
+
+  <div class="form-group">
+    <label for="bottomText">Bottom Text:</label>
+    <input type="text" id="bottomText" placeholder="Enter bottom text" class="comic-button">
+  </div>
+
+  <div class="form-group">
+    <button class="comic-button" onclick="generateMeme()">Generate Meme</button>
+    <button class="comic-button" onclick="downloadMeme()">Download Meme</button>
+  </div>
+
+  <div id="preview" class="meme-preview-container">
+    <h3>Preview:</h3>
+    <div class="meme-image-wrapper">
+      <img id="memeImage" src="" alt="Your Meme Will Appear Here">
+    </div>
+  </div>
+</section>
 
     <!-- Tokenomics Panel -->
     <section class="comic-panel">
