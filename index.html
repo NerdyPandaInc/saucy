@@ -148,8 +148,42 @@
     <li><strong>⚡ Double-Reflection Boost</strong>
       <ul>
         <li>4% reflection rate for 48 hours after qualifying buys</li>
-        <li>Qualification: flip ≥ <code>minFlipAmount</code> of a tracked memecoin in last 3 days of month</li>
+        <li>Qualification: flip a certaom amount of a tracked memecoin in last 3 days of month</li>
         <li>One boost per 30 days, per address</li>
+        <ul>
+  <!-- …other items… -->
+  <li id="flip-req">
+    Loading flip requirement…
+  </li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script>
+  (async () => {
+    if (!window.ethereum) return;
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(
+      '0xYOUR_CONTRACT_ADDRESS',
+      [ 'function minFlipAmount() view returns (uint256)' ],
+      provider
+    );
+
+    // fetch and format
+    const raw = await contract.minFlipAmount();
+    const human = ethers.utils.formatUnits(raw, 18);
+
+    // update the list item
+    document.getElementById('flip-req').innerHTML = `
+      Qualification: sell at least
+      <code>${human} BOOM</code>
+      of any top-3 tracked memecoin during the last 3 days of the month.
+    `;
+  })();
+</script>
+
+
       </ul>
     </li>
 
