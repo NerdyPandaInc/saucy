@@ -291,3 +291,31 @@ video {
   display: block;
   background: #000;
 }
+/* 🖼️ Meme Preview Container */
+.meme-preview-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+/* 🖼️ Image Wrapper to Control Overflow */
+.meme-image-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 5px solid #ffcc00;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 #000;
+  background: #111;
+}
+
+/* 🖼️ Meme Image Styling */
+#memeImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+}
