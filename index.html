@@ -32,29 +32,26 @@
   <main class="comic-container">
 
     <!-- Origin Story Panel -->
-<section class="comic-panel origin-story">
-  <div class="burst-title">
-    <h2>📖 Origin Story</h2>
-  </div>
-  <p class="fade-panel">
-    In the depths of the memeverse, a lone Shiba strapped on a detonator and declared war on inflation. Born from the ashes of rug pulls and broken promises, <strong>Boom Inu</strong> was forged to bring explosive energy back to DeFi. With a fixed supply, a ticking burn mechanism, and a mission to reward the bold, Boomer’s journey began not with a whisper—but with a boom.
-  </p>
-  <p class="fade-panel">
-    What follows is the legend of that journey—etched into every transaction, every burn, and every reflection. Welcome to the lore of Boom Inu.
-  </p>
-</section>
-
+    <section class="comic-panel origin-story">
+      <div class="burst-title">
+        <h2>📖 Origin Story</h2>
+      </div>
+      <p class="fade-panel">
+        In the depths of the memeverse, a lone Shiba strapped on a detonator and declared war on inflation. Born from the ashes of rug pulls and broken promises, <strong>Boom Inu</strong> was forged to bring explosive energy back to DeFi. With a fixed supply, a ticking burn mechanism, and a mission to reward the bold, Boomer’s journey began not with a whisper—but with a boom.
+      </p>
+      <p class="fade-panel">
+        What follows is the legend of that journey—etched into every transaction, every burn, and every reflection. Welcome to the lore of Boom Inu.
+      </p>
+    </section>
 
     <!-- Story & Lore Panel -->
     <section class="comic-panel">
       <h2>📝 Story & Lore</h2>
       <p class="fade-panel">
         <strong>A New Chapter Begins:</strong><br>
-        Boom Inu launched with 10 000 000 000 000 BOOM. Every trade burns 3%—shrinking supply—and sets aside 2% to reward holders. Once 1.2 000 000 000 000 BOOM is gone, only 8.8 000 000 000 000 remain, locking in permanent scarcity and fueling reflections.
+        Boom Inu launched with 10 000 000 000 000 BOOM. Every trade burns 3%—shrinking supply—and sets aside 2% to reward holders. Once 1 200 000 000 000 BOOM is gone, only 8 800 000 000 000 remain, locking in permanent scarcity and fueling reflections.
       </p>
-      <p class="fade-panel">
-        <strong>Core Mechanics, Simplified:</strong>
-      </p>
+      <p class="fade-panel"><strong>Core Mechanics, Simplified:</strong></p>
       <ul class="fade-panel">
         <li>3% burn on non-LP transfers until 1.2 T cap</li>
         <li>2% reflection fee distributed automatically</li>
@@ -170,88 +167,79 @@
     </section>
   </main>
 
-<!-- 🎵 Background Music -->
-<audio id="bgMusic" preload="auto">
-  <source src="sounds/BoomInu.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+  <!-- 🎵 Background Music -->
+  <!-- (moved up to prevent duplicate) -->
 
-<!-- ✅ Meme Generator & Flip Requirement Scripts -->
-<script>
-  // Meme Generator Logic
-  function sanitize(text) {
-    return encodeURIComponent(text.trim() || "_")
-      .replace(/-/g, "--")
-      .replace(/_/g, "__")
-      .replace(/\?/g, "~q")
-      .replace(/%/g, "~p")
-      .replace(/#/g, "~h")
-      .replace(/\//g, "~s");
-  }
+  <!-- Third-Party Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
-  function generateMeme() {
-    const template = document.getElementById("template").value;
-    const top = sanitize(document.getElementById("topText").value);
-    const bottom = sanitize(document.getElementById("bottomText").value);
-    const url = `https://api.memegen.link/images/${template}/${top}/${bottom}.png`;
-    document.getElementById("memeImage").src = url;
-  }
-
-  function downloadMeme() {
-    const image = document.getElementById("memeImage").src;
-    const link = document.createElement("a");
-    link.href = image;
-    link.download = "boom-inu-meme.png";
-    link.click();
-  }
-
-  // Optional: Animate meme panel on scroll
-  window.addEventListener("scroll", () => {
-    const panel = document.getElementById("meme-generator");
-    const rect = panel.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      panel.classList.add("visible");
+  <!-- Meme Generator & Flip Requirement -->
+  <script>
+    function sanitize(text) {
+      return encodeURIComponent(text.trim() || "_")
+        .replace(/-/g, "--")
+        .replace(/_/g, "__")
+        .replace(/\?/g, "~q")
+        .replace(/%/g, "~p")
+        .replace(/#/g, "~h")
+        .replace(/\//g, "~s");
     }
-  });
-</script>
 
-<!-- ✅ Ethers.js UMD build (safe for CSP) -->
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-<script>
-  async function updateFlipRequirement() {
-    const el = document.getElementById('flip-req');
-    if (!el || !window.ethereum) return;
-
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(
-        '0xYOUR_CONTRACT_ADDRESS', // 🔁 Replace with your actual contract address
-        ['function minFlipAmount() view returns (uint256)'],
-        provider
-      );
-
-      const raw = await contract.minFlipAmount();
-      const human = ethers.utils.formatUnits(raw, 18);
-
-      el.innerHTML = `
-        Qualification: sell at least
-        <code>${human} BOOM</code>
-        of any top-3 tracked memecoin during the last 3 days of the month.
-      `;
-    } catch (e) {
-      console.error('❌ Failed to fetch flip requirement:', e);
-      el.textContent = 'Unable to load flip requirement';
+    function generateMeme() {
+      const template = document.getElementById("template").value;
+      const top = sanitize(document.getElementById("topText").value);
+      const bottom = sanitize(document.getElementById("bottomText").value);
+      const url = `https://api.memegen.link/images/${template}/${top}/${bottom}.png`;
+      document.getElementById("memeImage").src = url;
     }
-  }
 
-  updateFlipRequirement();
-</script>
+    function downloadMeme() {
+      const image = document.getElementById("memeImage").src;
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = "boom-inu-meme.png";
+      link.click();
+    }
 
-<!-- 📜 Your main site script (if needed) -->
-<script src="script.js"></script>
+    window.addEventListener("scroll", () => {
+      const panel = document.getElementById("meme-generator");
+      const rect = panel.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        panel.classList.add("visible");
+      }
+    });
+
+    async function updateFlipRequirement() {
+      const el = document.getElementById('flip-req');
+      if (!el || !window.ethereum) return;
+
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const contract = new ethers.Contract(
+          '0xYOUR_CONTRACT_ADDRESS',
+          ['function minFlipAmount() view returns (uint256)'],
+          provider
+        );
+
+        const raw = await contract.minFlipAmount();
+        const human = ethers.utils.formatUnits(raw, 18);
+
+        el.innerHTML = `
+          Qualification: sell at least
+          <code>${human} BOOM</code>
+          of any top-3 tracked memecoin during the last 3 days of the month.
+        `;
+      } catch (e) {
+        console.error('Failed to fetch flip requirement:', e);
+        el.textContent = 'Unable to load flip requirement';
+      }
+    }
+
+    updateFlipRequirement();
+  </script>
+
+  <!-- Your main site script (if needed) -->
+  <script src="script.js"></script>
 </body>
 </html>
-
-
