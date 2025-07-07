@@ -26,7 +26,6 @@
 </header>
 
 
-
   <main class="comic-container">
  <section class="comic-panel origin-story">
   <div class="burst-title">
@@ -64,6 +63,34 @@ Time waits for no one. The next chapter is being written with every block confir
     </video>
   </div>
 </section>
+
+    <div id="meme-generator">
+  <h2>Create Your Boom Inu Meme</h2>
+
+  <label for="template">Choose a template:</label>
+  <select id="template">
+    <option value="buzz">Buzz Lightyear</option>
+    <option value="drake">Drake Hotline Bling</option>
+    <option value="two-buttons">Two Buttons</option>
+    <option value="doge">Doge</option>
+    <option value="gru">Gru Plan</option>
+    <!-- Add more templates as needed -->
+  </select>
+
+  <label for="topText">Top Text:</label>
+  <input type="text" id="topText" placeholder="Enter top text">
+
+  <label for="bottomText">Bottom Text:</label>
+  <input type="text" id="bottomText" placeholder="Enter bottom text">
+
+  <button onclick="generateMeme()">Generate Meme</button>
+  <button onclick="downloadMeme()">Download Meme</button>
+
+  <div id="preview">
+    <h3>Preview:</h3>
+    <img id="memeImage" src="" alt="Your Meme Will Appear Here">
+  </div>
+</div>
 
     <section class="comic-panel">
       <h2>📊 Tokenomics</h2>
