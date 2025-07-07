@@ -89,6 +89,30 @@
     </section>
 
     <!-- Meme Generator Panel -->
+    <!-- Replace your existing Meme Generator & Flip Requirement scripts with this -->
+
+<!-- Third-Party Libs -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+<script>
+  // Map your <select> values to Imgflip template IDs
+  const IMGFLIP_TEMPLATES = {
+    drake:             "181913649",
+    "two-buttons":     "87743020",
+    "distracted-boyfriend": "112126428",
+    "change-my-mind":  "129242436",
+    gru:               "131087935",
+    doge:              "8072285",
+    buzz:              "555285653",
+    philosoraptor:     "1045805"
+  };
+
+  // sanitize text for URL-safe form
+  function sanitize(text) {
+    return text.trim() || "_";
+  }
+
+     <!-- Meme Generator Panel -->
     <section class="comic-panel fade-panel" id="meme-generator">
       <h2>Create Your Boom Inu Meme</h2>
       <label for="template">Choose a template:</label>
@@ -115,6 +139,97 @@
         </div>
       </div>
     </section>
+
+    <!-- Third-Party Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+    <!-- Imgflip Meme Generator & Flip-Requirement Loader -->
+    <script>
+      // Imgflip template IDs
+      const IMGFLIP_TEMPLATES = {
+        drake:             "181913649",
+        "two-buttons":     "87743020",
+        "distracted-boyfriend": "112126428",
+        "change-my-mind":  "129242436",
+        gru:               "131087935",
+        doge:              "8072285",
+        buzz:              "555285653",
+        philosoraptor:     "1045805"
+      };
+
+      // Fallback for empty text
+      function sanitize(text) {
+        return text.trim() || "_";
+      }
+
+      // Generate meme via Imgflip
+      async function generateMeme() {
+        const tplKey     = document.getElementById("template").value;
+        const templateId = IMGFLIP_TEMPLATES[tplKey];
+        const topText    = document.getElementById("topText").value;
+        const bottomText = document.getElementById("bottomText").value;
+        const form       = new FormData();
+
+        form.append("template_id", templateId);
+        form.append("username",    "YOUR_IMGFLIP_USERNAME"); // ← your Imgflip username
+        form.append("password",    "YOUR_IMGFLIP_PASSWORD"); // ← your Imgflip password
+        form.append("text0",       sanitize(topText));
+        form.append("text1",       sanitize(bottomText));
+
+        try {
+          const res  = await fetch("https://api.imgflip.com/caption_image", {
+            method: "POST",
+            body: form
+          });
+          const json = await res.json();
+          if (!json.success) throw new Error(json.error_message);
+          document.getElementById("memeImage").src = json.data.url;
+        } catch (err) {
+          console.error("Imgflip error:", err);
+          alert("Failed to generate meme: " + err.message);
+        }
+      }
+
+      // Download the generated meme
+      function downloadMeme() {
+        const image = document.getElementById("memeImage").src;
+        const link  = document.createElement("a");
+        link.href   = image;
+        link.download = "boom-inu-meme.png";
+        link.click();
+      }
+
+      // Fetch and display on-chain flip requirement
+      async function updateFlipRequirement() {
+        const el = document.getElementById("flip-req");
+        if (!el || !window.ethereum) return;
+
+        try {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const contract = new ethers.Contract(
+            "0xYOUR_CONTRACT_ADDRESS",               // ← replace with your contract
+            ["function minFlipAmount() view returns (uint256)"],
+            provider
+          );
+          const raw   = await contract.minFlipAmount();
+          const human = ethers.utils.formatUnits(raw, 18);
+
+          el.innerHTML = `
+            Qualification: sell at least
+            <code>${human} BOOM</code>
+            of any top-3 tracked memecoin during the last 3 days of the month.
+          `;
+        } catch (e) {
+          console.error("Flip req error:", e);
+          el.textContent = "Unable to load flip requirement";
+        }
+      }
+
+      // Initialize on page load
+      window.addEventListener("load", updateFlipRequirement);
+    </script>
+
 
     <!-- Tokenomics Panel -->
     <section class="comic-panel">
