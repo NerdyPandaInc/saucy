@@ -3,78 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comic Book Page</title>
+  <title>BOOMINU Comic Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Intro Modal -->
   <div id="intro-popup" class="intro-modal">
     <div class="intro-content">
       <h1>💥 Welcome to BOOMINU</h1>
-      <h1>Disclaimer: BoomInu is a community-driven meme token with no financial value. Always DYOR.</h1>
+      <p>Disclaimer: BoomInu is a community-driven meme token with no financial value. Always DYOR.</p>
       <button id="enterBtn" class="comic-button">Enter Site</button>
     </div>
   </div>
 
+  <!-- Background Layers -->
   <div class="background-overlay"></div>
   <div class="background-rotator bg1"></div>
   <div class="background-rotator bg2"></div>
 
+  <!-- Header -->
   <header class="comic-header">
     <img src="images/boomInuLogo1.png" alt="BOOMINU Logo" class="comic-logo" />
     <h1>💥 BOOMINU: The Detonator of DeFi 💥</h1>
   </header>
 
+  <!-- Main Content -->
   <main class="comic-container">
-    <section class="comic-panel origin-story">
-      <div class="burst-title">
-        <h2>Origin Story</h2>
-      </div>
-    </section>
 
+    <!-- Origin Story Panel -->
+<section class="comic-panel origin-story">
+  <div class="burst-title">
+    <h2>📖 Origin Story</h2>
+  </div>
+  <p class="fade-panel">
+    In the depths of the memeverse, a lone Shiba strapped on a detonator and declared war on inflation. Born from the ashes of rug pulls and broken promises, <strong>Boom Inu</strong> was forged to bring explosive energy back to DeFi. With a fixed supply, a ticking burn mechanism, and a mission to reward the bold, Boomer’s journey began not with a whisper—but with a boom.
+  </p>
+  <p class="fade-panel">
+    What follows is the legend of that journey—etched into every transaction, every burn, and every reflection. Welcome to the lore of Boom Inu.
+  </p>
+</section>
+
+
+    <!-- Story & Lore Panel -->
     <section class="comic-panel">
       <h2>📝 Story & Lore</h2>
-
       <p class="fade-panel">
         <strong>A New Chapter Begins:</strong><br>
-        Boom Inu launched with 10 trillion BOOM. Every trade burns 3%—shrinking supply—and sets aside 2% to reward holders. Once 1.2 T BOOM is gone, only 8.8 T remain, locking in permanent scarcity and fueling reflections.
+        Boom Inu launched with 10 000 000 000 000 BOOM. Every trade burns 3%—shrinking supply—and sets aside 2% to reward holders. Once 1.2 000 000 000 000 BOOM is gone, only 8.8 000 000 000 000 remain, locking in permanent scarcity and fueling reflections.
       </p>
-
       <p class="fade-panel">
         <strong>Core Mechanics, Simplified:</strong>
-        <ul>
-          <li>3% burn on non-LP transfers until 1.2 T cap</li>
-          <li>2% reflection fee distributed automatically</li>
-          <li>0% buy tax on whitelisted liquidity pools</li>
-          <li>No minting ever—supply is fixed</li>
-        </ul>
       </p>
-
+      <ul class="fade-panel">
+        <li>3% burn on non-LP transfers until 1.2 T cap</li>
+        <li>2% reflection fee distributed automatically</li>
+        <li>0% buy tax on whitelisted liquidity pools</li>
+        <li>No minting ever—supply is fixed</li>
+      </ul>
       <p class="fade-panel">
         <strong>Why Hold Boom Inu?</strong><br>
         Polygon’s low fees mean instant, cheap trades. Reflections claim themselves on every transaction—no extra steps. Immutable tokenomics ensure the rules never change.
       </p>
-
       <p class="fade-panel">
         <strong>Rally the Pack:</strong><br>
         Join our community on Telegram, Twitter, and Discord. Early adopters lead the charge—stake your claim and watch Boom Inu conquer Polygon.
       </p>
-
-      <p class="fade-panel">
+      <blockquote class="fade-panel">
         “I’m not here to fetch. I’m here to detonate.”<br>
         — Boomer, the Shiba with a Detonator
-      </p>
-
+      </blockquote>
       <p class="fade-panel">
         <strong>Advisor Take:</strong><br>
         Deflationary burns + a mint-free reflection system—fully on-chain and first of its kind on Polygon. Permanent scarcity and automatic rewards, guaranteed.
       </p>
     </section>
 
+    <!-- Creator Video Panel -->
     <section class="comic-panel">
       <h2>🎥 The Creator of The "Boom"</h2>
       <p>Watch the explosive origins of BOOMINU unfold in motion.</p>
-
       <div class="video-wrapper">
         <video id="boomVideo" controls poster="images/boominu-poster.jpg">
           <source src="videos/2025-07-04-070009612.mp4" type="video/mp4">
@@ -83,9 +91,9 @@
       </div>
     </section>
 
+    <!-- Meme Generator Panel -->
     <section class="comic-panel fade-panel" id="meme-generator">
       <h2>Create Your Boom Inu Meme</h2>
-
       <label for="template">Choose a template:</label>
       <select id="template" class="comic-button">
         <option value="drake">Drake Hotline Bling</option>
@@ -97,71 +105,64 @@
         <option value="buzz">Buzz Lightyear</option>
         <option value="philosoraptor">Philosoraptor</option>
       </select>
-
       <label for="topText">Top Text:</label>
       <input type="text" id="topText" placeholder="Enter top text" class="comic-button">
-
       <label for="bottomText">Bottom Text:</label>
       <input type="text" id="bottomText" placeholder="Enter bottom text" class="comic-button">
-
       <button class="comic-button" onclick="generateMeme()">Generate Meme</button>
       <button class="comic-button" onclick="downloadMeme()">Download Meme</button>
-
       <div id="preview" class="meme-preview-container">
-        <h3 style="margin-top: 1rem;">Preview:</h3>
+        <h3>Preview:</h3>
         <div class="meme-image-wrapper">
           <img id="memeImage" src="" alt="Your Meme Will Appear Here">
         </div>
       </div>
     </section>
 
+    <!-- Tokenomics Panel -->
     <section class="comic-panel">
       <h2>📊 Tokenomics</h2>
-
       <ul>
-        <li>🔥 Total Supply: 10 T BOOM</li>
+        <li>🔥 Total Supply: 10 000 000 000 000 BOOM</li>
         <li><strong>Allocation:</strong>
           <ul>
-            <li>1 T (10%) to Treasury (365 days lock)</li>
-            <li>0.5 T (5%) to Team</li>
-            <li>8.5 T (85%) for Public Circulation</li>
+            <li>1 000 000 000 000 (10%) to Treasury (365-day lock)</li>
+            <li>500 000 000 000 (5%) to Team</li>
+            <li>8 500 000 000 000 (85%) for Public Circulation</li>
           </ul>
         </li>
         <li>⛔ No further minting ever</li>
       </ul>
-
       <ul>
         <li><strong>Phase 1 – Burn</strong>
           <ul>
             <li>3% fee on all non-LP & non-whitelisted transfers</li>
-            <li>Burn cap: stops after 1.2 T (12%) is removed</li>
+            <li>Burn cap: stops after 1.2 T is removed</li>
           </ul>
         </li>
-
         <li><strong>Phase 2 – Reflections</strong>
           <ul>
-            <li>2% fee on transfers goes into the rewards pool</li>
-            <li>Auto-claim on your next transfer (no extra tx needed)</li>
+            <li>2% fee on transfers goes into the contract’s balance</li>
+            <li>Auto-claim on user transfers (no extra tx needed)</li>
             <li>Per-tx reflection fee capped to prevent whale dumps</li>
           </ul>
         </li>
-
         <li><strong>⚡ Double-Reflection Boost</strong>
           <ul>
-            <li>4% reflection rate for 48 hours after qualifying buys</li>
+            <li>2%×2 reflection rate for 48 hours after qualifying buys</li>
             <li id="flip-req">Loading flip requirement…</li>
             <li>One boost per 30 days, per address</li>
           </ul>
         </li>
-
         <li><strong>🚀 Tax-Free Buys</strong>
           <ul>
-            <li>0% buy tax on all whitelisted liquidity pools (presale, DEX, etc.)</li>
+            <li>0% buy tax on all whitelisted liquidity pools</li>
           </ul>
         </li>
       </ul>
     </section>
 
+    <!-- Join Panel -->
     <section class="comic-panel">
       <h2>🧠 Join the Meme War</h2>
       <p>Connect your wallet and become part of the BOOMINU revolution.</p>
@@ -169,16 +170,16 @@
     </section>
   </main>
 
-  <!-- 🎵 Background Music -->
+  <!-- Background Music -->
   <audio id="bgMusic" preload="auto">
     <source src="sounds/BoomInu.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- 📜 JavaScript -->
+  <!-- Core Script -->
   <script src="script.js"></script>
 
-  <!-- Ethers.js ESM + dynamic flip-requirement -->
+  <!-- Ethers.js ESM + Dynamic Flip Requirement -->
   <script type="module">
     import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js';
 
@@ -203,13 +204,4 @@
           <code>${human} BOOM</code>
           of any top-3 tracked memecoin during the last 3 days of the month.
         `;
-      } catch (e) {
-        console.error('Failed to fetch flip requirement', e);
-        el.textContent = 'Unable to load flip requirement';
-      }
-    }
-
-    updateFlipRequirement();
-  </script>
-</body>
-</html>
+      } catch
