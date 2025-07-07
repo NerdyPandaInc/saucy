@@ -124,5 +124,33 @@ Time waits for no one. The next chapter is being written with every block confir
 
   <!-- 📜 JavaScript -->
   <script src="script.js"></script>
+  <script>
+  function sanitize(text) {
+    return encodeURIComponent(text.trim() || "_")
+      .replace(/-/g, "--")
+      .replace(/_/g, "__")
+      .replace(/\?/g, "~q")
+      .replace(/%/g, "~p")
+      .replace(/#/g, "~h")
+      .replace(/\//g, "~s");
+  }
+
+  function generateMeme() {
+    const template = document.getElementById("template").value;
+    const top = sanitize(document.getElementById("topText").value);
+    const bottom = sanitize(document.getElementById("bottomText").value);
+    const url = `https://api.memegen.link/images/${template}/${top}/${bottom}.png`;
+
+    document.getElementById("memeImage").src = url;
+  }
+
+  function downloadMeme() {
+    const image = document.getElementById("memeImage").src;
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "boom-inu-meme.png";
+    link.click();
+  }
+</script>
 </body>
 </html>
