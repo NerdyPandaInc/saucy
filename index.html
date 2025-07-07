@@ -125,7 +125,7 @@ Time waits for no one. The next chapter is being written with every block confir
 
   <!-- 📜 JavaScript -->
   <script src="script.js"></script>
-  <script>
+ <script>
   function sanitize(text) {
     return encodeURIComponent(text.trim() || "_")
       .replace(/-/g, "--")
@@ -141,7 +141,6 @@ Time waits for no one. The next chapter is being written with every block confir
     const top = sanitize(document.getElementById("topText").value);
     const bottom = sanitize(document.getElementById("bottomText").value);
     const url = `https://api.memegen.link/images/${template}/${top}/${bottom}.png`;
-
     document.getElementById("memeImage").src = url;
   }
 
@@ -152,6 +151,15 @@ Time waits for no one. The next chapter is being written with every block confir
     link.download = "boom-inu-meme.png";
     link.click();
   }
+
+  // Optional: Animate meme panel on scroll
+  window.addEventListener("scroll", () => {
+    const panel = document.getElementById("meme-generator");
+    const rect = panel.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      panel.classList.add("visible");
+    }
+  });
 </script>
 </body>
 </html>
