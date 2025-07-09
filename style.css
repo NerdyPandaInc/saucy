@@ -350,6 +350,6 @@ video {
   color: white;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
+.menu li.dropdown > a {
+  color: #ffcc00;
 }
