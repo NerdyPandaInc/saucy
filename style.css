@@ -319,3 +319,37 @@ video {
   border: none;
   border-radius: 0;
 }
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu > li {
+  position: relative;
+  display: inline-block;
+}
+
+.menu li a {
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  font-family: 'Bangers', sans-serif;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  padding: 10px;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content li a {
+  color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
