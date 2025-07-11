@@ -206,4 +206,14 @@ input[type="text"] {
   padding: 8px;
   line-height: 1.8;
 }
-
+.meme-input {
+  font-size: 1.1rem;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 2px solid #ffcc00;
+  background-color: #1a1a1a;
+  color: #fff;
+  width: 100%;
+  font-family: 'Orbitron', sans-serif;
+}
