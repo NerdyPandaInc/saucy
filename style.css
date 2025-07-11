@@ -1,6 +1,8 @@
+/* 🎨 Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
-/* 🔧 Reset & Base Styles */
+/* 🔧 Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -20,37 +22,12 @@ body {
   overflow-x: hidden;
 }
 
-/* 🧠 Centered Header */
+/* 🧠 Header */
 .comic-header {
   text-align: center;
   margin-bottom: 2rem;
-  max-width: 100%;
 }
 
-/* 🖼️ Responsive Logo */
-.comic-logo {
-  display: block;
-  margin: 0 auto 1rem auto;
-  height: 400px;
-  width: auto;
-  max-width: 90%;
-  opacity: 0;
-  animation: fadeInLogo 5.5s ease-out forwards;
-  filter: drop-shadow(0 0 15px #000);
-}
-
-@keyframes fadeInLogo {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* 💬 Header Title */
 .comic-header h1 {
   font-size: 2.5rem;
   color: #ffcc00;
@@ -58,7 +35,23 @@ body {
   padding: 0 1rem;
 }
 
-/* 📖 Main Container */
+/* 🖼️ Logo */
+.comic-logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  max-height: 400px;
+  max-width: 90%;
+  opacity: 0;
+  animation: fadeInLogo 5.5s ease-out forwards;
+  filter: drop-shadow(0 0 15px #000);
+}
+
+@keyframes fadeInLogo {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 📦 Comic Panels */
 .comic-container {
   max-width: 960px;
   margin: 0 auto;
@@ -68,7 +61,6 @@ body {
   padding: 0 1rem;
 }
 
-/* 📦 Comic Panels with Scroll Animation */
 .comic-panel {
   background: #222;
   border: 5px solid #ffcc00;
@@ -92,8 +84,7 @@ body {
   text-shadow: 2px 2px #000;
 }
 
-.comic-panel p,
-.comic-panel ul {
+.comic-panel p, .comic-panel ul {
   font-size: 1.2rem;
   color: #fff;
 }
@@ -126,42 +117,80 @@ body {
   background: #fff000;
 }
 
-/* 📱 Responsive Tweaks */
-@media (max-width: 600px) {
-  .comic-logo {
-    height: 120px;
-  }
-
-  .comic-header h1 {
-    font-size: 1.8rem;
-  }
-
-  .comic-panel {
-    padding: 1.5rem;
-  }
-
-  .comic-panel h2 {
-    font-size: 1.5rem;
-  }
-
-  .comic-panel p,
-  .comic-panel ul {
-    font-size: 1rem;
-  }
-
-  .comic-button {
-    font-size: 1rem;
-    padding: 0.5rem 1.5rem;
-  }
+/* 🖼️ Meme Styling */
+.meme-preview-container,
+.meme-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+  border: 5px solid #ffcc00;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 #000;
+  background: #111;
 }
 
-/* 🔁 Background Rotator with Fallback */
+#memeImage {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* 📊 Boom Inu Widget */
+#boominu-widget {
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.4);
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+#boominu-widget h3 {
+  color: #ffcc00;
+  margin-top: 0;
+}
+
+#boominu-widget button {
+  background-color: #ffcc00;
+  color: white;
+  padding: 10px 18px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
+}
+
+#boominu-widget button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 119, 0.8);
+}
+
+#boominu-widget button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 15px rgba(255, 0, 119, 0.6);
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .comic-logo { max-height: 120px; }
+  .comic-header h1 { font-size: 1.8rem; }
+  .comic-panel { padding: 1.5rem; }
+  .comic-panel h2 { font-size: 1.5rem; }
+  .comic-panel p, .comic-panel ul { font-size: 1rem; }
+  .comic-button { font-size: 1rem; padding: 0.5rem 1.5rem; }
+}
+
+/* 🖼️ Background & Burst */
 .background-rotator {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('images/202572165617309.png');
+  background-image: url('images/202572165617309.png'); /* Ensure this file exists */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -169,14 +198,6 @@ body {
   z-index: -2;
   opacity: 0;
   transition: opacity 2s ease-in-out;
-}
-
-.bg1 {
-  z-index: -3;
-}
-
-.bg2 {
-  z-index: -4;
 }
 
 .background-overlay {
@@ -188,10 +209,8 @@ body {
   z-index: -1;
 }
 
-/* 💥 Burst Graphic Behind Title */
 .burst-title {
   position: relative;
-  display: inline-block;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -206,16 +225,23 @@ body {
   opacity: 0.8;
 }
 
-/* ✨ Fade-in Comic Paragraphs */
-.fade-panel {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
+/* 🎬 Video Styling */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 2rem auto;
+  border: 4px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.fade-panel.visible {
-  opacity: 1;
-  transform: translateY(0);
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
 }
 
 /* ⏱️ Intro Modal */
@@ -235,7 +261,6 @@ body {
   opacity: 1;
   transition: opacity 1s ease-out;
   pointer-events: all;
-  overflow: hidden;
 }
 
 .intro-modal.fade-out {
@@ -263,139 +288,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* 🔄 Intro Animation */
 @keyframes popIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  margin: 2rem auto;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-  border: 4px solid #000;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-video {
-  width: 100%;
-  height: auto;
-  display: block;
-  background: #000;
-}
-/* 🖼️ Meme Preview Container */
-.meme-preview-container {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  padding: 1rem 0;
-}
-
-/* 🖼️ Image Wrapper to Control Overflow */
-.meme-image-wrapper {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  border: 5px solid #ffcc00;
-  border-radius: 10px;
-  box-shadow: 5px 5px 0 #000;
-  background: #111;
-}
-
-/* 🖼️ Meme Image Styling */
-#memeImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  border: none;
-  border-radius: 0;
-}
-.menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu > li {
-  position: relative;
-  display: inline-block;
-}
-
-.menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu > li {
-  position: relative;
-  display: inline-block;
-}
-
-.menu li a {
-  padding: 10px 15px;
-  display: block;
-  text-decoration: none;
-  font-family: 'Bangers', sans-serif;
-  color: white;
-}
-
-.menu li.dropdown > a {
-  color: #ffcc00; /* Make “Resources” golden */
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #222;
-  padding: 10px;
-  min-width: 160px;
-  z-index: 1;
-}
-
-.dropdown-content li {
-  list-style: none;
-}
-
-.dropdown-content li a {
-  color: white;
-  text-decoration: none;
-  padding: 8px 12px;
-  display: block;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-#boominu-widget button {
-  background-color: #ffcc00;
-  color: white;
-  padding: 10px 18px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  font-family: 'Orbitron', sans-serif;
-  transition: transform 0.2s ease, box-shadow 0.4s ease;
-  box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
-}
-
-#boominu-widget button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 0, 119, 0.8);
-}
-
-#boominu-widget button:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 15px rgba(255, 0, 119, 0.6);
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
