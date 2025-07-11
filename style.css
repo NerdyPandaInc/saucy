@@ -8,11 +8,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   font-family: 'Bangers', cursive;
   background: radial-gradient(circle at center, #222 0%, #000 100%);
@@ -22,120 +20,7 @@ body {
   overflow-x: hidden;
 }
 
-/* 🧠 Header */
-.comic-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.comic-header h1 {
-  font-size: 2.5rem;
-  color: #ffcc00;
-  text-shadow: 3px 3px #000;
-  padding: 0 1rem;
-}
-
-/* 🖼️ Logo */
-.comic-logo {
-  display: block;
-  margin: 0 auto 1rem auto;
-  max-height: 400px;
-  max-width: 90%;
-  opacity: 0;
-  animation: fadeInLogo 5.5s ease-out forwards;
-  filter: drop-shadow(0 0 15px #000);
-}
-
-@keyframes fadeInLogo {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* 📦 Comic Panels */
-.comic-container {
-  max-width: 960px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 0 1rem;
-}
-
-.comic-panel {
-  background: #222;
-  border: 5px solid #ffcc00;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 5px 5px 0 #000;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease-out;
-}
-
-.comic-panel.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.comic-panel h2 {
-  font-size: 1.8rem;
-  color: #ffcc00;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px #000;
-}
-
-.comic-panel p, .comic-panel ul {
-  font-size: 1.2rem;
-  color: #fff;
-}
-
-.comic-panel ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.comic-panel ul li::before {
-  content: "💥 ";
-  margin-right: 0.5rem;
-}
-
-/* 🎯 Buttons */
-.comic-button {
-  background: #ffcc00;
-  color: #000;
-  font-size: 1.2rem;
-  padding: 0.75rem 2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 #000;
-  transition: background 0.2s ease-in-out;
-  margin-top: 1rem;
-}
-
-.comic-button:hover {
-  background: #fff000;
-}
-
-/* 🖼️ Meme Styling */
-.meme-preview-container,
-.meme-image-wrapper {
-  width: 100%;
-  overflow: hidden;
-  padding: 1rem 0;
-  border: 5px solid #ffcc00;
-  border-radius: 10px;
-  box-shadow: 5px 5px 0 #000;
-  background: #111;
-}
-
-#memeImage {
-  width: 100%;
-  display: block;
-  object-fit: contain;
-}
-
-/* 📊 Boom Inu Widget */
+/* ✅ Widget */
 #boominu-widget {
   padding: 20px;
   background: #1a1a1a;
@@ -144,12 +29,9 @@ body {
   max-width: 400px;
   margin: 40px auto;
 }
-
 #boominu-widget h3 {
   color: #ffcc00;
-  margin-top: 0;
 }
-
 #boominu-widget button {
   background-color: #ffcc00;
   color: white;
@@ -163,43 +45,76 @@ body {
   transition: transform 0.2s ease, box-shadow 0.4s ease;
   box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
 }
-
 #boominu-widget button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(255, 0, 119, 0.8);
 }
 
-#boominu-widget button:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 15px rgba(255, 0, 119, 0.6);
+/* ✅ Comic Panels */
+.comic-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.comic-panel {
+  background: #222;
+  border: 5px solid #ffcc00;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 5px 5px 0 #000;
+}
+.comic-panel h2 {
+  font-size: 1.8rem;
+  color: #ffcc00;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px #000;
+}
+.comic-panel p, .comic-panel ul {
+  font-size: 1.2rem;
+}
+.comic-panel ul {
+  list-style: none;
+  padding-left: 0;
+}
+.comic-panel ul li::before {
+  content: "💥 ";
+  margin-right: 0.5rem;
 }
 
-/* 📱 Responsive */
-@media (max-width: 600px) {
-  .comic-logo { max-height: 120px; }
-  .comic-header h1 { font-size: 1.8rem; }
-  .comic-panel { padding: 1.5rem; }
-  .comic-panel h2 { font-size: 1.5rem; }
-  .comic-panel p, .comic-panel ul { font-size: 1rem; }
-  .comic-button { font-size: 1rem; padding: 0.5rem 1.5rem; }
+/* ✅ Header */
+.comic-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.comic-header h1 {
+  font-size: 2.5rem;
+  color: #ffcc00;
+  text-shadow: 3px 3px #000;
+}
+.comic-logo {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 0 15px #000);
 }
 
-/* 🖼️ Background & Burst */
+/* ✅ Background Rotators */
 .background-rotator {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('images/202572165617309.png'); /* Ensure this file exists */
+  background-image: url('images/202572165617309.png'); /* must exist */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: -2;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 2s ease-in-out;
 }
-
 .background-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -209,65 +124,22 @@ body {
   z-index: -1;
 }
 
-.burst-title {
-  position: relative;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.burst-graphic {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  z-index: -1;
-  opacity: 0.8;
-}
-
-/* 🎬 Video Styling */
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  margin: 2rem auto;
-  border: 4px solid #000;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-}
-
-video {
-  width: 100%;
-  height: auto;
-  display: block;
-  background: #000;
-}
-
-/* ⏱️ Intro Modal */
+/* ✅ Intro Modal */
 .intro-modal {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  color: #fff;
-  font-family: 'Bangers', cursive;
-  text-align: center;
-  opacity: 1;
   transition: opacity 1s ease-out;
-  pointer-events: all;
 }
-
 .intro-modal.fade-out {
   opacity: 0;
   pointer-events: none;
 }
-
 .intro-content {
   background: #ffcc00;
   color: #000;
@@ -275,20 +147,23 @@ video {
   border: 5px solid #000;
   border-radius: 10px;
   box-shadow: 0 0 20px #ff0000;
-  animation: popIn 0.5s ease-out;
+  text-align: center;
 }
+.intro-content h1 { font-size: 2.5rem; }
+.intro-content p { font-size: 1.5rem; }
 
-.intro-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+/* ✅ Buttons */
+.comic-button {
+  background: #ffcc00;
+  color: #000;
+  font-size: 1.2rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #000;
+  transition: background 0.2s ease-in-out;
 }
-
-.intro-content p {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+.comic-button:hover {
+  background: #fff000;
 }
