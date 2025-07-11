@@ -274,5 +274,20 @@ input[type="text"] {
 #boominu-lore:hover {
   transform: scale(1.02);
 }
+/* 📺 Video Wrapper Fix */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Optional: limits expansion */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
 
 
