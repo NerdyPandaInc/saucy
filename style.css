@@ -376,3 +376,26 @@ video {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+#boominu-widget button {
+  background-color: #ff0077;
+  color: white;
+  padding: 10px 18px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
+}
+
+#boominu-widget button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 119, 0.8);
+}
+
+#boominu-widget button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 15px rgba(255, 0, 119, 0.6);
+}
