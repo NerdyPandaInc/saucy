@@ -253,4 +253,26 @@ input[type="text"] {
   font-family: 'Orbitron', sans-serif;
   width: 100%;
 }
+/* 💥 Boom Inu Lore Block */
+#boominu-lore {
+  background: linear-gradient(135deg, #1a1a1a, #000);
+  border: 2px solid #ffcc00;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+  color: #ffcc00;
+  font-family: 'Orbitron', sans-serif;
+  padding: 25px;
+  margin: 40px auto;
+  max-width: 800px;
+  line-height: 2;
+  font-size: 1.5rem; /* <-- increased from default */
+  text-align: justify;
+  text-shadow: 0 0 3px #000;
+  transition: transform 0.3s ease;
+}
+
+#boominu-lore:hover {
+  transform: scale(1.02);
+}
+
 
