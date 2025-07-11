@@ -69,3 +69,8 @@ async function fetchBoomStats() {
 
 fetchBoomStats();
 setInterval(fetchBoomStats, 10000); // refresh stats every 10s
+
+document.getElementById("enterBtn")?.addEventListener("click", () => {
+  const modal = document.getElementById("intro-popup");
+  if (modal) modal.style.display = "none";
+});
