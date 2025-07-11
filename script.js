@@ -19,11 +19,26 @@ async function claimReflections() {
   }
 }
 
+// 🧠 Meme Template Map
+const MEME_TEMPLATES = {
+  "drake": "drake",
+  "two-buttons": "two-buttons",
+  "distracted-boyfriend": "distracted-boyfriend",
+  "change-my-mind": "change-my-mind",
+  "gru": "gru",
+  "united-states": "united-states",
+  "doge": "doge",
+  "success-kid": "success-kid",
+  "roll-safe": "roll-safe"
+};
+
 // 🖼️ Meme Generator
 function generateMeme() {
   const top = document.getElementById("topText")?.value || "_";
   const bottom = document.getElementById("bottomText")?.value || "_";
-  const memeUrl = `https://api.memegen.link/images/doge/${encodeURIComponent(top)}/${encodeURIComponent(bottom)}.png`;
+  const templateKey = document.getElementById("template")?.value || "doge";
+  const template = MEME_TEMPLATES[templateKey] || "doge";
+  const memeUrl = `https://api.memegen.link/images/${template}/${encodeURIComponent(top)}/${encodeURIComponent(bottom)}.png`;
   const memeImage = document.getElementById("memeImage");
   if (memeImage) memeImage.src = memeUrl;
 }
