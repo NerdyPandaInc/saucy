@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+fix this: <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,8 +14,9 @@
       <li class="dropdown">
         <a href="#">Resources ▾</a>
      <ul class="dropdown-content">
-  <li><a href="whitepaper.html">Whitepaper</a></li> <!-- ✅ Works -->
-          <li><a href="claim.html">Claims</a></li>
+  <li><a href="whitepaper.html">📄 Whitepaper</a></li> <!-- ✅ Works -->
+          <li><a href="/roadmap/">🗺️ Roadmap</a></li>
+          <li><a href="/docs/">📚 Docs</a></li>
         </ul>
       </li>
     </ul>
@@ -295,11 +296,11 @@
         );
         const raw   = await contract.minFlipAmount();
         const human = ethers.utils.formatUnits(raw, 18);
-        el.innerHTML = 
+        el.innerHTML = `
           Qualification: sell at least
           <code>${human} BOOM</code>
           of any top-3 tracked memecoin during the last 3 days of the month.
-        ;
+        `;
       } catch (err) {
         console.error("Flip req error:", err);
         el.textContent = "Unable to load flip requirement";
@@ -360,7 +361,9 @@
     }
   }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+  </script>
+
   <!-- Optional: your main site script -->
   <script src="script.js"></script>
 </body>
