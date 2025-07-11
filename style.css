@@ -240,3 +240,17 @@ input[type="text"] {
   width: 100%;
   font-family: 'Orbitron', sans-serif;
 }
+.meme-select {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #ffcc00;
+  box-shadow: 3px 3px 0 #000;
+  font-family: 'Orbitron', sans-serif;
+  width: 100%;
+}
+
