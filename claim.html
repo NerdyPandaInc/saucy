@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boom Inu Tracker</title>
+
+  <!-- Orbitron Font for Meme-Sleek Buttons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+  <!-- Ethers.js Library -->
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+    }
+
+    #boominu-widget {
+      padding: 20px;
+      border-top: 1px solid #ccc;
+      background-color: #1a1a1a;
+      max-width: 400px;
+      margin: 40px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(255, 0, 119, 0.3);
+    }
+
+    #boominu-widget h3 {
+      color: #ff0077;
+    }
+
+    #boominu-widget button {
+      background-color: #ff0077;
+      color: white;
+      padding: 10px 18px;
+      margin: 8px 6px 0 0;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
+    }
+
+    #boominu-widget button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 0, 119, 0.8);
+    }
+
+    #boominu-widget button:active {
+      transform: scale(0.97);
+      box-shadow: 0 0 15px rgba(255, 0, 119, 0.6);
+    }
+
+    .claimed-success {
+      animation: boomPulse 0.4s ease;
+      box-shadow: 0 0 25px #00ffcc !important;
+    }
+
+    @keyframes boomPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="boominu-widget">
+    <h3>💥 Boom Inu Tracker</h3>
+    <p><strong>Your Address:</strong> <span id="walletAddress">Not Connected</span></p>
+    <p><strong>Current Flip Streak:</strong> <span id="flipStreak">-</span></p>
+    <p><strong>Available Reflections:</strong> <span id="reflections">-</span> BOOM</p>
+    <button onclick="connectWallet()">Connect MetaMask</button>
+    <button onclick="claimReflections()">Claim Reflections</button>
+  </div>
+
+  <script>
+    let provider, signer, boomContract;
+    const contractAddress = 'YOUR_CONTRACT_ADDRESS'; // Replace with actual contract
+    const abi = [ /* Paste ABI here */ ]; // Insert actual ABI
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        signer = provider.getSigner();
+        const address = await signer.getAddress();
+        document.getElementById('walletAddress').innerText = address;
+        boomContract = new ethers.Contract(contractAddress, abi, signer);
+        fetchStats(address);
+      } else {
+        alert('MetaMask not detected.');
+      }
+    }
+
+    async function fetchStats(address) {
+      try {
+        const streak = await boomContract.flipStreak(address);
+        const [accrued, owed] = await boomContract.callStatic._calculateOwed(address);
+        document.getElementById('flipStreak').innerText = streak.toString();
+        document.getElementById('reflections').innerText = (owed / 1e18).toFixed(2);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function claimReflections() {
+      try {
+        const tx = await boomContract.claimAllFull(1);
+        await tx.wait();
+        const claimBtn = document.querySelector("button[onclick='claimReflections()']");
+        claimBtn.classList.add("claimed-success");
+        setTimeout(() => claimBtn.classList.remove("claimed-success"), 1200);
+        alert('Claimed successfully!');
+      } catch (e) {
+        console.error(e);
+        alert('Claim failed');
+      }
+    }
+  </script>
+
+</body>
+</html>
