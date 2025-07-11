@@ -217,3 +217,15 @@ input[type="text"] {
   width: 100%;
   font-family: 'Orbitron', sans-serif;
 }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  padding: 10px;
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
