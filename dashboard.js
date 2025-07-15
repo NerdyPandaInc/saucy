@@ -160,6 +160,13 @@ document.getElementById("connect-wallet").addEventListener("click", async () => 
   }
 });
 
+// Enable Connect Wallet based on security acknowledgment
+document.getElementById("security-ack").addEventListener("change", (e) => {
+  const connectButton = document.getElementById("connect-wallet");
+  connectButton.disabled = !e.target.checked;
+  console.log("Connect button enabled:", !connectButton.disabled);
+});
+
 // Disconnect Wallet
 document.getElementById("disconnect-wallet").addEventListener("click", () => {
   provider = null;
