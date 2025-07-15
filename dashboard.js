@@ -83,40 +83,53 @@ const abi = [
   {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"status","type":"bool"}],"name":"whitelistAddress","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ];
 
-// Connect Wallet
-document.getElementById("connect-wallet").addEventListener("click", async () => {
-  // Debug: Check if Ethers and MetaMask are loaded
-  console.log("Ethers loaded:", ethers);
+// Initialize connection
+async function initializeConnection() {
   if (!window.ethereum) {
     console.error("MetaMask not detected. Please install it.");
     alert("MetaMask is not detected. Please install it and refresh the page.");
-    return; // Return inside the event listener is valid
+    return;
   }
 
   try {
-    console.log("Attempting to connect wallet...");
+    console.log("Requesting accounts...");
     await window.ethereum.request({ method: "eth_requestAccounts" });
     provider = new ethers.providers.Web3Provider(window.ethereum);
     const network = await provider.getNetwork();
-    if (network.chainId !== 137) { // 137 is Polygon Mainnet
+    if (network.chainId !== 137) {
       alert("Please switch to Polygon Mainnet in MetaMask.");
       return;
     }
     signer = provider.getSigner();
     contract = new ethers.Contract(contractAddress, abi, signer);
-    console.log("Wallet connected, contract initialized:", contract);
+    console.log("Contract initialized:", contract);
+    return true;
+  } catch (error) {
+    console.error("Connection failed:", error);
+    alert("Failed to connect wallet: " + error.message);
+    return false;
+  }
+}
+
+// Connect Wallet
+document.getElementById("connect-wallet").addEventListener("click", async () => {
+  const connected = await initializeConnection();
+  if (connected) {
     await loadData();
     document.getElementById("connect-wallet").style.display = "none";
     document.getElementById("toggle-auto-claim").disabled = false;
     document.getElementById("claim-reflections").disabled = false;
-  } catch (error) {
-    console.error("Connection error:", error);
-    alert("Failed to connect wallet: " + error.message);
   }
 });
 
 // Load Data
 async function loadData() {
+  if (!contract) {
+    console.error("Contract not initialized. Please connect wallet.");
+    document.getElementById("metrics").innerHTML = `<h3>Global Metrics</h3><p>Contract not initialized. Connect your wallet first.</p>`;
+    document.getElementById("user-data").innerHTML = `<h3>Your Stats</h3><p>Connect wallet to see your data.</p>`;
+    return;
+  }
   await updateMetrics();
   await updateUserData();
   listenToEvents();
@@ -126,6 +139,7 @@ async function loadData() {
 async function updateMetrics() {
   const metricsDiv = document.getElementById("metrics");
   try {
+    if (!contract) throw new Error("Contract not initialized");
     const [totalSupply, burned, dailyVolume, reflectionsLocked, phaseTwo] = await Promise.all([
       contract.totalSupply(),
       contract.burned(),
@@ -149,6 +163,7 @@ async function updateMetrics() {
 async function updateUserData() {
   const userDataDiv = document.getElementById("user-data");
   try {
+    if (!contract) throw new Error("Contract not initialized");
     const address = await signer.getAddress();
     const [balance, owed] = await Promise.all([
       contract.balanceOf(address),
@@ -171,6 +186,7 @@ async function updateUserData() {
 // Toggle Auto Claim
 document.getElementById("toggle-auto-claim").addEventListener("click", async () => {
   try {
+    if (!contract) throw new Error("Contract not initialized");
     const currentStatus = await contract.autoClaimEnabled(await signer.getAddress());
     const tx = await contract.setAutoClaim(!currentStatus);
     await tx.wait();
@@ -185,6 +201,7 @@ document.getElementById("toggle-auto-claim").addEventListener("click", async () 
 // Claim Reflections
 document.getElementById("claim-reflections").addEventListener("click", async () => {
   try {
+    if (!contract) throw new Error("Contract not initialized");
     const tx = await contract.claimAllFull(5); // Adjust maxLoops as needed
     await tx.wait();
     alert("Reflections claimed successfully!");
@@ -197,6 +214,10 @@ document.getElementById("claim-reflections").addEventListener("click", async () 
 
 // Listen to Events
 function listenToEvents() {
+  if (!contract) {
+    console.error("Contract not initialized. Cannot listen to events.");
+    return;
+  }
   const eventList = document.getElementById("event-list");
   contract.on("ReflectionClaimed", (user, amount, event) => {
     const time = new Date(event.block.timestamp * 1000).toLocaleString();
@@ -213,7 +234,4 @@ function listenToEvents() {
   });
 }
 
-// Initial Load if MetaMask is detected
-if (window.ethereum) {
-  loadData().catch(console.error);
-}
+// Initial Load (disabled until connected)
