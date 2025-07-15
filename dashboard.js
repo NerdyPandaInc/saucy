@@ -1,5 +1,6 @@
 const { ethers } = window;
 let provider, signer, contract;
+let isConnecting = false;
 
 const contractAddress = "0x665Dcc5aD8F4306C87dCFB0B2329ca829Bb0f6CF";
 const abi = [
@@ -85,9 +86,19 @@ const abi = [
 
 // Initialize connection
 async function initializeConnection() {
+  if (isConnecting) {
+    alert("Already processing connection request. Please wait.");
+    return false;
+  }
+
+  isConnecting = true;
+  document.getElementById("connect-wallet").disabled = true;
+
   if (!window.ethereum) {
     console.error("MetaMask not detected. Please install it.");
     alert("MetaMask is not detected. Please install it and refresh the page.");
+    isConnecting = false;
+    document.getElementById("connect-wallet").disabled = false;
     return false;
   }
 
@@ -98,15 +109,21 @@ async function initializeConnection() {
     const network = await provider.getNetwork();
     if (network.chainId !== 137) {
       alert("Please switch to Polygon Mainnet in MetaMask.");
+      isConnecting = false;
+      document.getElementById("connect-wallet").disabled = false;
       return false;
     }
     signer = provider.getSigner();
     contract = new ethers.Contract(contractAddress, abi, signer);
     console.log("Contract initialized:", contract);
+    isConnecting = false;
+    document.getElementById("connect-wallet").disabled = false;
     return true;
   } catch (error) {
     console.error("Connection failed:", error);
     alert("Failed to connect wallet: " + error.message);
+    isConnecting = false;
+    document.getElementById("connect-wallet").disabled = false;
     return false;
   }
 }
