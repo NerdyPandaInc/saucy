@@ -1,117 +1,343 @@
-BoomInu Smart Contract Transparency Documentation Overview 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoomInu Smart Contract Transparency Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        strong {
+            color: #000;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul, ol {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .warning {
+            background-color: #ffe6e6;
+            border: 1px solid #cc0000;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .example {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning">
+        <h2>Warning: Risks of Investing in Cryptocurrency</h2>
+        <p>Investing in cryptocurrencies, including the <strong>BoomInu (BOOM) token</strong>, involves significant risks. The cryptocurrency market is highly volatile, and you may lose some or all of your investment. Key risks include price fluctuations, regulatory uncertainties, security vulnerabilities (e.g., hacks or scams), and lack of guaranteed returns. Always conduct thorough research, only invest what you can afford to lose, and consider consulting a financial advisor before making investment decisions. Never share your wallet seed phrase or private keys, and ensure you understand the risks before interacting with any blockchain-based platform, including the <strong>BoomInu Smart Contract</strong> or its <strong>Transparency Dashboard</strong>.</p>
+    </div>
 
-The BoomInu smart contract, deployed at address ....0f6CF on Polygon Mainnet (Chain ID 137), is an ERC-20-compatible token with innovative features for reflection rewards, staking incentives, and community-driven governance. It aims to enhance user engagement through streaks, double reflections, and treasury burns, while maintaining transparency via on-chain events. The contract integrates with the BoomInu Transparency Dashboard, enabling secure user interaction. A key aspect of its evolution includes a planned renouncement of ownership during Phase 2 or as decided by the community, reflecting a shift toward decentralization.Contract Logic and Functionality1. Core ERC-20 FunctionalityPurpose: Establishes the foundation for token operations, ensuring compatibility with wallets, DEXs, and DeFi platforms.
-Functions:balanceOf(address account): Returns the token balance of a specified address.Logic: Queries an internal balanceOf mapping to provide the user’s BOOM holdings.
-Example: If 0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb holds 1,000 BOOM, balanceOf(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb) returns 1000.
+    <h1>BoomInu Smart Contract Transparency Documentation</h1>
 
-transfer(address to, uint256 amount): Transfers tokens from the caller to another address.Logic: Verifies the caller’s balance, updates sender and receiver balances, and emits a Transfer event.
-Example: Transferring 100 BOOM from 0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb to 0x1234... adjusts balances to 900 and 100, respectively.
+    <div class="section">
+        <h2>Overview</h2>
+        <p>The <strong>BoomInu smart contract</strong>, deployed at address <strong>0x665Dcc5aD8F4306C87dCFB0B2329ca829Bb0f6CF</strong> on the <strong>Polygon Mainnet (Chain ID 137)</strong>, is an <strong>ERC-20-compatible token</strong> with innovative features for <strong>reflection rewards</strong>, <strong>staking incentives</strong>, and <strong>community-driven governance</strong>. It aims to enhance user engagement through <strong>streaks</strong>, <strong>double reflections</strong>, and <strong>treasury burns</strong>, while maintaining transparency via on-chain events. The contract integrates with the <strong>BoomInu Transparency Dashboard</strong>, enabling secure user interaction. A key aspect of its evolution includes a planned <strong>renouncement of ownership</strong> during <strong>Phase 2</strong> or as decided by the community, reflecting a shift toward decentralization.</p>
+    </div>
 
-approve(address spender, uint256 amount): Allows a spender to withdraw from the caller’s balance up to the approved amount.Logic: Updates the allowance mapping and emits an Approval event.
-Example: Approving 0x5678... for 50 BOOM enables them to transfer that amount.
+    <div class="section">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#core-erc20-functionality">Core ERC-20 Functionality</a></li>
+            <li><a href="#reflection-mechanism">Reflection Mechanism</a></li>
+            <li><a href="#streak-and-bonus-system">Streak and Bonus System</a></li>
+            <li><a href="#treasury-and-burning">Treasury and Burning</a></li>
+            <li><a href="#governance-and-configuration">Governance and Configuration</a></li>
+            <li><a href="#tax-and-trading">Tax and Trading</a></li>
+            <li><a href="#boost-and-phase-management">Boost and Phase Management</a></li>
+            <li><a href="#integration-with-transparency-dashboard">Integration with Transparency Dashboard</a></li>
+            <li><a href="#why-this-design">Why This Design?</a></li>
+            <li><a href="#next-steps">Next Steps</a></li>
+        </ul>
+    </div>
 
-transferFrom(address from, address to, uint256 amount): Transfers tokens using the approved allowance.Logic: Checks the allowance, deducts from it, and updates balances.
-Example: If 0x5678... is approved for 50 BOOM, transferring 30 BOOM to 0x9012... reduces the allowance to 20.
+    <div class="section" id="core-erc20-functionality">
+        <h2>1. Core ERC-20 Functionality</h2>
+        <p><strong>Purpose</strong>: Establishes the foundation for token operations, ensuring compatibility with wallets, DEXs, and DeFi platforms.</p>
+        <ul>
+            <li><strong>balanceOf(address account)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Queries an internal balanceOf mapping to provide the user’s BOOM holdings.</li>
+                    <li><strong>Example</strong>: If <strong>0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb</strong> holds 1,000 BOOM, <strong>balanceOf(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb)</strong> returns <strong>1000</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>transfer(address to, uint256 amount)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Verifies the caller’s balance, updates sender and receiver balances, and emits a <strong>Transfer</strong> event.</li>
+                    <li><strong>Example</strong>: Transferring 100 BOOM from <strong>0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb</strong> to <strong>0x1234...</strong> adjusts balances to 900 and 100, respectively.</li>
+                </ul>
+            </li>
+            <li><strong>approve(address spender, uint256 amount)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Updates the allowance mapping and emits an <strong>Approval</strong> event.</li>
+                    <li><strong>Example</strong>: Approving <strong>0x5678...</strong> for 50 BOOM enables them to transfer that amount.</li>
+                </ul>
+            </li>
+            <li><strong>transferFrom(address from, address to, uint256 amount)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Checks the allowance, deducts from it, and updates balances.</li>
+                    <li><strong>Example</strong>: If <strong>0x5678...</strong> is approved for 50 BOOM, transferring 30 BOOM to <strong>0x9012...</strong> reduces the allowance to 20.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why</strong>: These functions ensure <strong>BOOM</strong>’s interoperability and usability across the <strong>Polygon ecosystem</strong>.</p>
+    </div>
 
-Why: These functions ensure BOOM’s interoperability and usability across the Polygon ecosystem.
+    <div class="section" id="reflection-mechanism">
+        <h2>2. Reflection Mechanism</h2>
+        <p><strong>Purpose</strong>: Distributes passive rewards to token holders based on their stake, encouraging long-term holding.</p>
+        <ul>
+            <li><strong>magnifiedReflectionPerShare()</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Calculates the total reflections distributed, scaled by <strong>MAGNITUDE</strong> to maintain precision.</li>
+                    <li><strong>Example</strong>: If 1,000 BOOM reflections are distributed across 1,000,000 shares, it might return <strong>1000 * MAGNITUDE</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>claimAllFull(uint8 maxLoops)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Computes owed reflections using the user’s balance and <strong>magnifiedReflectionPerShare</strong>, iterating up to <strong>maxLoops</strong> times, and updates <strong>alreadyCredited</strong>.</li>
+                    <li><strong>Example</strong>: A user with 500 BOOM and 5 BOOM owed calls <strong>claimAllFull(5)</strong>, receiving 5 BOOM after confirmation.</li>
+                </ul>
+            </li>
+            <li><strong>setAutoClaim(bool enabled)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Sets the <strong>autoClaimEnabled</strong>___
 
-2. Reflection MechanismPurpose: Distributes passive rewards to token holders based on their stake, encouraging long-term holding.
-Functions:magnifiedReflectionPerShare(): Returns the current reflection rate per share.Logic: Calculates the total reflections distributed, scaled by MAGNITUDE to maintain precision.
-Example: If 1,000 BOOM reflections are distributed across 1,000,000 shares, it might return 1000 * MAGNITUDE.
+System: flag for the caller, enabling periodic claims by the contract.</li>
+                    <li><strong>Example</strong>: Enabling auto-claim for <strong>0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb</strong> automates future reflection claims.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Events</strong>:</p>
+        <ul>
+            <li><strong>ReflectionClaimed(address user, uint256 amount)</strong>: Logs individual claims.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>ReflectionClaimed(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, 5)</strong> for a 5 BOOM claim.</li>
+                </ul>
+            </li>
+            <li><strong>ReflectionDistributed(uint256 amount)</strong>: Records total reflections distributed.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>ReflectionDistributed(1000)</strong> when 1,000 BOOM is added to the pool.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why</strong>: Reflections reward holders passively, with <strong>claimAllFull</strong> offering manual flexibility and <strong>autoClaim</strong> enhancing convenience.</p>
+    </div>
 
-claimAllFull(uint8 maxLoops): Claims all available reflections for the caller.Logic: Computes owed reflections using the user’s balance and magnifiedReflectionPerShare, iterating up to maxLoops times, and updates alreadyCredited.
-Example: A user with 500 BOOM and 5 BOOM owed calls claimAllFull(5), receiving 5 BOOM after confirmation.
+    <div class="section" id="streak-and-bonus-system">
+        <h2>3. Streak and Bonus System</h2>
+        <p><strong>Purpose</strong>: Incentivizes daily engagement with streak-based bonuses and double reflections.</p>
+        <ul>
+            <li><strong>flipStreak(address)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Tracks consecutive daily actions (e.g., flips) using <strong>lastFlipTime</strong> and <strong>STREAK_WINDOW</strong>.</li>
+                    <li><strong>Example</strong>: If <strong>0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb</strong> flips daily for 3 days, <strong>flipStreak</strong> returns <strong>3</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>streakBonusExpires(address)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Grants a bonus for <strong>STREAK_BONUS_DURATION</strong> when <strong>STREAK_REQUIRED</strong> is met.</li>
+                    <li><strong>Example</strong>: A 5-day streak sets a 7-day bonus (if <strong>STREAK_BONUS_DURATION</strong> is 7 days), expiring at a future timestamp.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Events</strong>:</p>
+        <ul>
+            <li><strong>DoubleReflectionGranted(address user, uint256 until)</strong>: Emits when a bonus is granted.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>DoubleReflectionGranted(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, 1742345600)</strong> for a bonus until that timestamp.</li>
+                </ul>
+            </li>
+            <li><strong>StreakProgress(address user, uint256 currentStreak)</strong>: Logs streak updates.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>StreakProgress(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, 4)</strong> after the 4th flip.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why</strong>: Streaks and bonuses foster daily participation, rewarding consistency with enhanced reflections.</p>
+    </div>
 
-setAutoClaim(bool enabled): Toggles automatic reflection claiming.Logic: Sets the autoClaimEnabled flag for the caller, enabling periodic claims by the contract.
-Example: Enabling auto-claim for 0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb automates future reflection claims.
+    <div class="section" id="treasury-and-burning">
+        <h2>4. Treasury and Burning</h2>
+        <p><strong>Purpose</strong>: Reduces token supply through burns, supporting a deflationary model.</p>
+        <ul>
+            <li><strong>burned()</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Maintains a cumulative burn tally.</li>
+                    <li><strong>Example</strong>: If 50,000 BOOM are burned, <strong>burned()</strong> returns <strong>50000</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>treasuryBurnProgress()</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Tracks progress toward <strong>treasuryBurnCap</strong>.</li>
+                    <li><strong>Example</strong>: If 10,000 of a 50,000 cap are burned, returns <strong>{burnedAmount: 10000, burnCap: 50000}</strong>.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Events</strong>:</p>
+        <ul>
+            <li><strong>TreasuryBurned(uint256 amount)</strong>: Emits on burns.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>TreasuryBurned(1000)</strong> when 1,000 BOOM are burned.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why</strong>: Burns reduce circulation, potentially increasing value, with progress tracking enhancing transparency.</p>
+    </div>
 
-Events:ReflectionClaimed(address user, uint256 amount): Logs individual claims.Example: Emits ReflectionClaimed(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, 5) for a 5 BOOM claim.
+    <div class="section" id="governance-and-configuration">
+        <h2>5. Governance and Configuration</h2>
+        <p><strong>Purpose</strong>: Allows the owner to manage settings and token integrations, with a planned transition to community control.</p>
+        <ul>
+            <li><strong>owner()</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Stores the deployment or transferred owner.</li>
+                    <li><strong>Example</strong>: Returns <strong>0xAdminAddress</strong> if set initially.</li>
+                </ul>
+            </li>
+            <li><strong>transferOwnership(address newOwner)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Updates the owner state and emits an event.</li>
+                    <li><strong>Example</strong>: Calling with <strong>0xNewAdmin</strong> sets the new owner.</li>
+                </ul>
+            </li>
+            <li><strong>whitelistAddress(address account, bool status)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Updates <strong>isWhitelisted</strong> for special privileges.</li>
+                    <li><strong>Example</strong>: Setting <strong>whitelistAddress(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, true)</strong> grants benefits.</li>
+                </ul>
+            </li>
+            <li><strong>blacklistAddress(address user, bool status)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Updates <strong>blacklisted</strong> to restrict actions.</li>
+                    <li><strong>Example</strong>: Setting <strong>blacklistAddress(0xBadActor, true)</strong> prevents transactions.</li>
+                </ul>
+            </li>
+            <li><strong>updateTrackedTokens(address[] newTokens)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Updates the <strong>trackedTokens</strong> array with new convertible tokens.</li>
+                    <li><strong>Example</strong>: Adding <strong>0xNewToken</strong> and <strong>0xAnotherToken</strong> enables users to flip these to BOOM.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Events</strong>:</p>
+        <ul>
+            <li><strong>OwnershipTransferred(address previousOwner, address newOwner)</strong>: Logs ownership changes.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>OwnershipTransferred(0xOldAdmin, 0xNewAdmin)</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>TrackedTokensUpdated(address[] newTokens)</strong>: Logs token updates.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>TrackedTokensUpdated([0xNewToken, 0xAnotherToken])</strong>.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why Ownership Intervention is Needed</strong>:</p>
+        <ul>
+            <li><strong>Token Integration</strong>: The owner must input token addresses (e.g., <strong>0xNewToken</strong>) via <strong>updateTrackedTokens</strong> to enable flipping to BOOM. This is essential for adapting to new partnerships or market trends, such as integrating a trending DeFi token to boost liquidity.</li>
+            <li><strong>Security Adjustments</strong>: Functions like <strong>whitelistAddress</strong> and <strong>blacklistAddress</strong> allow the owner to protect the ecosystem, e.g., whitelisting a trusted partner (<strong>0xPartner</strong>) or blacklisting a malicious actor (<strong>0xBadActor</strong>) to prevent exploits.</li>
+            <li><strong>Phase Transitions</strong>: The owner may adjust settings (e.g., tax rates) during <strong>Phase 1</strong> to optimize for <strong>Phase 2</strong>, ensuring a smooth evolution.</li>
+            <li><strong>Example</strong>: If a new token <strong>0xHotNewCoin</strong> gains popularity, the owner can add it to <strong>trackedTokens</strong>, allowing users to convert it to BOOM, enhancing adoption.</li>
+        </ul>
+        <p><strong>Ownership Renouncement Plan</strong>: Ownership will be renounced during <strong>Phase 2</strong> or as determined by the community (e.g., via a DAO vote). This shift to decentralization ensures no single entity controls token integrations post-renouncement, as the owner will no longer update <strong>trackedTokens</strong>. The community will decide future token additions, fostering a self-sustaining ecosystem.</p>
+    </div>
 
-ReflectionDistributed(uint256 amount): Records total reflections distributed.Example: Emits ReflectionDistributed(1000) when 1,000 BOOM is added to the pool.
+    <div class="section" id="tax-and-trading">
+        <h2>6. Tax and Trading</h2>
+        <p><strong>Purpose</strong>: Implements buy/sell taxes to fund reflections and treasury.</p>
+        <ul>
+            <li><strong>buyTaxPercentage()</strong> and <strong>setBuyTaxPercentage(uint256 tax)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Applies a percentage tax on purchases.</li>
+                    <li><strong>Example</strong>: Setting <strong>setBuyTaxPercentage(2)</strong> charges 2% on buys.</li>
+                </ul>
+            </li>
+            <li><strong>sellTaxPercentage()</strong> and <strong>setSellTaxPercentage(uint256 tax)</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Applies a percentage tax on sales.</li>
+                    <li><strong>Example</strong>: Setting <strong>sellTaxPercentage(3)</strong> charges 3% on sells.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why</strong>: Taxes support the reflection pool and treasury, aligning with the token’s economic model.</p>
+    </div>
 
-Why: Reflections reward holders passively, with claimAllFull offering manual flexibility and autoClaim enhancing convenience.
+    <div class="section" id="boost-and-phase-management">
+        <h2>7. Boost and Phase Management</h2>
+        <p><strong>Purpose</strong>: Introduces time-bound boosts and phase transitions for dynamic incentives.</p>
+        <ul>
+            <li><strong>boostWindowOpen()</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Tracks a promotional period for enhanced rewards.</li>
+                    <li><strong>Example</strong>: Returns <strong>true</strong> during a 7-day boost event.</li>
+                </ul>
+            </li>
+            <li><strong>isPhaseTwo()</strong>:
+                <ul>
+                    <li><strong>Logic</strong>: Compares <strong>totalSupply</strong> to <strong>PHASE_TWO_SUPPLY</strong> (e.g., 500,000 BOOM).</li>
+                    <li><strong>Example</strong>: Returns <strong>true</strong> when supply exceeds 500,000 BOOM.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Events</strong>:</p>
+        <ul>
+            <li><strong>BoostWindowSet(bool open)</strong>: Logs boost window changes.
+                <ul>
+                    <li><strong>Example</strong>: Emits <strong>BoostWindowSet(true)</strong> when the window opens.</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>Why</strong>: Boosts and phases create excitement and adaptability, with <strong>Phase 2</strong> marking the ownership renouncement.</p>
+    </div>
 
-3. Streak and Bonus SystemPurpose: Incentivizes daily engagement with streak-based bonuses and double reflections.
-Functions:flipStreak(address): Returns the user’s current streak count.Logic: Tracks consecutive daily actions (e.g., flips) using lastFlipTime and STREAK_WINDOW.
-Example: If 0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb flips daily for 3 days, flipStreak returns 3.
+    <div class="section" id="integration-with-transparency-dashboard">
+        <h2>Integration with Transparency Dashboard</h2>
+        <ul>
+            <li><strong>Connection</strong>: <strong>initializeConnection()</strong> sets up MetaMask and the contract, starting the <strong>60-second timer</strong>.</li>
+            <li><strong>Data Display</strong>: <strong>updateMetrics()</strong> shows global data (e.g., <strong>50,000 BOOM burned</strong>), while <strong>updateUserData()</strong> displays personal stats (e.g., <strong>1,000 BOOM balance</strong>).</li>
+            <li><strong>Interactions</strong>: <strong>claimReflections</strong> calls <strong>claimAllFull(5)</strong>, resetting the timer on success, and <strong>toggleAutoClaim</strong> updates <strong>autoClaimEnabled</strong>.</li>
+            <li><strong>Events</strong>: <strong>listenToEvents()</strong> logs <strong>ReflectionClaimed</strong> (e.g., “<strong>0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb</strong> claimed 5 BOOM”).</li>
+            <li><strong>Security</strong>: The timer resets on navigation or successful actions, ensuring safe usage.</li>
+        </ul>
+    </div>
 
-streakBonusExpires(address): Returns the expiration of the double reflection bonus.Logic: Grants a bonus for STREAK_BONUS_DURATION when STREAK_REQUIRED is met.
-Example: A 5-day streak sets a 7-day bonus (if STREAK_BONUS_DURATION is 7 days), expiring at a future timestamp.
+    <div class="section" id="why-this-design">
+        <h2>Why This Design?</h2>
+        <p>The <strong>BoomInu contract</strong> blends <strong>ERC-20 standards</strong> with unique features like <strong>reflections</strong>, <strong>streaks</strong>, and <strong>burns</strong> to reward holders and reduce supply. Ownership intervention enables adaptability (e.g., adding <strong>0xNewToken</strong>), while the planned renouncement in <strong>Phase 2</strong> or by community vote ensures a decentralized future, enhancing trust and community ownership.</p>
+    </div>
 
-DoubleReflectionGranted(address user, uint256 until): Emits when a bonus is granted.Example: Emits DoubleReflectionGranted(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, 1742345600) for a bonus until that timestamp.
-
-Events:StreakProgress(address user, uint256 currentStreak): Logs streak updates.Example: Emits StreakProgress(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, 4) after the 4th flip.
-
-Why: Streaks and bonuses foster daily participation, rewarding consistency with enhanced reflections.
-
-4. Treasury and BurningPurpose: Reduces token supply through burns, supporting a deflationary model.
-Functions:burned(): Returns the total burned tokens.Logic: Maintains a cumulative burn tally.
-Example: If 50,000 BOOM are burned, burned() returns 50000.
-
-treasuryBurnProgress(): Returns burned amount and cap.Logic: Tracks progress toward treasuryBurnCap.
-Example: If 10,000 of a 50,000 cap are burned, returns {burnedAmount: 10000, burnCap: 50000}.
-
-TreasuryBurned(uint256 amount): Emits on burns.Example: Emits TreasuryBurned(1000) when 1,000 BOOM are burned.
-
-Why: Burns reduce circulation, potentially increasing value, with progress tracking enhancing transparency.
-
-5. Governance and ConfigurationPurpose: Allows the owner to manage settings and token integrations, with a planned transition to community control.
-Functions:owner(): Returns the current owner address.Logic: Stores the deployment or transferred owner.
-Example: Returns 0xAdminAddress if set initially.
-
-transferOwnership(address newOwner): Transfers ownership.Logic: Updates the owner state and emits an event.
-Example: Calling with 0xNewAdmin sets the new owner.
-
-whitelistAddress(address account, bool status): Manages whitelist status.Logic: Updates isWhitelisted for special privileges.
-Example: Setting whitelistAddress(0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb, true) grants benefits.
-
-blacklistAddress(address user, bool status): Manages blacklist status.Logic: Updates blacklisted to restrict actions.
-Example: Setting blacklistAddress(0xBadActor, true) prevents transactions.
-
-updateTrackedTokens(address[] newTokens): Adds token addresses for flipping to BOOM.Logic: Updates the trackedTokens array with new convertible tokens.
-Example: Adding 0xNewToken and 0xAnotherToken enables users to flip these to BOOM.
-
-Events:OwnershipTransferred(address previousOwner, address newOwner): Logs ownership changes.Example: Emits OwnershipTransferred(0xOldAdmin, 0xNewAdmin).
-
-TrackedTokensUpdated(address[] newTokens): Logs token updates.Example: Emits TrackedTokensUpdated([0xNewToken, 0xAnotherToken]).
-
-Why Ownership Intervention is Needed:Token Integration: The owner must input token addresses (e.g., 0xNewToken) via updateTrackedTokens to enable flipping to BOOM. This is essential for adapting to new partnerships or market trends, such as integrating a trending DeFi token to boost liquidity.
-Security Adjustments: Functions like whitelistAddress and blacklistAddress allow the owner to protect the ecosystem, e.g., whitelisting a trusted partner (0xPartner) or blacklisting a malicious actor (0xBadActor) to prevent exploits.
-Phase Transitions: The owner may adjust settings (e.g., tax rates) during Phase 1 to optimize for Phase 2, ensuring a smooth evolution.
-Example: If a new token 0xHotNewCoin gains popularity, the owner can add it to trackedTokens, allowing users to convert it to BOOM, enhancing adoption.
-
-Ownership Renouncement Plan: Ownership will be renounced during Phase 2 or as determined by the community (e.g., via a DAO vote). This shift to decentralization ensures no single entity controls token integrations post-renouncement, as the owner will no longer update trackedTokens. The community will decide future token additions, fostering a self-sustaining ecosystem.
-
-6. Tax and TradingPurpose: Implements buy/sell taxes to fund reflections and treasury.
-Functions:buyTaxPercentage() and setBuyTaxPercentage(uint256 tax): Gets/sets the buy tax rate.Logic: Applies a percentage tax on purchases.
-Example: Setting setBuyTaxPercentage(2) charges 2% on buys.
-
-sellTaxPercentage() and setSellTaxPercentage(uint256 tax): Gets/sets the sell tax rate.Logic: Applies a percentage tax on sales.
-Example: Setting sellTaxPercentage(3) charges 3% on sells.
-
-Why: Taxes support the reflection pool and treasury, aligning with the token’s economic model.
-
-7. Boost and Phase ManagementPurpose: Introduces time-bound boosts and phase transitions for dynamic incentives.
-Functions:boostWindowOpen(): Checks if the boost window is active.Logic: Tracks a promotional period for enhanced rewards.
-Example: Returns true during a 7-day boost event.
-
-isPhaseTwo(): Indicates Phase 2 status.Logic: Compares totalSupply to PHASE_TWO_SUPPLY (e.g., 500,000 BOOM).
-Example: Returns true when supply exceeds 500,000 BOOM.
-
-Events:BoostWindowSet(bool open): Logs boost window changes.Example: Emits BoostWindowSet(true) when the window opens.
-
-Why: Boosts and phases create excitement and adaptability, with Phase 2 marking the ownership renouncement.
-
-Integration with Transparency DashboardConnection: initializeConnection() sets up MetaMask and the contract, starting the 60-second timer.
-Data Display: updateMetrics() shows global data (e.g., 50,000 BOOM burned), while updateUserData() displays personal stats (e.g., 1,000 BOOM balance).
-Interactions: claimReflections calls claimAllFull(5), resetting the timer on success, and toggleAutoClaim updates autoClaimEnabled.
-Events: listenToEvents() logs ReflectionClaimed (e.g., “0xE952aC79FA74006D3e3DcD333e24b3a8AAA4CEeb claimed 5 BOOM”).
-Security: The timer resets on navigation or successful actions, ensuring safe usage.
-
-Why This Design?The BoomInu contract blends ERC-20 standards with unique features like reflections, streaks, and burns to reward holders and reduce supply. Ownership intervention enables adaptability (e.g., adding 0xNewToken), while the planned renouncement in Phase 2 or by community vote ensures a decentralized future, enhancing trust and community ownership.Next StepsReview: Confirm this aligns with your vision by 11:50 AM EDT.
-Enhance: Provide additional details (e.g., PHASE_TWO_SUPPLY value) if available.
-Deploy: Pair this with the dashboard for presale transparency.
-
-
-
-
+    <div class="section" id="next-steps">
+        <h2>Next Steps</h2>
+        <ul>
+            <li><strong>Review</strong>: Confirm this aligns with your vision by <strong>11:50 AM EDT</strong>.</li>
+            <li><strong>Enhance</strong>: Provide additional details (e.g., <strong>PHASE_TWO_SUPPLY</strong> value) if available.</li>
+            <li><strong>Deploy</strong>: Pair this with the dashboard for presale transparency.</li>
+        </ul>
+    </div>
+</body>
+</html>
