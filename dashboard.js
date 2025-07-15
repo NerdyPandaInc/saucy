@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const { ethers } = window;
   let provider, signer, contract;
   let isConnecting = false;
+  let timerInterval;
 
   // Cache DOM elements
   const connectButton = document.getElementById("connect-wallet");
@@ -10,15 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleAutoClaimButton = document.getElementById("toggle-auto-claim");
   const claimReflectionsButton = document.getElementById("claim-reflections");
   const securityAck = document.getElementById("security-ack");
+  const timerDiv = document.getElementById("timer");
 
-  if (!connectButton || !disconnectButton || !loadingDiv || !toggleAutoClaimButton || !claimReflectionsButton || !securityAck) {
+  if (!connectButton || !disconnectButton || !loadingDiv || !toggleAutoClaimButton || !claimReflectionsButton || !securityAck || !timerDiv) {
     console.error("DOM elements not found:", {
       connectButton,
       disconnectButton,
       loadingDiv,
       toggleAutoClaimButton,
       claimReflectionsButton,
-      securityAck
+      securityAck,
+      timerDiv
     });
     alert("Error: Required DOM elements not found. Please reload the page.");
     return;
@@ -116,6 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
     For help, review your stats, ensure proper setup, or contact support at [support link].
   `.trim();
 
+  // Initialize timer
+  function startTimer() {
+    let timeLeft = 60;
+    timerDiv.textContent = `Session Timer: ${timeLeft}s`;
+    if (timerInterval) clearInterval(timerInterval); // Clear existing interval
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerDiv.textContent = `Session Timer: ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        if (disconnectButton.style.display !== "none") {
+          disconnectButton.click();
+          alert("Session timed out. Wallet disconnected for security.");
+        }
+      }
+    }, 1000);
+  }
+
+  // Reset timer on navigation
+  window.addEventListener("DOMContentLoaded", startTimer);
+
   // Initialize connection
   async function initializeConnection() {
     if (isConnecting) {
@@ -164,6 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
       isConnecting = false;
       connectButton.style.display = "inline-block";
       loadingDiv.style.display = "none";
+      startTimer(); // Start timer after successful connection
       return true;
     } catch (error) {
       console.error("Connection failed:", error);
@@ -294,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateUserData();
     } catch (error) {
       console.error("Toggle error:", error);
-      alert("Failed to toggle auto claim: " + (error.message || "Unknown error") + "\n" + genericErrorMessage);
+      alert("Failed to toggle auto claim: " + (error.message || "Unknown error") + " (Reason: " + (error.reason || "Unknown") + ")\n" + genericErrorMessage);
     }
   });
 
