@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boom Inu Transparency Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+    #app { max-width: 800px; margin: auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #333; }
+    .section { margin: 15px 0; }
+    button { padding: 10px 15px; margin-right: 10px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #e65b5b; }
+    #metrics, #user-data { border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+    @media (max-width: 600px) { #app { padding: 10px; } button { width: 100%; margin-bottom: 10px; } }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Boom Inu Transparency Dashboard</h1>
+    <div class="section" id="metrics">
+      <h3>Global Metrics</h3>
+      <p>Loading...</p>
+    </div>
+    <div class="section" id="user-data">
+      <h3>Your Stats</h3>
+      <p>Connect wallet to see your data.</p>
+      <button id="connect-wallet">Connect Wallet</button>
+    </div>
+    <div class="section" id="actions">
+      <button id="toggle-auto-claim" disabled>Toggle Auto Claim</button>
+      <button id="claim-reflections" disabled>Claim Reflections</button>
+    </div>
+    <div class="section" id="events">
+      <h3>Recent Events</h3>
+      <ul id="event-list"></ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+  <script>
+    const { ethers } = window;
+    let provider, signer, contract;
+
+    const contractAddress = "0x665Dcc5aD8F4306C87dCFB0B2329ca829Bb0f6CF";
+    const abi = [{"inputs":[{"internalType":"address","name":"_treasuryWallet","type":"address"},{"internalType":"address","name":"_teamWallet","type":"address"},{"internalType":"address","name":"_publicWallet","type":"address"},{"internalType":"address","name":"_dexRouter","type":"address"},{"internalType":"address","name":"_dexFactory","type":"
