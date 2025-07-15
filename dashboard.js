@@ -106,6 +106,16 @@ document.addEventListener("DOMContentLoaded", () => {
     {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"status","type":"bool"}],"name":"whitelistAddress","outputs":[],"stateMutability":"nonpayable","type":"function"}
   ];
 
+  // Generic error message template
+  const genericErrorMessage = `
+    Action failed. Possible reasons include:
+    - Insufficient BOOM token balance (check your balance and minimum holding requirement).
+    - Unmet contract conditions (e.g., streak or threshold requirements).
+    - Network issues (ensure you're on Polygon Mainnet).
+    - Contract restrictions (e.g., reflections locked).
+    For help, review your stats, ensure proper setup, or contact support at [support link].
+  `.trim();
+
   // Initialize connection
   async function initializeConnection() {
     if (isConnecting) {
@@ -157,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     } catch (error) {
       console.error("Connection failed:", error);
-      alert("Failed to connect wallet: " + error.message);
+      alert("Failed to connect wallet: " + error.message + "\n" + genericErrorMessage);
       isConnecting = false;
       connectButton.style.display = "inline-block";
       loadingDiv.style.display = "none";
@@ -187,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }, 0);
     } else {
-      alert("Connection failed. Please check MetaMask and try again.");
+      alert("Connection failed. Please check MetaMask and try again.\n" + genericErrorMessage);
     }
   });
 
@@ -256,13 +266,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const address = await signer.getAddress();
       const balance = await contract.balanceOf(address); // Token balance
       const streak = await contract.flipStreak(address);
+      const minHolding = await contract.minHoldingForReflection(); // Minimum holding requirement
       const bonusExpires = await contract.streakBonusExpires(address);
 
       // Note: Owed Reflections requires a specific function not in the current ABI
       userDataDiv.innerHTML = `<h3>Your Stats</h3>
         <p>Balance: ${ethers.utils.formatEther(balance)} BOOM</p>
+        <p>Minimum Holding Required: ${ethers.utils.formatEther(minHolding)} BOOM</p>
         <p>Owed Reflections: N/A (Placeholder - Update ABI with correct function, e.g., getOwed)</p>
-        <p>Streak: ${streak}</p>
+        <p>Streak: ${streak.toString()}</p>
         <p>Bonus Expires: ${bonusExpires.eq(0) ? 'N/A' : new Date(bonusExpires.toNumber() * 1000).toLocaleString()}</p>`;
     } catch (error) {
       console.error("User data error:", error);
@@ -282,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateUserData();
     } catch (error) {
       console.error("Toggle error:", error);
-      alert("Failed to toggle auto claim: " + error.message);
+      alert("Failed to toggle auto claim: " + (error.message || "Unknown error") + "\n" + genericErrorMessage);
     }
   });
 
@@ -297,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateUserData();
     } catch (error) {
       console.error("Claim error:", error);
-      alert("Failed to claim reflections: " + error.message);
+      alert("Failed to claim reflections: " + (error.message || "Unknown error") + " (Reason: " + (error.reason || "Unknown") + ")\n" + genericErrorMessage);
     }
   });
 
