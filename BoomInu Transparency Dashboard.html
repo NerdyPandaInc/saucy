@@ -1,0 +1,89 @@
+BoomInu Transparency Dashboard - Full Transparency DocumentationOverviewThe BoomInu Transparency Dashboard is a web-based tool designed to provide users with real-time insights into the BoomInu (BOOM) token ecosystem on the Polygon Mainnet (Chain ID 137). It allows users to connect their MetaMask wallet, view global metrics, monitor personal stats, interact with the BoomInu smart contract (e.g., claim reflections, toggle auto-claim), and stay updated on recent events. This documentation outlines the functionality of each component, its purpose, and usage instructions, ensuring full transparency into the dashboard’s operations.Table of ContentsTechnical Setup (#technical-setup)
+Functionality Breakdown (#functionality-breakdown)Connection Management (#connection-management)
+Data Loading (#data-loading)
+User Interaction (#user-interaction)
+Event Monitoring (#event-monitoring)
+Security and Timer (#security-and-timer)
+
+Usage Instructions (#usage-instructions)
+Assumptions and Limitations (#assumptions-and-limitations)
+
+Technical SetupHTML Structure: The dashboard uses a single dashboard.html file with embedded CSS for styling and JavaScript (dashboard.js) for logic. It includes an iframe-compatible layout for embedding.
+Dependencies: Ethers.js (v5.7.2) via CDN (https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js) for blockchain interactions.
+MetaMask for wallet connectivity on Polygon Mainnet.
+
+Contract Details: Interacts with the BoomInu contract at address 0x665Dcc5aD8F4306C87dCFB0B2329ca829Bb0f6CF using a predefined ABI.
+Security: Implements a session timer and security acknowledgment to protect user wallets.
+
+Functionality BreakdownConnection ManagementPurpose: Ensures secure wallet connection and network validation, enabling interaction with the BoomInu contract.
+Functions:initializeConnection():How It Works: Checks for MetaMask, requests account access, sets up a Web3Provider and signer, and validates the network (Chain ID 137). If successful, initializes the contract instance.
+Why: Provides a secure entry point, ensuring users are on the correct network and have authorized access, preventing unauthorized or misconfigured interactions.
+
+Connect Wallet Event Listener:How It Works: Triggers initializeConnection() on button click, enables action buttons post-connection, and starts the session timer.
+Why: Offers a user-friendly way to establish a session while enforcing security checks (e.g., acknowledgment checkbox).
+
+Disconnect Wallet Event Listener:How It Works: Clears provider, signer, and contract instances, resets UI, and prompts a page refresh.
+Why: Allows manual session termination and ensures a clean state for reconnection.
+
+Data LoadingPurpose: Fetches and displays real-time data from the blockchain for transparency.
+Functions:loadData():How It Works: Calls updateMetrics() and updateUserData(), and sets up event listeners if the contract is initialized.
+Why: Centralizes data retrieval to ensure all UI elements are updated consistently after connection.
+
+updateMetrics():How It Works: Asynchronously fetches totalSupply, burned, dailyVolume, reflectionsLocked, and isPhaseTwo from the contract, formatting values for display.
+Why: Provides a global overview of the token ecosystem, building trust by showing live data like burn progress and phase status.
+
+updateUserData():How It Works: Retrieves the user’s balanceOf, flipStreak, minHoldingForReflection, and streakBonusExpires, displaying them in the UI.
+Why: Offers personalized insights, helping users understand their holdings and eligibility for rewards, enhancing engagement.
+
+User InteractionPurpose: Enables users to interact with the BoomInu contract for reward management.
+Functions:toggleAutoClaim Event Listener:How It Works: Checks the current autoClaimEnabled status, calls setAutoClaim with the inverse, waits for transaction confirmation, and updates UI.
+Why: Allows users to automate reflection claims, improving convenience while reflecting their preference in the contract state.
+
+claimReflections Event Listener:How It Works: Calls claimAllFull(5) to claim reflections with a maximum of 5 loops, waits for confirmation, and refreshes user data.
+Why: Provides a direct way to claim earned reflections, ensuring users can access their rewards efficiently.
+
+Event MonitoringPurpose: Keeps users informed of significant contract activities in real-time.
+Functions:listenToEvents():How It Works: Sets up listeners for ReflectionClaimed, TreasuryBurned, and StreakProgress events, updating the event list with timestamps and details.
+Why: Enhances transparency by logging key actions (e.g., burns, claims) as they occur, fostering community trust.
+
+Security and TimerPurpose: Protects user wallets with a timed session and acknowledgment.
+Functions:startTimer():How It Works: Initializes a 60-second countdown, updates the timer display, and triggers disconnection if it reaches zero.
+Why: Adds a security layer by limiting session duration, reducing the risk of unauthorized access.
+
+Security Acknowledgment:How It Works: Disables the connect button until the checkbox is checked, enabling it only with user consent.
+Why: Ensures users are aware of risks (e.g., not sharing seed phrases), aligning with best security practices.
+
+Usage InstructionsPrerequisitesMetaMask Installation: Install the MetaMask extension in your browser and ensure it’s unlocked.
+Network Configuration: Switch MetaMask to Polygon Mainnet (Chain ID 137).
+BOOM Tokens: Hold BOOM tokens in your wallet to interact with the contract (check minimum holding requirements in the dashboard).
+
+Steps to Use the DashboardAccess the Dashboard:Open the dashboard via the hosted URL (e.g., https://yourdomain.com/dashboard.html) or an embedded iframe.
+
+Acknowledge Security Risks:Check the "I understand the security risks and wish to proceed" checkbox to enable the "Connect Wallet" button.
+
+Connect Your Wallet:Click "Connect Wallet" to initiate the MetaMask connection prompt.
+Approve the request in MetaMask and ensure the network is Polygon Mainnet.
+Upon success, the timer will start (60 seconds), and action buttons will become active.
+
+View Global Metrics:After connection, the "Global Metrics" section will display live data (e.g., total supply, burned amount).
+
+Check Your Stats:The "Your Stats" section will show your BOOM balance, minimum holding requirement, streak, and bonus expiration.
+
+Interact with the Contract:Toggle Auto Claim: Click "Toggle Auto Claim" to enable/disable automatic reflection claims. A success alert confirms the change.
+Claim Reflections: Click "Claim Reflections" to claim your owed reflections. A success alert confirms the transaction.
+Note: The timer resets to 60 seconds after successful actions.
+
+Monitor Events:The "Recent Events" section will update with real-time logs of claims, burns, and streak progress.
+
+Manage Session:Wait for the timer to reach zero to automatically disconnect, or click "Disconnect Wallet" manually.
+Refresh the page to reset the timer and reconnect if needed.
+
+Best PracticesSecurity: Never share your MetaMask seed phrase. Disconnect after use to minimize exposure.
+Network Stability: Ensure a stable internet connection to avoid transaction failures.
+Token Management: Acquire sufficient BOOM tokens if your balance is below the minimum holding requirement.
+
+Assumptions and LimitationsContract ABI: Assumes the provided ABI is complete and accurate. Missing functions (e.g., getOwed for owed reflections) are noted as placeholders.
+User Responsibility: Users must manage their wallet and network settings; the dashboard only facilitates interaction.
+No Error Handling Details: This document excludes troubleshooting for issues like the "Below threshold" error, focusing on intended functionality.
+Timer Scope: The timer resets only on successful claims or toggles, not on failed attempts or other interactions.
+
