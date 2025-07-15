@@ -118,6 +118,7 @@ document.getElementById("connect-wallet").addEventListener("click", async () => 
     await loadData();
     document.getElementById("connect-wallet").style.display = "none";
     document.getElementById("disconnect-wallet").style.display = "inline-block";
+    console.log("Disconnect button visibility set to:", document.getElementById("disconnect-wallet").style.display);
     document.getElementById("toggle-auto-claim").disabled = false;
     document.getElementById("claim-reflections").disabled = false;
   }
@@ -198,6 +199,7 @@ async function updateUserData() {
 
 // Toggle Auto Claim
 document.getElementById("toggle-auto-claim").addEventListener("click", async () => {
+  alert("Toggle Auto Claim button clicked! Attempting to toggle...");
   try {
     if (!contract) throw new Error("Contract not initialized");
     const currentStatus = await contract.autoClaimEnabled(await signer.getAddress());
@@ -207,12 +209,13 @@ document.getElementById("toggle-auto-claim").addEventListener("click", async () 
     updateUserData();
   } catch (error) {
     console.error("Toggle error:", error);
-    alert("Error toggling auto claim: " + error.message);
+    alert("Failed to toggle auto claim: " + error.message);
   }
 });
 
 // Claim Reflections
 document.getElementById("claim-reflections").addEventListener("click", async () => {
+  alert("Claim Reflections button clicked! Attempting to claim...");
   try {
     if (!contract) throw new Error("Contract not initialized");
     const tx = await contract.claimAllFull(5); // Adjust maxLoops as needed
@@ -221,7 +224,7 @@ document.getElementById("claim-reflections").addEventListener("click", async () 
     updateUserData();
   } catch (error) {
     console.error("Claim error:", error);
-    alert("Error claiming reflections: " + error.message);
+    alert("Failed to claim reflections: " + error.message);
   }
 });
 
