@@ -3,6 +3,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let provider, signer, contract;
   let isConnecting = false;
 
+  // Cache DOM elements
+  const connectButton = document.getElementById("connect-wallet");
+  const disconnectButton = document.getElementById("disconnect-wallet");
+  const loadingDiv = document.getElementById("loading");
+  const toggleAutoClaimButton = document.getElementById("toggle-auto-claim");
+  const claimReflectionsButton = document.getElementById("claim-reflections");
+  const securityAck = document.getElementById("security-ack");
+
+  if (!connectButton || !disconnectButton || !loadingDiv || !toggleAutoClaimButton || !claimReflectionsButton || !securityAck) {
+    console.error("DOM elements not found:", {
+      connectButton,
+      disconnectButton,
+      loadingDiv,
+      toggleAutoClaimButton,
+      claimReflectionsButton,
+      securityAck
+    });
+    alert("Error: Required DOM elements not found. Please reload the page.");
+    return;
+  }
+
   const contractAddress = "0x665Dcc5aD8F4306C87dCFB0B2329ca829Bb0f6CF";
   const abi = [
     {"inputs":[{"internalType":"address","name":"_treasuryWallet","type":"address"},{"internalType":"address","name":"_teamWallet","type":"address"},{"internalType":"address","name":"_publicWallet","type":"address"},{"internalType":"address","name":"_dexRouter","type":"address"},{"internalType":"address","name":"_dexFactory","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},
@@ -92,14 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
-    const connectButton = document.getElementById("connect-wallet");
-    const loadingDiv = document.getElementById("loading");
-    if (!connectButton || !loadingDiv) {
-      console.error("DOM elements not found:", { connectButton, loadingDiv });
-      alert("Error: Required DOM elements (connect-wallet or loading) not found. Please reload the page.");
-      return false;
-    }
-
     isConnecting = true;
     connectButton.style.display = "none";
     loadingDiv.style.display = "block";
@@ -131,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
           alert("Network changed to an unsupported chain. Please switch back to Polygon Mainnet.");
           if (contract) {
             contract = null;
-            document.getElementById("disconnect-wallet").click();
+            disconnectButton.click();
           }
         }
       });
@@ -153,8 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Connect Wallet
-  document.getElementById("connect-wallet").addEventListener("click", async () => {
-    const securityAck = document.getElementById("security-ack");
+  connectButton.addEventListener("click", async () => {
     if (!securityAck.checked) {
       alert("Please acknowledge the security risks before connecting.");
       return;
@@ -163,16 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Connection result:", connected);
     if (connected) {
       await loadData();
-      document.getElementById("connect-wallet").style.display = "none";
-      document.getElementById("disconnect-wallet").style.display = "inline-block";
-      console.log("Disconnect button visibility set to:", document.getElementById("disconnect-wallet").style.display);
+      if (connectButton) connectButton.style.display = "none";
+      if (disconnectButton) disconnectButton.style.display = "inline-block";
       // Force enable action buttons with delay to ensure DOM update
       setTimeout(() => {
-        document.getElementById("toggle-auto-claim").disabled = false;
-        document.getElementById("claim-reflections").disabled = false;
+        if (toggleAutoClaimButton) toggleAutoClaimButton.disabled = false;
+        if (claimReflectionsButton) claimReflectionsButton.disabled = false;
         console.log("Action buttons enabled:", {
-          toggle: !document.getElementById("toggle-auto-claim").disabled,
-          claim: !document.getElementById("claim-reflections").disabled
+          toggle: !toggleAutoClaimButton.disabled,
+          claim: !claimReflectionsButton.disabled
         });
       }, 0);
     } else {
@@ -181,21 +192,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Enable Connect Wallet based on security acknowledgment
-  document.getElementById("security-ack").addEventListener("change", (e) => {
-    const connectButton = document.getElementById("connect-wallet");
+  securityAck.addEventListener("change", (e) => {
     connectButton.disabled = !e.target.checked;
     console.log("Connect button enabled:", !connectButton.disabled);
   });
 
   // Disconnect Wallet
-  document.getElementById("disconnect-wallet").addEventListener("click", () => {
+  disconnectButton.addEventListener("click", () => {
     provider = null;
     signer = null;
     contract = null;
-    document.getElementById("connect-wallet").style.display = "inline-block";
-    document.getElementById("disconnect-wallet").style.display = "none";
-    document.getElementById("toggle-auto-claim").disabled = true;
-    document.getElementById("claim-reflections").disabled = true;
+    if (connectButton) connectButton.style.display = "inline-block";
+    if (disconnectButton) disconnectButton.style.display = "none";
+    if (toggleAutoClaimButton) toggleAutoClaimButton.disabled = true;
+    if (claimReflectionsButton) claimReflectionsButton.disabled = true;
     document.getElementById("metrics").innerHTML = `<h3>Global Metrics</h3><p>Loading...</p>`;
     document.getElementById("user-data").innerHTML = `<h3>Your Stats</h3><p>Connect wallet to see your data.</p>`;
     alert("Wallet disconnected. Please refresh the page to clear the cache and reconnect.");
@@ -261,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Toggle Auto Claim
-  document.getElementById("toggle-auto-claim").addEventListener("click", async () => {
+  toggleAutoClaimButton.addEventListener("click", async () => {
     alert("Toggle Auto Claim button clicked! Attempting to toggle...");
     try {
       if (!contract) throw new Error("Contract not initialized");
@@ -277,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Claim Reflections
-  document.getElementById("claim-reflections").addEventListener("click", async () => {
+  claimReflectionsButton.addEventListener("click", async () => {
     alert("Claim Reflections button clicked! Attempting to claim...");
     try {
       if (!contract) throw new Error("Contract not initialized");
