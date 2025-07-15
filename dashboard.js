@@ -92,13 +92,15 @@ async function initializeConnection() {
   }
 
   isConnecting = true;
-  document.getElementById("connect-wallet").disabled = true;
+  document.getElementById("connect-wallet").style.display = "none";
+  document.getElementById("loading").style.display = "block";
 
   if (!window.ethereum) {
     console.error("MetaMask not detected. Please install it.");
     alert("MetaMask is not detected. Please install it and refresh the page.");
     isConnecting = false;
-    document.getElementById("connect-wallet").disabled = false;
+    document.getElementById("connect-wallet").style.display = "inline-block";
+    document.getElementById("loading").style.display = "none";
     return false;
   }
 
@@ -110,26 +112,43 @@ async function initializeConnection() {
     if (network.chainId !== 137) {
       alert("Please switch to Polygon Mainnet in MetaMask.");
       isConnecting = false;
-      document.getElementById("connect-wallet").disabled = false;
+      document.getElementById("connect-wallet").style.display = "inline-block";
+      document.getElementById("loading").style.display = "none";
       return false;
     }
+    provider.on("network", (newNetwork, oldNetwork) => {
+      if (newNetwork && newNetwork.chainId !== 137) {
+        alert("Network changed to an unsupported chain. Please switch back to Polygon Mainnet.");
+        if (contract) {
+          contract = null;
+          document.getElementById("disconnect-wallet").click();
+        }
+      }
+    });
     signer = provider.getSigner();
     contract = new ethers.Contract(contractAddress, abi, signer);
     console.log("Contract initialized:", contract);
     isConnecting = false;
-    document.getElementById("connect-wallet").disabled = false;
+    document.getElementById("connect-wallet").style.display = "inline-block";
+    document.getElementById("loading").style.display = "none";
     return true;
   } catch (error) {
     console.error("Connection failed:", error);
     alert("Failed to connect wallet: " + error.message);
     isConnecting = false;
-    document.getElementById("connect-wallet").disabled = false;
+    document.getElementById("connect-wallet").style.display = "inline-block";
+    document.getElementById("loading").style.display = "none";
     return false;
   }
 }
 
 // Connect Wallet
 document.getElementById("connect-wallet").addEventListener("click", async () => {
+  const securityAck = document.getElementById("security-ack");
+  if (!securityAck.checked) {
+    alert("Please acknowledge the security risks before connecting.");
+    return;
+  }
   const connected = await initializeConnection();
   if (connected) {
     await loadData();
