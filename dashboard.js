@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await window.ethereum.request({ method: "eth_requestAccounts" });
       provider = new ethers.providers.Web3Provider(window.ethereum);
       const network = await provider.getNetwork();
+      console.log("Network detected:", network);
       if (network.chainId !== 137) {
         alert("Please switch to Polygon Mainnet in MetaMask.");
         isConnecting = false;
@@ -165,12 +166,15 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("connect-wallet").style.display = "none";
       document.getElementById("disconnect-wallet").style.display = "inline-block";
       console.log("Disconnect button visibility set to:", document.getElementById("disconnect-wallet").style.display);
-      document.getElementById("toggle-auto-claim").disabled = false;
-      document.getElementById("claim-reflections").disabled = false;
-      console.log("Action buttons enabled:", {
-        toggle: !document.getElementById("toggle-auto-claim").disabled,
-        claim: !document.getElementById("claim-reflections").disabled
-      });
+      // Force enable action buttons with delay to ensure DOM update
+      setTimeout(() => {
+        document.getElementById("toggle-auto-claim").disabled = false;
+        document.getElementById("claim-reflections").disabled = false;
+        console.log("Action buttons enabled:", {
+          toggle: !document.getElementById("toggle-auto-claim").disabled,
+          claim: !document.getElementById("claim-reflections").disabled
+        });
+      }, 0);
     } else {
       alert("Connection failed. Please check MetaMask and try again.");
     }
