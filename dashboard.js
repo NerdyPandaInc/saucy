@@ -150,6 +150,7 @@ document.getElementById("connect-wallet").addEventListener("click", async () => 
     return;
   }
   const connected = await initializeConnection();
+  console.log("Connection result:", connected);
   if (connected) {
     await loadData();
     document.getElementById("connect-wallet").style.display = "none";
@@ -157,6 +158,12 @@ document.getElementById("connect-wallet").addEventListener("click", async () => 
     console.log("Disconnect button visibility set to:", document.getElementById("disconnect-wallet").style.display);
     document.getElementById("toggle-auto-claim").disabled = false;
     document.getElementById("claim-reflections").disabled = false;
+    console.log("Action buttons enabled:", {
+      toggle: !document.getElementById("toggle-auto-claim").disabled,
+      claim: !document.getElementById("claim-reflections").disabled
+    });
+  } else {
+    alert("Connection failed. Please check MetaMask and try again.");
   }
 });
 
