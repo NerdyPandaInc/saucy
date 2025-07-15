@@ -317,6 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await tx.wait();
       alert("Auto Claim toggled successfully!");
       updateUserData();
+      startTimer(); // Reset timer on successful toggle
     } catch (error) {
       console.error("Toggle error:", error);
       alert("Failed to toggle auto claim: " + (error.message || "Unknown error") + " (Reason: " + (error.reason || "Unknown") + ")\n" + genericErrorMessage);
@@ -332,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await tx.wait();
       alert("Reflections claimed successfully!");
       updateUserData();
+      startTimer(); // Reset timer on successful claim
     } catch (error) {
       console.error("Claim error:", error);
       alert("Failed to claim reflections: " + (error.message || "Unknown error") + " (Reason: " + (error.reason || "Unknown") + ")\n" + genericErrorMessage);
