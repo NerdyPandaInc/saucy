@@ -18,6 +18,7 @@
     .faq-details { display: none; }
     .faq-summary:hover { cursor: pointer; color: #ff6b6b; }
     .loading { display: none; text-align: center; color: #666; }
+    #timer { text-align: center; font-size: 1.2em; color: #ff6b6b; margin: 10px 0; }
     @media (max-width: 600px) { #app { padding: 10px; } button { width: 100%; margin-bottom: 10px; } }
   </style>
 </head>
@@ -25,6 +26,7 @@
   <div id="app">
     <p style="color: red; text-align: center;">Warning: Only connect your wallet if you trust this site. Never share your seed phrase.</p>
     <h1>BoomInu Transparency Dashboard</h1>
+    <div id="timer">Session Timer: 60s</div>
     <div class="section" id="welcome">
       <p>Welcome! Connect your wallet to view your stats and interact with the BoomInu contract. Use MetaMask and switch to Polygon Mainnet (Chain ID 137).</p>
       <label><input type="checkbox" id="security-ack"> I understand the security risks and wish to proceed.</label>
@@ -37,7 +39,7 @@
     <div class="section" id="user-data">
       <h3>Your Stats</h3>
       <p>Connect wallet to see your data.</p>
-      <button id="connect-wallet">Connect Wallet</button> <!-- Removed disabled by default -->
+      <button id="connect-wallet">Connect Wallet</button>
       <button id="disconnect-wallet" style="display: none;">Disconnect Wallet</button>
       <div id="loading" class="loading">Connecting...</div>
     </div>
