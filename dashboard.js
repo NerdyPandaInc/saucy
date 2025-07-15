@@ -180,13 +180,14 @@ async function updateUserData() {
   try {
     if (!contract) throw new Error("Contract not initialized");
     const address = await signer.getAddress();
-    const balance = await contract.balanceOf(address); // Placeholder for owed reflections
+    const balance = await contract.balanceOf(address); // Token balance
     const streak = await contract.flipStreak(address);
     const bonusExpires = await contract.streakBonusExpires(address);
 
+    // Note: Owed Reflections requires a specific function not in the current ABI
     userDataDiv.innerHTML = `<h3>Your Stats</h3>
       <p>Balance: ${ethers.utils.formatEther(balance)} BOOM</p>
-      <p>Owed Reflections: ${ethers.utils.formatEther(balance)} BOOM (Placeholder - Update ABI for correct function)</p>
+      <p>Owed Reflections: N/A (Placeholder - Update ABI with correct function, e.g., getOwed)</p>
       <p>Streak: ${streak}</p>
       <p>Bonus Expires: ${bonusExpires.eq(0) ? 'N/A' : new Date(bonusExpires.toNumber() * 1000).toLocaleString()}</p>`;
   } catch (error) {
