@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boom Inu Transparency Dashboard</title>
+  <title>BoomInu Transparency Dashboard</title>
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
     #app { max-width: 800px; margin: auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
@@ -11,22 +12,34 @@
     .section { margin: 15px 0; }
     button { padding: 10px 15px; margin-right: 10px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; }
     button:hover { background: #e65b5b; }
+    button:disabled { background: #ccc; cursor: not-allowed; }
     #metrics, #user-data { border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+    .faq { margin: 10px 0; }
+    .faq-details { display: none; }
+    .faq-summary:hover { cursor: pointer; color: #ff6b6b; }
+    .loading { display: none; text-align: center; color: #666; }
     @media (max-width: 600px) { #app { padding: 10px; } button { width: 100%; margin-bottom: 10px; } }
   </style>
 </head>
 <body>
   <div id="app">
-    <h1>Boom Inu Transparency Dashboard</h1>
+    <p style="color: red; text-align: center;">Warning: Only connect your wallet if you trust this site. Never share your seed phrase.</p>
+    <h1>BoomInu Transparency Dashboard</h1>
+    <div class="section" id="welcome">
+      <p>Welcome! Connect your wallet to view your stats and interact with the BoomInu contract. Use MetaMask and switch to Polygon Mainnet (Chain ID 137).</p>
+      <label><input type="checkbox" id="security-ack"> I understand the security risks and wish to proceed.</label>
+    </div>
     <div class="section" id="metrics">
-      <h3>Global Metrics</h3>
-      <p>Loading...</p>
+      <h3>Global Metrics (Preview)</h3>
+      <p>Total Supply: ~1,000,000,000 BOOM (Static preview - Connect for live data)</p>
+      <p>Burned: ~50,000,000 BOOM (Static preview - Connect for live data)</p>
     </div>
     <div class="section" id="user-data">
       <h3>Your Stats</h3>
       <p>Connect wallet to see your data.</p>
-      <button id="connect-wallet">Connect Wallet</button>
+      <button id="connect-wallet" disabled>Connect Wallet</button>
       <button id="disconnect-wallet" style="display: none;">Disconnect Wallet</button>
+      <div id="loading" class="loading">Connecting...</div>
     </div>
     <div class="section" id="actions">
       <button id="toggle-auto-claim" disabled>Toggle Auto Claim</button>
@@ -35,6 +48,15 @@
     <div class="section" id="events">
       <h3>Recent Events</h3>
       <ul id="event-list"></ul>
+    </div>
+    <div class="section faq">
+      <details>
+        <summary class="faq-summary">Frequently Asked Questions</summary>
+        <div class="faq-details">
+          <p><strong>Is it safe to connect my wallet?</strong> Yes, if you trust this site. We only access your address for dashboard data and do not request your seed phrase.</p>
+          <p><strong>What data is accessed?</strong> We retrieve your balance, streak, and owed reflections from the BoomInu contract.</p>
+        </div>
+      </details>
     </div>
   </div>
 
