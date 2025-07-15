@@ -88,7 +88,7 @@ async function initializeConnection() {
   if (!window.ethereum) {
     console.error("MetaMask not detected. Please install it.");
     alert("MetaMask is not detected. Please install it and refresh the page.");
-    return;
+    return false;
   }
 
   try {
@@ -98,7 +98,7 @@ async function initializeConnection() {
     const network = await provider.getNetwork();
     if (network.chainId !== 137) {
       alert("Please switch to Polygon Mainnet in MetaMask.");
-      return;
+      return false;
     }
     signer = provider.getSigner();
     contract = new ethers.Contract(contractAddress, abi, signer);
@@ -117,9 +117,24 @@ document.getElementById("connect-wallet").addEventListener("click", async () => 
   if (connected) {
     await loadData();
     document.getElementById("connect-wallet").style.display = "none";
+    document.getElementById("disconnect-wallet").style.display = "inline-block";
     document.getElementById("toggle-auto-claim").disabled = false;
     document.getElementById("claim-reflections").disabled = false;
   }
+});
+
+// Disconnect Wallet
+document.getElementById("disconnect-wallet").addEventListener("click", () => {
+  provider = null;
+  signer = null;
+  contract = null;
+  document.getElementById("connect-wallet").style.display = "inline-block";
+  document.getElementById("disconnect-wallet").style.display = "none";
+  document.getElementById("toggle-auto-claim").disabled = true;
+  document.getElementById("claim-reflections").disabled = true;
+  document.getElementById("metrics").innerHTML = `<h3>Global Metrics</h3><p>Loading...</p>`;
+  document.getElementById("user-data").innerHTML = `<h3>Your Stats</h3><p>Connect wallet to see your data.</p>`;
+  alert("Wallet disconnected. Please refresh the page to clear the cache and reconnect.");
 });
 
 // Load Data
@@ -165,16 +180,13 @@ async function updateUserData() {
   try {
     if (!contract) throw new Error("Contract not initialized");
     const address = await signer.getAddress();
-    const [balance, owed] = await Promise.all([
-      contract.balanceOf(address),
-      contract._calculateOwed(address).then(result => result[1]) // Assuming [accrued, owed]
-    ]);
+    const balance = await contract.balanceOf(address); // Placeholder for owed reflections
     const streak = await contract.flipStreak(address);
     const bonusExpires = await contract.streakBonusExpires(address);
 
     userDataDiv.innerHTML = `<h3>Your Stats</h3>
       <p>Balance: ${ethers.utils.formatEther(balance)} BOOM</p>
-      <p>Owed Reflections: ${ethers.utils.formatEther(owed)} BOOM</p>
+      <p>Owed Reflections: ${ethers.utils.formatEther(balance)} BOOM (Placeholder - Update ABI for correct function)</p>
       <p>Streak: ${streak}</p>
       <p>Bonus Expires: ${bonusExpires.eq(0) ? 'N/A' : new Date(bonusExpires.toNumber() * 1000).toLocaleString()}</p>`;
   } catch (error) {
@@ -233,5 +245,3 @@ function listenToEvents() {
     eventList.innerHTML = `<li>${time}: ${user} reached streak ${streak}</li>` + eventList.innerHTML;
   });
 }
-
-// Initial Load (disabled until connected)
