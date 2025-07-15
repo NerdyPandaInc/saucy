@@ -83,16 +83,16 @@ const abi = [
   {"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"status","type":"bool"}],"name":"whitelistAddress","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ];
 
-// Debug: Check if Ethers and MetaMask are loaded
-console.log("Ethers loaded:", ethers);
-if (!window.ethereum) {
-  console.error("MetaMask not detected. Please install it.");
-  alert("MetaMask is not detected. Please install it and refresh the page.");
-  return;
-}
-
 // Connect Wallet
 document.getElementById("connect-wallet").addEventListener("click", async () => {
+  // Debug: Check if Ethers and MetaMask are loaded
+  console.log("Ethers loaded:", ethers);
+  if (!window.ethereum) {
+    console.error("MetaMask not detected. Please install it.");
+    alert("MetaMask is not detected. Please install it and refresh the page.");
+    return; // Return inside the event listener is valid
+  }
+
   try {
     console.log("Attempting to connect wallet...");
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -214,4 +214,6 @@ function listenToEvents() {
 }
 
 // Initial Load if MetaMask is detected
-if (window.ethereum) loadData();
+if (window.ethereum) {
+  loadData().catch(console.error);
+}
