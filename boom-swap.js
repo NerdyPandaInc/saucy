@@ -4,8 +4,9 @@
 const routerAddress = "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff"; // QuickSwap Router
 const boomAddress = "0x665Dcc5aD8F4306C87dCFB0B2329ca829Bb0f6CF"; // BOOM Token
 const maticAddress = "0x0000000000000000000000000000000000001010"; // Native MATIC
+const wmaticAddress = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"; // Wrapped MATIC (used for estimation)
 
-// 🧬 Minimal ABI
+// 🧬 Minimal Router ABI
 const routerAbi = [
   {
     name: "swapExactETHForTokens",
@@ -31,7 +32,7 @@ const routerAbi = [
   }
 ];
 
-// 🌐 State Variables
+// 🌐 Wallet State
 let signer = null;
 let userAddress = null;
 
@@ -47,7 +48,7 @@ document.getElementById("connectWallet").addEventListener("click", async () => {
       `✅ Connected: ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
   } catch (err) {
     console.error("Wallet connect failed:", err);
-    alert("Connection failed. Make sure MetaMask is installed and you're on Polygon.");
+    alert("Connection failed. Make sure MetaMask is installed and you're on the Polygon network.");
   }
 });
 
@@ -59,7 +60,7 @@ document.getElementById("disconnectWallet").addEventListener("click", () => {
   document.getElementById("boomOutput").value = "";
 });
 
-// 💥 Execute Swap
+// 💥 Execute Swap: MATIC → BOOM
 async function swapBoom() {
   if (!signer || !userAddress) {
     alert("Please connect your wallet first.");
@@ -73,14 +74,14 @@ async function swapBoom() {
   }
 
   const amountInWei = ethers.utils.parseUnits(amountInput, 18);
-  const path = [maticAddress, boomAddress];
+  const path = [maticAddress, boomAddress]; // Native MATIC used during execution
   const deadline = Math.floor(Date.now() / 1000) + 600;
   const swapContract = new ethers.Contract(routerAddress, routerAbi, signer);
 
   try {
     document.getElementById("swapStatus").textContent = "⏳ Submitting transaction...";
     const tx = await swapContract.swapExactETHForTokens(
-      0, // amountOutMin
+      0, // Slippage protection can be added later
       path,
       userAddress,
       deadline,
@@ -107,9 +108,9 @@ document.getElementById("maticInput").addEventListener("input", async () => {
     const router = new ethers.Contract(routerAddress, routerAbi, provider);
 
     const amountInWei = ethers.utils.parseUnits(inputValue, 18);
-    const path = [maticAddress, boomAddress];
+    const estimationPath = [wmaticAddress, boomAddress]; // Use WMATIC for estimation
 
-    const amounts = await router.getAmountsOut(amountInWei, path);
+    const amounts = await router.getAmountsOut(amountInWei, estimationPath);
     const boomEstimate = ethers.utils.formatUnits(amounts[1], 18);
     document.getElementById("boomOutput").value = boomEstimate;
   } catch (err) {
@@ -118,8 +119,8 @@ document.getElementById("maticInput").addEventListener("input", async () => {
   }
 });
 
-// 🌍 Expose swapBoom to window for safety
+// 🌍 Expose swap function globally for safety
 window.swapBoom = swapBoom;
 
-// 🧠 Wire via button ID
+// 🧠 Also wire via button ID
 document.getElementById("swapButton").addEventListener("click", swapBoom);
