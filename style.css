@@ -346,3 +346,48 @@ nav ul.menu li a:hover {
   background-color: #fafafa;
   border-top: 1px solid #ddd;
 }
+.social-outlets {
+  margin: 3em auto;
+  text-align: center;
+  background-color: #fdfdfd;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.03);
+  max-width: 600px;
+}
+
+.social-outlets h3 {
+  font-size: 1.6em;
+  margin-bottom: 0.5em;
+  color: #222;
+}
+
+.social-outlets p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 1.2em;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+
+.social-links li a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.social-links li a:hover {
+  background-color: #555;
+}
