@@ -504,3 +504,27 @@ nav ul.menu li a {
   color: #aaa;
   text-align: center;
 }
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.popup-box {
+  background: #1a1a1a;
+  border: 2px solid #ffcc00;
+  padding: 2em;
+  border-radius: 12px;
+  max-width: 500px;
+  text-align: center;
+  color: #ffcc00;
+}
+.popup-box button {
+  margin-top: 1em;
+}
