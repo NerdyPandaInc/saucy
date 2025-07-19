@@ -203,17 +203,26 @@
 
     
 <!-- Join Panel -->
-    <section class="comic-panel">
-  <h2>🔗 Connect Your Wallet</h2>
-  <button id="connectWallet" class="dex-button">Connect Wallet</button>
-  <button id="disconnectWallet" class="dex-button">Disconnect Wallet</button>
-  <p id="walletStatus" class="wallet-status">Not connected</p>
+<section class="comic-panel dex-container">
+  <h2>💱 BoomSwap</h2>
+
+  <div class="dex-card">
+    <div class="dex-row">
+      <label for="maticInput">From</label>
+      <input type="text" id="maticInput" placeholder="0.0" />
+      <span class="dex-token">MATIC</span>
+    </div>
+
+    <div class="dex-row">
+      <label for="boomOutput">To</label>
+      <input type="text" id="boomOutput" placeholder="Estimated BOOM" disabled />
+      <span class="dex-token">BOOM</span>
+    </div>
+
+    <button id="swapButton" class="dex-button">💥 Swap</button>
+    <p id="swapStatus" class="wallet-status">Waiting for input</p>
+  </div>
 </section>
-<section class="comic-panel">
-  <h2>💥 Swap MATIC to BOOM</h2>
-  <div class="dex-swap-box">
-    <label for="maticInput">MATIC Amount</label>
-    <input type="text" id="maticInput" placeholder="Enter amount" />
 
     <button id="swapButton" class="dex-button">🔥 Swap Now</button>
   </div>
