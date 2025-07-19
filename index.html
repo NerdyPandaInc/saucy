@@ -203,17 +203,22 @@
 
     
 <!-- Join Panel -->
-<section class="comic-panel">
-  <h2>🧠 Join the Meme War</h2>
-  <p>Connect your wallet and become part of the BOOMINU revolution.</p>
+<section class="dex-panel">
+  <h2>🧠 BoomSwap DEX</h2>
 
-<div class="comic-swap-box">
-  <h2>💥 Swap Your BOOM</h2>
-  <input type="text" id="boomAmount" placeholder="Amount in MATIC" />
-  <button onclick="swapBoom()">⚡ Swap to BOOM</button>
-</div>
-<script src="boom-swap.js"></script>
+  <button id="connectWallet" class="dex-button">🔗 Connect Wallet</button>
 
+  <div class="swap-box">
+    <label for="maticInput">From: MATIC</label>
+    <input type="text" id="maticInput" placeholder="Enter MATIC amount" />
+
+    <label for="boomOutput">To: BOOM</label>
+    <input type="text" id="boomOutput" placeholder="Estimated BOOM output" disabled />
+
+    <button id="swapButton" class="dex-button">💥 Swap</button>
+  </div>
+
+  <p id="walletStatus" class="wallet-status">Not connected</p>
 </section>
   </main>
 
