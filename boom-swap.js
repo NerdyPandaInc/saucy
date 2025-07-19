@@ -56,6 +56,7 @@ document.getElementById("disconnectWallet").addEventListener("click", () => {
   signer = null;
   userAddress = null;
   document.getElementById("walletStatus").textContent = "🔒 Disconnected";
+  document.getElementById("boomOutput").value = "";
 });
 
 // 💥 Execute Swap
@@ -74,13 +75,12 @@ async function swapBoom() {
   const amountInWei = ethers.utils.parseUnits(amountInput, 18);
   const path = [maticAddress, boomAddress];
   const deadline = Math.floor(Date.now() / 1000) + 600;
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
   const swapContract = new ethers.Contract(routerAddress, routerAbi, signer);
 
   try {
     document.getElementById("swapStatus").textContent = "⏳ Submitting transaction...";
     const tx = await swapContract.swapExactETHForTokens(
-      0,          // amountOutMin (slippage control later)
+      0, // amountOutMin
       path,
       userAddress,
       deadline,
@@ -94,8 +94,32 @@ async function swapBoom() {
   }
 }
 
-// 🌍 Expose to global scope (in case HTML uses onclick)
+// 📊 Estimate BOOM Received from MATIC Input
+document.getElementById("maticInput").addEventListener("input", async () => {
+  const inputValue = document.getElementById("maticInput").value;
+  if (!inputValue || isNaN(inputValue)) {
+    document.getElementById("boomOutput").value = "";
+    return;
+  }
+
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const router = new ethers.Contract(routerAddress, routerAbi, provider);
+
+    const amountInWei = ethers.utils.parseUnits(inputValue, 18);
+    const path = [maticAddress, boomAddress];
+
+    const amounts = await router.getAmountsOut(amountInWei, path);
+    const boomEstimate = ethers.utils.formatUnits(amounts[1], 18);
+    document.getElementById("boomOutput").value = boomEstimate;
+  } catch (err) {
+    console.error("Estimation failed", err);
+    document.getElementById("boomOutput").value = "—";
+  }
+});
+
+// 🌍 Expose swapBoom to window for safety
 window.swapBoom = swapBoom;
 
-// 🧠 Also wire via button ID
+// 🧠 Wire via button ID
 document.getElementById("swapButton").addEventListener("click", swapBoom);
