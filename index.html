@@ -203,22 +203,15 @@
 
     
 <!-- Join Panel -->
-<section class="dex-panel">
-  <h2>🧠 BoomSwap DEX</h2>
+<section class="comic-panel">
+  <h2>💥 Swap MATIC to BOOM</h2>
+  <div class="dex-swap-box">
+    <label for="maticInput">MATIC Amount</label>
+    <input type="text" id="maticInput" placeholder="Enter amount" />
 
-  <button id="connectWallet" class="dex-button">🔗 Connect Wallet</button>
-
-  <div class="swap-box">
-    <label for="maticInput">From: MATIC</label>
-    <input type="text" id="maticInput" placeholder="Enter MATIC amount" />
-
-    <label for="boomOutput">To: BOOM</label>
-    <input type="text" id="boomOutput" placeholder="Estimated BOOM output" disabled />
-
-    <button id="swapButton" class="dex-button">💥 Swap</button>
+    <button id="swapButton" class="dex-button">🔥 Swap Now</button>
   </div>
-
-  <p id="walletStatus" class="wallet-status">Not connected</p>
+  <p id="swapStatus" class="wallet-status">Awaiting input</p>
 </section>
   </main>
 
