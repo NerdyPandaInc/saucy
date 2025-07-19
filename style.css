@@ -340,3 +340,9 @@ nav ul.menu li a {
 nav ul.menu li a:hover {
   color: #fff000; /* Slight variation on hover for interactivity */
 }
+.comic-panel {
+  padding: 3em 2em;
+  text-align: center;
+  background-color: #fafafa;
+  border-top: 1px solid #ddd;
+}
