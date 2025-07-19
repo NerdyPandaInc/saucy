@@ -332,3 +332,58 @@ nav ul.menu li a {
 .comic-swap-box button:hover {
   background-color: #fff000;
 }
+.dex-panel {
+  background-color: #000;
+  color: #ffcc00;
+  border: 2px solid #ffcc00;
+  border-radius: 10px;
+  padding: 2em;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+  max-width: 420px;
+  margin: 2em auto;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+}
+
+.swap-box {
+  margin-top: 1em;
+  text-align: left;
+}
+
+.swap-box label {
+  display: block;
+  margin-top: 1em;
+  color: #ffcc00;
+}
+
+.swap-box input {
+  width: 100%;
+  padding: 0.6em;
+  font-size: 1em;
+  border: 2px solid #ffcc00;
+  background-color: #1a1a1a;
+  color: #ffcc00;
+  border-radius: 6px;
+  margin-top: 0.5em;
+}
+
+.dex-button {
+  margin-top: 1.5em;
+  padding: 0.8em 1.2em;
+  font-weight: bold;
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dex-button:hover {
+  background-color: #fff000;
+}
+
+.wallet-status {
+  margin-top: 1em;
+  font-size: 0.95em;
+  color: #aaa;
+}
