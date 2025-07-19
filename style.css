@@ -387,3 +387,24 @@ nav ul.menu li a {
   font-size: 0.95em;
   color: #aaa;
 }
+.dex-swap-box {
+  margin-top: 1em;
+  text-align: left;
+}
+
+.dex-swap-box label {
+  color: #ffcc00;
+  display: block;
+  margin-top: 1em;
+}
+
+.dex-swap-box input {
+  width: 100%;
+  padding: 0.6em;
+  font-size: 1em;
+  border: 2px solid #ffcc00;
+  background: #1a1a1a;
+  color: #ffcc00;
+  border-radius: 6px;
+  margin-top: 0.5em;
+}
